@@ -1,12 +1,29 @@
+import { LanguageProvider } from "./context/LanguageContext"
+
 import Header from "./components/Header"
+import Footer from "./components/Footer"
+
 import Home from "./sections/Home"
+import Sobre from "./sections/Sobre"
+import Projetos from "./sections/Projetos"
+import Experiencias from "./sections/Experiencias"
+import Contato from "./sections/Contato"
 
 function App() {
   return (
-    <>
+    <LanguageProvider>
       <Header />
-      <Home />
-    </>
+
+      <main>
+        <Home />
+        <Sobre />
+        <Projetos />
+        <Experiencias />
+        <Contato />
+      </main>
+
+      <Footer />
+    </LanguageProvider>
   )
 }
 
