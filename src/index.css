@@ -1,8 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap");
 @import "tailwindcss";
 
 /* =========================================================
-   PALETA DO PROJETO
+   PALETA
    ========================================================= */
 
 :root {
@@ -12,8 +12,8 @@
   --creme: #FFFEE8;
   --azul: #253D5B;
 
-  --largura: 1180px;
-  --header: 76px;
+  --max-width: 1120px;
+  --header-height: 72px;
 }
 
 /* =========================================================
@@ -26,31 +26,30 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 95px;
+  scroll-padding-top: 90px;
 }
 
 body {
   margin: 0;
   min-width: 320px;
+
   background: var(--creme);
   color: var(--grafite);
-  font-family: "DM Sans", sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
 
-body,
-button,
-input,
-textarea {
   font-family: "DM Sans", sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 a {
   text-decoration: none;
 }
 
-button {
-  cursor: pointer;
+button,
+input,
+textarea {
+  font: inherit;
 }
 
 img {
@@ -64,22 +63,27 @@ img {
 
 header {
   position: fixed !important;
-  inset: 0 0 auto 0 !important;
+
+  top: 0 !important;
+  left: 0 !important;
+
   z-index: 9999 !important;
 
-  width: 100%;
-  height: var(--header);
+  width: 100% !important;
+  height: var(--header-height);
 
-  background: rgba(255, 254, 232, 0.96) !important;
+  background: rgba(255, 254, 232, 0.97) !important;
+
   border-bottom: 1px solid rgba(117, 154, 171, 0.32);
 
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 header nav {
-  width: min(calc(100% - 56px), var(--largura));
+  width: min(calc(100% - 56px), var(--max-width));
   height: 100%;
+
   margin: 0 auto;
 
   display: flex;
@@ -89,84 +93,76 @@ header nav {
 
 header nav > a:first-child {
   color: var(--azul) !important;
-  font-size: 22px !important;
-  line-height: 1;
+
+  font-size: 25px !important;
   font-weight: 700 !important;
-  letter-spacing: -0.08em;
+
+  letter-spacing: -0.08em !important;
 }
 
 header nav > div {
+  display: flex;
   align-items: center;
+  gap: 28px;
 }
 
 header nav > div a {
   color: var(--grafite) !important;
-  font-size: 11px !important;
+
+  font-size: 12px !important;
   font-weight: 500 !important;
+
   letter-spacing: 0 !important;
 
-  transition:
-    color 0.2s ease,
-    opacity 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 header nav > div a:hover {
   color: var(--azul-claro) !important;
 }
 
-header nav > div button {
-  height: 30px !important;
-  min-width: 54px;
-  padding: 0 13px !important;
+header nav button {
+  min-width: 48px;
+
+  padding: 7px 13px !important;
 
   border: 1px solid var(--vinho) !important;
+  border-radius: 999px !important;
+
   background: transparent !important;
 
   color: var(--vinho) !important;
 
-  font-size: 9px !important;
+  font-size: 10px !important;
   font-weight: 600 !important;
 
-  border-radius: 999px !important;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
-header nav > div button:hover {
+header nav button:hover {
   background: var(--vinho) !important;
   color: var(--creme) !important;
 }
 
-/* menu mobile */
-
-header > div {
-  color: var(--grafite);
-}
-
 /* =========================================================
-   ESPAÇAMENTO DO CONTEÚDO POR CAUSA DO HEADER FIXO
+   CONTEÚDO
    ========================================================= */
 
 main {
-  padding-top: var(--header);
-}
-
-/* =========================================================
-   CONFIGURAÇÕES GERAIS DAS SEÇÕES
-   ========================================================= */
-
-section > div {
-  width: min(calc(100% - 56px), var(--largura)) !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  padding-top: var(--header-height);
 }
 
 section {
-  border: 0;
+  position: relative;
+  overflow: hidden;
 }
 
-section h1,
-section h2,
-section h3 {
-  letter-spacing: -0.04em;
+section > div {
+  width: min(calc(100% - 56px), var(--max-width));
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 /* =========================================================
@@ -174,226 +170,348 @@ section h3 {
    ========================================================= */
 
 #home {
-  min-height: 660px !important;
+  min-height: calc(100vh - var(--header-height));
 
-  background: var(--creme) !important;
+  background: var(--creme);
 
-  padding: 48px 0 72px !important;
-  border-bottom: 1px solid rgba(117, 154, 171, 0.42);
+  border-bottom: 1px solid rgba(117, 154, 171, 0.35);
+
+  padding: 54px 0 72px;
 }
 
-#home > div {
-  width: min(calc(100% - 56px), var(--largura)) !important;
+/*
+  Essas classes são as do Home.jsx corrigido.
+*/
 
-  min-height: 540px !important;
+.home-content {
+  width: min(calc(100% - 56px), var(--max-width));
 
-  display: grid !important;
-  grid-template-columns: 1.05fr 0.95fr !important;
+  min-height: calc(100vh - var(--header-height) - 125px);
 
-  gap: 70px !important;
-  align-items: center !important;
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: 1fr 0.95fr;
+
+  align-items: center;
+
+  gap: 65px;
 }
 
-#home > div > div:first-child {
-  max-width: 580px;
-}
+/* =========================================================
+   TEXTO DA HOME
+   ========================================================= */
 
-#home p:first-child {
-  margin: 0 0 13px !important;
-
-  color: var(--azul-claro) !important;
-
-  font-size: 9px !important;
-  font-weight: 600 !important;
-
-  letter-spacing: 0.22em !important;
-  text-transform: uppercase !important;
-}
-
-#home h1 {
-  margin: 0 !important;
-
+.home-text {
   max-width: 570px;
-
-  color: var(--azul) !important;
-
-  font-size: clamp(48px, 6vw, 76px) !important;
-  font-weight: 500 !important;
-  line-height: 0.92 !important;
-
-  letter-spacing: -0.06em !important;
 }
 
-#home h2 {
-  margin: 19px 0 0 !important;
+.home-label {
+  margin: 0 0 18px;
 
-  color: var(--azul) !important;
+  color: var(--azul-claro);
 
-  font-size: 16px !important;
-  font-weight: 500 !important;
-  line-height: 1.35 !important;
+  font-size: 11px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.22em;
+
+  text-transform: uppercase;
 }
 
-#home p:nth-of-type(2) {
-  margin: 20px 0 0 !important;
+.home-text h1 {
+  margin: 0;
+
+  max-width: 560px;
+
+  color: var(--azul);
+
+  font-size: clamp(52px, 6vw, 76px);
+
+  font-weight: 500;
+
+  line-height: 0.96;
+
+  letter-spacing: -0.055em;
+}
+
+.home-text h2 {
+  margin: 22px 0 0;
+
+  max-width: 360px;
+
+  color: var(--azul);
+
+  font-size: 19px;
+
+  font-weight: 500;
+
+  line-height: 1.45;
+}
+
+.home-highlight {
+  margin: 26px 0 0;
 
   max-width: 520px;
 
-  color: var(--azul) !important;
+  color: var(--azul);
 
-  font-size: 15px !important;
-  line-height: 1.55 !important;
+  font-size: 18px;
 
-  letter-spacing: 0 !important;
-  text-transform: none !important;
+  line-height: 1.6;
 }
 
-#home p:nth-of-type(3) {
-  margin: 12px 0 0 !important;
+.home-description {
+  margin: 14px 0 0;
 
-  max-width: 455px;
+  max-width: 470px;
 
-  color: rgba(30, 37, 43, 0.66) !important;
+  color: rgba(30, 37, 43, 0.67);
 
-  font-size: 11px !important;
-  line-height: 1.65 !important;
+  font-size: 13px;
 
-  letter-spacing: 0 !important;
-  text-transform: none !important;
+  line-height: 1.75;
 }
 
-#home > div > div:first-child > div {
-  margin-top: 25px !important;
-  gap: 9px !important;
+/* =========================================================
+   BOTÕES DA HOME
+   ========================================================= */
+
+.home-buttons {
+  margin-top: 30px;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 10px;
 }
 
-#home a {
-  display: inline-flex !important;
+.home-button-primary,
+.home-button-secondary {
+  min-height: 42px;
+
+  padding: 0 20px;
+
+  display: inline-flex;
+
   align-items: center;
   justify-content: center;
 
-  min-height: 31px;
+  border-radius: 999px;
 
-  padding: 0 17px !important;
+  font-size: 11px;
 
-  font-size: 8px !important;
-  font-weight: 600 !important;
-
-  letter-spacing: 0 !important;
-
-  border-radius: 999px !important;
+  font-weight: 600;
 
   transition:
     transform 0.2s ease,
-    background 0.2s ease,
-    border-color 0.2s ease;
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
-#home a:first-child {
-  background: var(--vinho) !important;
-  color: var(--creme) !important;
+.home-button-primary {
+  background: var(--vinho);
+
+  color: var(--creme);
 }
 
-#home a:first-child:hover {
-  background: var(--azul) !important;
+.home-button-secondary {
+  border: 1px solid var(--azul);
+
+  background: transparent;
+
+  color: var(--azul);
 }
 
-#home a:last-child {
-  border: 1px solid var(--azul) !important;
-  color: var(--azul) !important;
-  background: transparent !important;
+.home-button-primary:hover {
+  background: var(--azul);
+
+  transform: translateY(-2px);
 }
 
-#home a:last-child:hover {
-  background: var(--azul) !important;
-  color: var(--creme) !important;
+.home-button-secondary:hover {
+  background: var(--azul);
+
+  color: var(--creme);
+
+  transform: translateY(-2px);
 }
 
-/* bloco visual da Home */
+/* =========================================================
+   COMPOSIÇÃO VISUAL DA HOME
+   ========================================================= */
 
-#home > div > div:last-child {
+.home-visual {
   position: relative;
 
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
+  width: 420px;
+  height: 460px;
+
+  margin: 0 auto;
 }
 
-#home > div > div:last-child > div {
-  position: relative;
+/* =========================================================
+   ÚNICO CONTORNO PONTILHADO
+   ========================================================= */
 
-  width: 350px !important;
-  height: 410px !important;
-
-  padding: 0 !important;
-
-  background: transparent !important;
-
-  border-radius: 0 !important;
-}
-
-/* moldura externa */
-
-#home > div > div:last-child > div::before {
-  content: "";
-
+.visual-outline {
   position: absolute;
 
-  top: 15px;
-  right: 20px;
+  top: 52px;
+  right: 24px;
 
-  width: 280px;
-  height: 330px;
+  width: 315px;
+  height: 355px;
 
-  border: 1px dashed rgba(117, 154, 171, 0.65);
+  border: 1.5px dashed rgba(117, 154, 171, 0.72);
 
-  border-radius: 34px;
+  border-radius: 42px;
+
+  background: transparent;
+
+  z-index: 1;
 }
 
-/* bloco azul atrás */
+/* =========================================================
+   CÍRCULO
+   ========================================================= */
 
-#home > div > div:last-child > div::after {
-  content: "";
+.visual-circle {
+  position: absolute;
 
+  top: 25px;
+  left: 190px;
+
+  width: 47px;
+  height: 47px;
+
+  border: 1px solid rgba(117, 154, 171, 0.8);
+
+  border-radius: 50%;
+
+  background: var(--creme);
+
+  z-index: 5;
+}
+
+/* =========================================================
+   DETALHE VINHO
+   ========================================================= */
+
+.visual-star {
+  position: absolute;
+
+  top: 68px;
+  right: 0;
+
+  color: var(--vinho);
+
+  font-size: 32px;
+
+  line-height: 1;
+
+  z-index: 8;
+}
+
+/* =========================================================
+   BLOCO AZUL ATRÁS DA FOTO
+   ========================================================= */
+
+.visual-back {
   position: absolute;
 
   left: 38px;
-  bottom: 12px;
+  bottom: 32px;
 
-  width: 210px;
-  height: 48px;
+  width: 245px;
+  height: 68px;
 
   background: var(--azul);
 
-  border-radius: 12px;
+  border-radius: 14px;
 
-  transform: rotate(-4deg);
-}
-
-/* conteúdo interno */
-
-#home > div > div:last-child > div > div {
-  position: absolute;
-
-  top: 55px;
-  right: 80px;
+  transform: rotate(-5deg);
 
   z-index: 2;
-
-  width: 40px !important;
-  height: 40px !important;
-
-  background: var(--creme) !important;
-
-  border: 1px solid rgba(117, 154, 171, 0.55);
-
-  border-radius: 50% !important;
 }
 
-/* texto da imagem desaparece */
+/* =========================================================
+   FOTO
+   ========================================================= */
 
-#home > div > div:last-child > div > div span {
-  display: none;
+.visual-photo {
+  position: absolute;
+
+  top: 82px;
+  left: 92px;
+
+  width: 255px;
+  height: 315px;
+
+  overflow: hidden;
+
+  background: var(--azul-claro);
+
+  border: 1px solid rgba(117, 154, 171, 0.65);
+
+  /*
+    Recorte assimétrico para ficar mais
+    orgânico e parecido com o mockup.
+  */
+
+  border-radius: 30px 12px 45px 18px;
+
+  clip-path: polygon(
+    0 0,
+    88% 0,
+    100% 10%,
+    100% 100%,
+    0 100%
+  );
+
+  z-index: 4;
+}
+
+.visual-photo img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  border-radius: inherit;
+}
+
+/* =========================================================
+   ELEMENTO </> 
+   ========================================================= */
+
+.visual-code {
+  position: absolute;
+
+  right: 34px;
+  bottom: 70px;
+
+  width: 55px;
+  height: 55px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: var(--azul-claro);
+
+  color: var(--creme);
+
+  border-radius: 12px;
+
+  font-size: 18px;
+  font-weight: 500;
+
+  z-index: 8;
 }
 
 /* =========================================================
@@ -401,130 +519,135 @@ section h3 {
    ========================================================= */
 
 #sobre {
-  background: var(--creme) !important;
+  background: var(--creme);
 
-  padding: 82px 0 78px !important;
+  padding: 100px 0;
 
-  border-bottom: 1px solid rgba(117, 154, 171, 0.4);
-}
-
-#sobre > div {
-  position: relative;
+  border-bottom: 1px solid rgba(117, 154, 171, 0.35);
 }
 
 #sobre > div > p:first-child {
-  margin: 0 !important;
-
   color: var(--azul-claro) !important;
 
-  font-size: 8px !important;
-  letter-spacing: 0.18em !important;
+  font-size: 10px !important;
 }
 
 #sobre h2 {
-  max-width: 760px;
-
-  margin-top: 14px !important;
+  margin-top: 15px !important;
 
   color: var(--azul) !important;
 
-  font-size: clamp(31px, 4vw, 48px) !important;
+  font-size: clamp(38px, 5vw, 55px) !important;
+
   font-weight: 500 !important;
+
   line-height: 1 !important;
 }
 
 #sobre h2 + p {
-  margin-top: 14px !important;
+  margin-top: 16px !important;
 
-  max-width: 680px;
+  max-width: 650px;
 
-  color: rgba(30, 37, 43, 0.62) !important;
+  color: rgba(30, 37, 43, 0.65) !important;
 
-  font-size: 11px !important;
-  line-height: 1.6 !important;
+  font-size: 13px !important;
+
+  line-height: 1.7 !important;
 
   letter-spacing: 0 !important;
+
   text-transform: none !important;
 }
 
+/* bloco principal do Sobre */
+
 #sobre .border-y {
-  margin-top: 42px !important;
+  margin-top: 52px !important;
 
-  padding: 31px 0 !important;
+  padding: 38px 0 !important;
 
-  border-top: 1px solid rgba(117, 154, 171, 0.48) !important;
-  border-bottom: 1px solid rgba(117, 154, 171, 0.48) !important;
+  border-top: 1px solid rgba(117, 154, 171, 0.5) !important;
+  border-bottom: 1px solid rgba(117, 154, 171, 0.5) !important;
 
   display: grid !important;
+
   grid-template-columns: 1fr 1fr !important;
-  gap: 70px !important;
+
+  gap: 65px !important;
 }
 
 #sobre .border-y h3 {
-  margin: 0 !important;
-
   color: var(--azul) !important;
 
-  font-size: 15px !important;
+  font-size: 20px !important;
+
   font-weight: 500 !important;
 }
 
 #sobre .border-y p {
-  margin: 9px 0 0 !important;
+  color: rgba(30, 37, 43, 0.75) !important;
 
-  max-width: 470px;
+  font-size: 13px !important;
 
-  color: rgba(30, 37, 43, 0.73) !important;
-
-  font-size: 10px !important;
-  line-height: 1.65 !important;
+  line-height: 1.8 !important;
 
   letter-spacing: 0 !important;
+
   text-transform: none !important;
 }
 
+/* três informações */
+
 #sobre > div > .mt-10 {
-  margin-top: 31px !important;
+  margin-top: 35px !important;
+
+  display: grid !important;
+
+  grid-template-columns: repeat(3, 1fr) !important;
 
   gap: 0 !important;
 }
 
 #sobre > div > .mt-10 > div {
-  min-height: 72px;
+  padding: 20px 28px 10px 0;
 
-  padding: 17px 22px 0 0;
-
-  border-top: 0 !important;
+  border-top: 1px solid rgba(117, 154, 171, 0.42) !important;
 }
 
 #sobre > div > .mt-10 > div + div {
   border-left: 1px solid rgba(117, 154, 171, 0.35);
-  padding-left: 22px;
+
+  padding-left: 28px;
 }
 
 #sobre > div > .mt-10 p:first-child {
   color: var(--azul-claro) !important;
 
-  font-size: 8px !important;
+  font-size: 9px !important;
 }
 
 #sobre > div > .mt-10 h3 {
-  margin-top: 7px !important;
+  margin-top: 8px !important;
 
   color: var(--azul) !important;
 
-  font-size: 12px !important;
+  font-size: 16px !important;
+
+  font-weight: 500 !important;
 }
 
 #sobre > div > .mt-10 p:last-child {
-  margin-top: 3px !important;
+  margin-top: 5px !important;
 
-  color: rgba(30, 37, 43, 0.62) !important;
+  color: rgba(30, 37, 43, 0.63) !important;
 
-  font-size: 9px !important;
-  line-height: 1.5 !important;
+  font-size: 11px !important;
+
+  line-height: 1.6 !important;
 
   letter-spacing: 0 !important;
+
   text-transform: none !important;
 }
 
@@ -533,215 +656,235 @@ section h3 {
    ========================================================= */
 
 #projetos {
-  background: var(--creme) !important;
-  color: var(--azul) !important;
+  background: var(--creme);
 
-  padding: 85px 0 95px !important;
+  color: var(--azul);
+
+  padding: 100px 0 110px;
+
+  border-bottom: 1px solid rgba(117, 154, 171, 0.35);
 }
 
 #projetos > div > p:first-child {
-  margin: 0 !important;
-
   color: var(--azul-claro) !important;
 
-  font-size: 8px !important;
+  font-size: 10px !important;
 }
 
 #projetos h2 {
-  margin-top: 14px !important;
+  margin-top: 15px !important;
 
   color: var(--azul) !important;
 
-  font-size: clamp(31px, 4vw, 48px) !important;
+  font-size: clamp(38px, 5vw, 55px) !important;
+
   font-weight: 500 !important;
+
+  line-height: 1 !important;
 }
 
 #projetos h2 + p {
-  margin-top: 13px !important;
+  margin-top: 16px !important;
 
-  color: rgba(30, 37, 43, 0.62) !important;
+  max-width: 650px;
 
-  font-size: 11px !important;
-  line-height: 1.6 !important;
+  color: rgba(30, 37, 43, 0.63) !important;
+
+  font-size: 13px !important;
+
+  line-height: 1.7 !important;
 
   letter-spacing: 0 !important;
+
   text-transform: none !important;
 }
 
-#projetos .relative.mt-16 {
-  margin-top: 46px !important;
-}
+/* timeline */
 
-/* esconder a linha antiga */
+#projetos .relative.mt-16 {
+  margin-top: 60px !important;
+}
 
 #projetos .absolute.left-2 {
   display: none !important;
 }
 
-/* cada projeto */
-
 #projetos article {
   display: grid !important;
 
-  grid-template-columns: 120px minmax(0, 1fr) !important;
+  grid-template-columns: 85px 1fr !important;
 
-  gap: 35px !important;
+  gap: 34px !important;
 
   align-items: center !important;
+
+  margin-bottom: 82px !important;
 }
 
-/* numero */
+#projetos article:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* números 01, 02, 03 */
 
 #projetos article > div:first-child {
-  padding-top: 0 !important;
+  padding: 0 !important;
 }
 
 #projetos article > div:first-child > div {
-  display: block !important;
-}
-
-#projetos article > div:first-child span:first-child {
   display: none !important;
 }
 
-#projetos article > div:first-child span:last-child {
+#projetos article > div:first-child > span {
   display: block !important;
 
   color: var(--azul-claro) !important;
 
-  font-size: 43px !important;
+  font-size: 48px !important;
+
   font-weight: 400 !important;
 
-  letter-spacing: -0.06em !important;
+  line-height: 1 !important;
 }
 
-/* remove o card */
+/* remove aparência de card pesado */
 
 #projetos article > div:last-child {
-  overflow: visible !important;
+  padding: 0 !important;
 
   border: 0 !important;
 
   background: transparent !important;
 
   border-radius: 0 !important;
+
+  overflow: visible !important;
 }
 
-/* conteúdo do projeto */
+/* imagem + texto */
 
 #projetos article > div:last-child > div {
   display: grid !important;
 
-  grid-template-columns: minmax(0, 1fr) minmax(250px, 0.95fr) !important;
-
-  gap: 45px !important;
+  grid-template-columns: 1fr 0.85fr !important;
 
   align-items: center !important;
+
+  gap: 55px !important;
 }
 
 /* imagem */
 
 #projetos article img {
-  width: 100%;
-  height: 235px !important;
-  min-height: 0 !important;
+  width: 100% !important;
 
-  object-fit: cover;
+  height: 285px !important;
 
-  border: 1px solid rgba(117, 154, 171, 0.45);
+  min-height: 285px !important;
 
-  border-radius: 17px !important;
+  object-fit: cover !important;
 
-  background: var(--azul-claro);
+  border: 1px solid rgba(117, 154, 171, 0.5) !important;
+
+  border-radius: 16px 16px 32px 16px !important;
 }
 
-/* informações */
+/* texto do projeto */
 
 #projetos article > div:last-child > div > div:last-child {
   padding: 0 !important;
 
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  display: flex !important;
+
+  flex-direction: column !important;
+
+  align-items: flex-start !important;
 }
 
 #projetos article p {
   letter-spacing: 0 !important;
+
   text-transform: none !important;
 }
 
 #projetos article p:first-child {
   color: var(--azul-claro) !important;
 
-  font-size: 8px !important;
+  font-size: 10px !important;
+
+  letter-spacing: 0.15em !important;
 
   text-transform: uppercase !important;
-  letter-spacing: 0.15em !important;
 }
 
 #projetos article h3 {
-  margin-top: 8px !important;
+  margin-top: 9px !important;
 
   color: var(--azul) !important;
 
-  font-size: 20px !important;
+  font-size: 25px !important;
+
   font-weight: 500 !important;
 }
 
 #projetos article p:nth-of-type(2) {
-  margin-top: 10px !important;
+  margin-top: 12px !important;
 
-  color: rgba(30, 37, 43, 0.68) !important;
+  color: rgba(30, 37, 43, 0.69) !important;
 
-  font-size: 10px !important;
-  line-height: 1.65 !important;
+  font-size: 13px !important;
+
+  line-height: 1.75 !important;
 }
 
-#projetos article .flex-wrap {
-  margin-top: 14px !important;
+/* tecnologias */
 
-  gap: 5px !important;
+#projetos article .flex-wrap {
+  margin-top: 17px !important;
+
+  gap: 6px !important;
 }
 
 #projetos article .flex-wrap span {
-  padding: 4px 8px !important;
+  padding: 5px 9px !important;
 
-  border: 1px solid rgba(117, 154, 171, 0.55) !important;
+  border: 1px solid rgba(117, 154, 171, 0.52) !important;
+
   border-radius: 999px !important;
 
   color: var(--azul) !important;
 
-  font-size: 7px !important;
+  font-size: 9px !important;
 }
 
+/* botão */
+
 #projetos article a {
-  margin-top: 13px !important;
+  margin-top: 17px !important;
+
+  padding: 9px 16px !important;
 
   border: 1px solid var(--azul) !important;
-  color: var(--azul) !important;
 
   border-radius: 999px !important;
 
-  font-size: 8px !important;
+  color: var(--azul) !important;
 
-  padding: 7px 13px !important;
-
-  transition:
-    background 0.2s ease,
-    color 0.2s ease;
+  font-size: 10px !important;
 }
 
 #projetos article a:hover {
   background: var(--azul) !important;
+
   color: var(--creme) !important;
 }
 
-/* alternância da imagem/texto */
+/* alternância */
 
 #projetos article:nth-child(even)
   > div:last-child
   > div {
-  grid-template-columns: minmax(250px, 0.95fr) minmax(0, 1fr) !important;
+  grid-template-columns: 0.85fr 1fr !important;
 }
 
 #projetos article:nth-child(even)
@@ -761,55 +904,56 @@ section h3 {
    ========================================================= */
 
 #experiencias {
-  background: var(--azul) !important;
-  color: var(--creme) !important;
+  background: var(--azul);
 
-  padding: 87px 0 90px !important;
+  color: var(--creme);
+
+  padding: 100px 0 110px;
 }
 
 #experiencias > div > p:first-child {
   color: var(--azul-claro) !important;
 
-  font-size: 8px !important;
+  font-size: 10px !important;
 }
 
 #experiencias h2 {
-  margin-top: 14px !important;
+  margin-top: 15px !important;
 
   color: var(--creme) !important;
 
-  font-size: clamp(31px, 4vw, 48px) !important;
+  font-size: clamp(38px, 5vw, 55px) !important;
+
   font-weight: 500 !important;
+
+  line-height: 1 !important;
 }
 
 #experiencias h2 + p {
-  margin-top: 12px !important;
+  margin-top: 16px !important;
 
-  max-width: 600px;
+  max-width: 650px;
 
-  color: rgba(255, 254, 232, 0.67) !important;
+  color: rgba(255, 254, 232, 0.72) !important;
 
-  font-size: 10px !important;
-  line-height: 1.6 !important;
+  font-size: 13px !important;
+
+  line-height: 1.7 !important;
 
   letter-spacing: 0 !important;
+
   text-transform: none !important;
 }
 
-/* área da timeline */
+/* timeline central */
 
 #experiencias .space-y-10 {
   position: relative;
 
-  margin-top: 58px !important;
+  margin-top: 70px !important;
 
-  display: flex;
-  flex-direction: column;
-
-  gap: 0 !important;
+  display: block !important;
 }
-
-/* linha central */
 
 #experiencias .space-y-10::before {
   content: "";
@@ -828,26 +972,23 @@ section h3 {
   transform: translateX(-50%);
 }
 
-/* cada experiência */
-
 #experiencias article {
   position: relative;
 
   width: 50% !important;
 
+  min-height: 145px;
+
   display: block !important;
 
   border: 0 !important;
 
-  padding: 0 0 52px !important;
-
-  min-height: 115px;
+  padding-bottom: 58px !important;
 }
 
-/* alternância */
-
 #experiencias article:nth-child(odd) {
-  margin-right: auto;
+  margin-left: 0 !important;
+  margin-right: 50% !important;
 
   padding-right: 58px !important;
 
@@ -855,14 +996,15 @@ section h3 {
 }
 
 #experiencias article:nth-child(even) {
-  margin-left: 50%;
+  margin-left: 50% !important;
+  margin-right: 0 !important;
 
   padding-left: 58px !important;
 
   text-align: left;
 }
 
-/* ponto da timeline */
+/* pontos da timeline */
 
 #experiencias article::after {
   content: "";
@@ -871,45 +1013,43 @@ section h3 {
 
   top: 4px;
 
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
 
   border-radius: 50%;
 
   background: var(--creme);
+
+  z-index: 3;
 }
 
 #experiencias article:nth-child(odd)::after {
-  right: -3px;
+  right: -4px;
 }
 
 #experiencias article:nth-child(even)::after {
-  left: -3px;
+  left: -4px;
 }
-
-/* ano */
 
 #experiencias article > div:first-child {
   color: var(--azul-claro) !important;
 
-  font-size: 9px !important;
+  font-size: 10px !important;
 }
 
-/* título */
-
 #experiencias article h3 {
-  margin-top: 9px !important;
+  margin-top: 8px !important;
 
   color: var(--creme) !important;
 
-  font-size: 15px !important;
+  font-size: 18px !important;
+
   font-weight: 500 !important;
 }
 
-/* instituição */
-
 #experiencias article p {
   letter-spacing: 0 !important;
+
   text-transform: none !important;
 }
 
@@ -918,24 +1058,25 @@ section h3 {
 
   color: var(--azul-claro) !important;
 
-  font-size: 8px !important;
+  font-size: 10px !important;
 }
 
 #experiencias article p:nth-of-type(2) {
-  margin-top: 2px !important;
+  margin-top: 3px !important;
 
-  color: rgba(255, 254, 232, 0.43) !important;
+  color: rgba(255, 254, 232, 0.47) !important;
 
-  font-size: 8px !important;
+  font-size: 9px !important;
 }
 
 #experiencias article p:nth-of-type(3) {
-  margin-top: 7px !important;
+  margin-top: 9px !important;
 
-  color: rgba(255, 254, 232, 0.65) !important;
+  color: rgba(255, 254, 232, 0.7) !important;
 
-  font-size: 9px !important;
-  line-height: 1.6 !important;
+  font-size: 11px !important;
+
+  line-height: 1.65 !important;
 }
 
 /* =========================================================
@@ -943,84 +1084,94 @@ section h3 {
    ========================================================= */
 
 #contato {
-  background: var(--creme) !important;
-  color: var(--grafite) !important;
+  background: var(--creme);
 
-  padding: 85px 0 45px !important;
+  color: var(--grafite);
+
+  padding: 100px 0 60px;
 }
 
 #contato > div > p:first-child {
   color: var(--azul-claro) !important;
 
-  font-size: 8px !important;
+  font-size: 10px !important;
 }
 
 #contato h2 {
-  margin-top: 14px !important;
+  margin-top: 15px !important;
 
   color: var(--azul) !important;
 
-  font-size: clamp(31px, 4vw, 48px) !important;
+  font-size: clamp(38px, 5vw, 55px) !important;
+
   font-weight: 500 !important;
+
+  line-height: 1 !important;
 }
 
 #contato h2 + p {
-  margin-top: 13px !important;
+  margin-top: 16px !important;
 
-  color: rgba(30, 37, 43, 0.64) !important;
+  max-width: 630px;
 
-  font-size: 10px !important;
-  line-height: 1.6 !important;
+  color: rgba(30, 37, 43, 0.66) !important;
+
+  font-size: 13px !important;
+
+  line-height: 1.7 !important;
 
   letter-spacing: 0 !important;
+
   text-transform: none !important;
 }
 
+/* duas colunas */
+
 #contato > div > div {
-  margin-top: 48px !important;
+  margin-top: 55px !important;
 
   display: grid !important;
+
   grid-template-columns: 0.8fr 1.2fr !important;
 
-  gap: 80px !important;
+  gap: 75px !important;
 }
 
-/* redes */
+/* contatos */
 
 #contato > div > div > div:first-child {
   display: flex !important;
+
   flex-direction: column !important;
 
   gap: 22px !important;
 }
 
 #contato > div > div > div:first-child a {
+  display: flex !important;
+
+  align-items: center !important;
+
+  gap: 12px !important;
+
   color: var(--azul) !important;
 
-  font-size: 10px !important;
+  font-size: 12px !important;
 
   letter-spacing: 0 !important;
-  text-transform: none !important;
 
-  display: flex !important;
-  align-items: center;
-  gap: 11px !important;
+  text-transform: none !important;
 }
 
 #contato > div > div > div:first-child a:hover {
   color: var(--vinho) !important;
 }
 
-#contato > div > div > div:first-child svg {
-  width: 16px;
-  height: 16px;
-}
-
-/* formulário */
+/* =========================================================
+   FORMULÁRIO
+   ========================================================= */
 
 #contato form {
-  margin: 0 !important;
-
   padding: 0 !important;
 
   border: 0 !important;
@@ -1035,63 +1186,93 @@ section h3 {
 }
 
 #contato form > div + div {
-  margin-top: 16px !important;
+  margin-top: 20px !important;
 }
 
 #contato label {
   color: var(--azul) !important;
 
-  font-size: 9px !important;
+  font-size: 11px !important;
 }
 
 #contato input,
 #contato textarea {
-  margin-top: 7px !important;
-
   width: 100% !important;
 
-  border: 1px solid rgba(117, 154, 171, 0.55) !important;
+  margin-top: 8px !important;
 
-  border-radius: 2px !important;
+  padding: 10px 1px !important;
+
+  border: 0 !important;
+
+  border-bottom: 1px solid rgba(117, 154, 171, 0.62) !important;
+
+  border-radius: 0 !important;
 
   background: transparent !important;
 
   color: var(--grafite) !important;
 
-  font-size: 10px !important;
-
-  padding: 9px 10px !important;
+  font-size: 13px !important;
 
   outline: none !important;
+
+  box-shadow: none !important;
 }
 
 #contato input:focus,
 #contato textarea:focus {
-  border-color: var(--azul) !important;
+  border-bottom-color: var(--azul) !important;
 }
 
 #contato textarea {
-  min-height: 110px;
+  min-height: 125px !important;
+
+  resize: vertical;
 }
 
 #contato button[type="submit"] {
-  margin-top: 16px !important;
+  margin-top: 20px !important;
+
+  min-height: 40px;
+
+  padding: 0 20px !important;
 
   border: 0 !important;
 
   border-radius: 999px !important;
 
   background: var(--vinho) !important;
+
   color: var(--creme) !important;
 
-  padding: 9px 18px !important;
+  font-size: 10px !important;
 
-  font-size: 8px !important;
   font-weight: 600 !important;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 #contato button[type="submit"]:hover {
   background: var(--azul) !important;
+
+  transform: translateY(-2px);
+}
+
+#contato form p {
+  margin-top: 5px !important;
+
+  color: var(--vinho) !important;
+
+  font-size: 10px !important;
+
+  line-height: 1.4 !important;
+
+  letter-spacing: 0 !important;
+
+  text-transform: none !important;
 }
 
 /* =========================================================
@@ -1099,23 +1280,25 @@ section h3 {
    ========================================================= */
 
 footer {
-  background: var(--creme) !important;
-  color: var(--grafite) !important;
+  background: var(--creme);
+
+  color: var(--grafite);
 
   border-top: 1px solid rgba(117, 154, 171, 0.35);
 
-  padding: 24px 0 !important;
+  padding: 24px 0;
 }
 
 footer > div {
-  width: min(calc(100% - 56px), var(--largura)) !important;
+  width: min(calc(100% - 56px), var(--max-width)) !important;
+
   margin: 0 auto !important;
 }
 
 footer p {
   color: rgba(30, 37, 43, 0.62) !important;
 
-  font-size: 8px !important;
+  font-size: 10px !important;
 }
 
 footer a {
@@ -1133,65 +1316,144 @@ footer a:hover {
 @media (max-width: 768px) {
 
   :root {
-    --header: 66px;
+    --header-height: 66px;
   }
 
   main {
-    padding-top: var(--header);
+    padding-top: var(--header-height);
   }
 
   section > div,
-  #home > div,
   header nav,
   footer > div {
-    width: min(calc(100% - 32px), var(--largura)) !important;
+    width: min(calc(100% - 32px), var(--max-width)) !important;
   }
 
   /* Header */
 
-  header nav {
-    padding: 0 !important;
-  }
-
   header nav > div {
-    gap: 0 !important;
+    gap: 0;
   }
 
   /* Home */
 
   #home {
-    min-height: auto !important;
+    min-height: auto;
 
-    padding: 55px 0 70px !important;
+    padding: 55px 0 75px;
   }
 
-  #home > div {
-    min-height: auto !important;
+  .home-content {
+    width: min(calc(100% - 32px), var(--max-width));
 
-    grid-template-columns: 1fr !important;
+    min-height: auto;
 
-    gap: 55px !important;
+    grid-template-columns: 1fr;
+
+    gap: 60px;
   }
 
-  #home h1 {
-    font-size: clamp(45px, 14vw, 65px) !important;
+  .home-text h1 {
+    font-size: clamp(46px, 14vw, 66px);
   }
 
-  #home > div > div:last-child {
-    justify-content: flex-start !important;
+  .home-text h2 {
+    font-size: 18px;
   }
 
-  #home > div > div:last-child > div {
-    width: 280px !important;
-    height: 330px !important;
+  .home-highlight {
+    font-size: 17px;
+  }
+
+  .home-description {
+    font-size: 13px;
+  }
+
+  .home-buttons {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .home-button-primary,
+  .home-button-secondary {
+    width: 100%;
+  }
+
+  /* composição da foto */
+
+  .home-visual {
+    width: 350px;
+    max-width: 100%;
+
+    height: 395px;
+
+    margin: 0 auto;
+  }
+
+  .visual-outline {
+    top: 28px;
+    right: 8px;
+
+    width: 275px;
+    height: 320px;
+
+    border-radius: 36px;
+  }
+
+  .visual-circle {
+    top: 4px;
+    left: 157px;
+
+    width: 42px;
+    height: 42px;
+  }
+
+  .visual-star {
+    top: 41px;
+    right: 0;
+
+    font-size: 27px;
+  }
+
+  .visual-back {
+    left: 27px;
+    bottom: 30px;
+
+    width: 205px;
+    height: 57px;
+  }
+
+  .visual-photo {
+    top: 65px;
+    left: 73px;
+
+    width: 208px;
+    height: 260px;
+
+    border-radius: 25px 10px 38px 15px;
+  }
+
+  .visual-code {
+    right: 12px;
+    bottom: 58px;
+
+    width: 48px;
+    height: 48px;
+
+    font-size: 16px;
   }
 
   /* Sobre */
 
+  #sobre {
+    padding: 80px 0;
+  }
+
   #sobre .border-y {
     grid-template-columns: 1fr !important;
 
-    gap: 34px !important;
+    gap: 36px !important;
   }
 
   #sobre > div > .mt-10 {
@@ -1199,25 +1461,34 @@ footer a:hover {
   }
 
   #sobre > div > .mt-10 > div + div {
-    border-left: 0;
-    border-top: 1px solid rgba(117, 154, 171, 0.35);
-    padding-left: 0;
-    padding-top: 18px;
+    border-left: 0 !important;
+
+    border-top: 1px solid rgba(117, 154, 171, 0.35) !important;
+
+    padding-left: 0 !important;
   }
 
   /* Projetos */
+
+  #projetos {
+    padding: 80px 0 90px;
+  }
 
   #projetos article {
     grid-template-columns: 1fr !important;
 
     gap: 15px !important;
+
+    margin-bottom: 65px !important;
   }
 
   #projetos article > div:last-child > div,
-  #projetos article:nth-child(even) > div:last-child > div {
+  #projetos article:nth-child(even)
+    > div:last-child
+    > div {
     grid-template-columns: 1fr !important;
 
-    gap: 24px !important;
+    gap: 25px !important;
   }
 
   #projetos article:nth-child(even)
@@ -1230,13 +1501,19 @@ footer a:hover {
   }
 
   #projetos article img {
-    height: 210px !important;
+    height: 230px !important;
+
+    min-height: 230px !important;
   }
 
   /* Experiências */
 
+  #experiencias {
+    padding: 80px 0 90px;
+  }
+
   #experiencias .space-y-10::before {
-    left: 6px;
+    left: 5px;
 
     transform: none;
   }
@@ -1248,7 +1525,7 @@ footer a:hover {
 
     margin: 0 !important;
 
-    padding-left: 32px !important;
+    padding-left: 30px !important;
     padding-right: 0 !important;
 
     text-align: left !important;
@@ -1257,49 +1534,1429 @@ footer a:hover {
   #experiencias article::after,
   #experiencias article:nth-child(odd)::after,
   #experiencias article:nth-child(even)::after {
-    left: 3px;
+    left: 1px;
     right: auto;
   }
 
   /* Contato */
 
+  #contato {
+    padding: 80px 0 55px;
+  }
+
   #contato > div > div {
     grid-template-columns: 1fr !important;
 
-    gap: 42px !important;
+    gap: 45px !important;
   }
 
-  #contato > div > div > div:first-child {
-    gap: 17px !important;
-  }
-
-  /* footer */
-
-  footer > div {
-    flex-direction: column;
-    align-items: flex-start !important;
-  }
 }
 
 @media (max-width: 480px) {
 
-  #home h1 {
-    font-size: 44px !important;
+  header nav {
+    width: min(calc(100% - 24px), var(--max-width)) !important;
   }
 
-  #home > div > div:first-child > div {
-    flex-direction: column;
-    align-items: stretch;
+  section > div {
+    width: min(calc(100% - 24px), var(--max-width)) !important;
   }
 
-  #home a {
-    width: 100%;
+  .home-content {
+    width: min(calc(100% - 24px), var(--max-width));
   }
 
+  .home-text h1 {
+    font-size: 44px;
+  }
+
+  #sobre h2,
   #projetos h2,
   #experiencias h2,
-  #contato h2,
-  #sobre h2 {
-    font-size: 31px !important;
+  #contato h2 {
+    font-size: 34px !important;
+  }
+
+  .visual-photo {
+    left: 61px;
+
+    width: 195px;
+    height: 245px;
+  }
+
+  .visual-outline {
+    left: 25px;
+
+    width: 265px;
+  }
+
+  .visual-circle {
+    left: 145px;
+  }
+
+  .visual-back {
+    left: 20px;
+
+    width: 195px;
+  }
+
+  .visual-code {
+    right: 2px;
+  }
+}
+/* Corrige o fundo dos cantos arredondados das imagens */
+
+#projetos .project-image {
+  background-color: #FFFEE8 !important;
+  border: 1px solid #759AAB !important;
+  border-radius: 18px 18px 34px 18px !important;
+  overflow: hidden !important;
+}
+
+#projetos .project-image__img {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+
+  /* O contêiner controla o arredondamento */
+  border: none !important;
+  border-radius: 0 !important;
+}
+/* ==========================================
+   CORREÇÃO DEFINITIVA DAS IMAGENS DE PROJETOS
+   ========================================== */
+
+/* Contêiner da imagem: fundo igual ao site */
+#projetos article > div:last-child > div > div:first-child {
+  position: relative !important;
+
+  width: 100% !important;
+  height: 285px !important;
+  min-height: 0 !important;
+
+  padding: 0 !important;
+
+  background: #FFFEE8 !important;
+
+  border: 1px solid #759AAB !important;
+  border-radius: 18px 18px 34px 18px !important;
+
+  overflow: hidden !important;
+}
+
+/* Imagem dentro do contêiner */
+#projetos article > div:last-child > div > div:first-child img {
+  display: block !important;
+
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  object-fit: cover !important;
+  object-position: center;
+
+  background: #FFFEE8 !important;
+
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+/* Versão para celular */
+@media (max-width: 768px) {
+  #projetos article > div:last-child > div > div:first-child {
+    height: 230px !important;
+  }
+}
+
+/* =====================================================
+   NOVO DESIGN — SOBRE MIM
+   ===================================================== */
+
+#sobre.about-section {
+  position: relative;
+  overflow: hidden;
+
+  background: var(--creme) !important;
+
+  padding: 100px 0 105px !important;
+
+  border-top: 0;
+  border-bottom: 1px solid rgba(117, 154, 171, 0.38);
+}
+
+#sobre > .about-container {
+  width: min(calc(100% - 56px), var(--max-width)) !important;
+  margin: 0 auto !important;
+}
+
+/* Cabeçalho */
+
+#sobre .about-kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin: 0 0 26px !important;
+
+  color: var(--azul-claro) !important;
+
+  font-size: 11px !important;
+  font-weight: 600;
+
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+}
+
+#sobre .about-kicker-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 31px;
+  height: 31px;
+
+  border: 1px solid rgba(117, 154, 171, 0.65);
+  border-radius: 50%;
+
+  color: var(--vinho);
+
+  font-size: 10px;
+  letter-spacing: 0;
+}
+
+#sobre .about-heading-grid {
+  display: grid;
+
+  grid-template-columns: 1.15fr 0.65fr;
+
+  align-items: end;
+
+  gap: 65px;
+}
+
+#sobre .about-title {
+  max-width: 690px;
+
+  margin: 0 !important;
+
+  color: var(--azul) !important;
+
+  font-size: clamp(42px, 5.5vw, 68px) !important;
+  font-weight: 500 !important;
+
+  line-height: 1.02 !important;
+  letter-spacing: -0.055em !important;
+}
+
+#sobre .about-title span {
+  display: inline-block;
+
+  color: var(--vinho);
+  font-family: "Playfair Display", serif;
+
+  font-weight: 500;
+  font-style: italic;
+}
+
+#sobre .about-intro {
+  margin: 0 0 5px !important;
+
+  max-width: 350px;
+
+  color: rgba(30, 37, 43, 0.72) !important;
+
+  font-size: 16px !important;
+  line-height: 1.8 !important;
+
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* Conteúdo principal */
+
+#sobre .about-main {
+  display: grid;
+
+  grid-template-columns: 1fr 0.92fr;
+
+  align-items: stretch;
+
+  gap: 75px;
+
+  margin-top: 75px;
+}
+
+#sobre .about-copy {
+  padding: 7px 0 12px;
+}
+
+#sobre .about-section-label {
+  margin: 0 0 17px !important;
+
+  color: var(--azul-claro) !important;
+
+  font-size: 10px !important;
+  font-weight: 600 !important;
+
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+}
+
+#sobre .about-copy-title {
+  max-width: 450px;
+
+  margin: 0 0 24px !important;
+
+  color: var(--azul) !important;
+
+  font-size: 29px !important;
+  font-weight: 500 !important;
+
+  line-height: 1.25 !important;
+  letter-spacing: -0.035em !important;
+}
+
+#sobre .about-paragraph {
+  max-width: 490px;
+
+  margin: 0 0 15px !important;
+
+  color: rgba(30, 37, 43, 0.78) !important;
+
+  font-size: 14px !important;
+  line-height: 1.9 !important;
+
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* Link para projetos */
+
+#sobre .about-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+
+  margin-top: 17px;
+  padding: 11px 0;
+
+  color: var(--vinho) !important;
+
+  border-bottom: 1px solid rgba(96, 8, 25, 0.42);
+
+  font-size: 12px !important;
+  font-weight: 600;
+
+  transition:
+    gap 0.2s ease,
+    color 0.2s ease;
+}
+
+#sobre .about-link:hover {
+  gap: 25px;
+  color: var(--azul) !important;
+}
+
+#sobre .about-link-arrow {
+  font-size: 17px;
+}
+
+/* Painel azul */
+
+#sobre .about-panel {
+  position: relative;
+  isolation: isolate;
+
+  min-height: 390px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  overflow: hidden;
+
+  padding: 27px 30px 23px;
+
+  color: var(--creme);
+
+  background: var(--azul);
+
+  border-radius: 24px 24px 70px 24px;
+}
+
+/* Círculo decorativo ao fundo */
+
+#sobre .about-panel::before {
+  content: "";
+
+  position: absolute;
+
+  z-index: -1;
+
+  top: 65px;
+  right: -85px;
+
+  width: 255px;
+  height: 255px;
+
+  border: 1px solid rgba(117, 154, 171, 0.38);
+
+  border-radius: 50%;
+}
+
+#sobre .about-panel::after {
+  content: "";
+
+  position: absolute;
+
+  z-index: -1;
+
+  top: 105px;
+  right: -45px;
+
+  width: 175px;
+  height: 175px;
+
+  border: 1px dashed rgba(117, 154, 171, 0.45);
+
+  border-radius: 50%;
+}
+
+#sobre .about-panel-top,
+#sobre .about-panel-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+#sobre .about-panel-top {
+  padding-bottom: 17px;
+
+  border-bottom: 1px solid rgba(255, 254, 232, 0.22);
+
+  color: var(--azul-claro);
+
+  font-size: 10px;
+  letter-spacing: 0.13em;
+}
+
+#sobre .about-panel-dot {
+  width: 8px;
+  height: 8px;
+
+  background: var(--vinho);
+
+  border-radius: 50%;
+}
+
+#sobre .about-panel-content {
+  position: relative;
+  z-index: 1;
+
+  padding: 31px 0;
+}
+
+#sobre .about-panel-label {
+  margin: 0 0 20px !important;
+
+  color: var(--azul-claro) !important;
+
+  font-size: 10px !important;
+  font-weight: 600 !important;
+
+  letter-spacing: 0.17em !important;
+  text-transform: uppercase !important;
+}
+
+#sobre .about-panel-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  margin: 0 !important;
+
+  color: var(--creme) !important;
+
+  font-size: clamp(32px, 3.6vw, 45px) !important;
+  font-weight: 500 !important;
+
+  line-height: 1.12 !important;
+  letter-spacing: -0.045em !important;
+}
+
+#sobre .about-panel-title span:nth-child(2) {
+  color: var(--azul-claro);
+}
+
+#sobre .about-panel-title span:nth-child(3) {
+  color: var(--creme);
+}
+
+#sobre .about-panel-description {
+  max-width: 300px;
+
+  margin: 22px 0 0 !important;
+
+  color: rgba(255, 254, 232, 0.78) !important;
+
+  font-size: 13px !important;
+  line-height: 1.7 !important;
+
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+#sobre .about-panel-bottom {
+  padding-top: 17px;
+
+  border-top: 1px solid rgba(255, 254, 232, 0.22);
+
+  color: rgba(255, 254, 232, 0.65);
+
+  font-size: 9px;
+  line-height: 1.5;
+
+  letter-spacing: 0.08em;
+}
+
+#sobre .about-panel-symbol {
+  color: var(--azul-claro);
+  font-size: 23px;
+}
+
+/* Marca decorativa LA */
+
+#sobre .about-panel-watermark {
+  position: absolute;
+
+  right: 8px;
+  bottom: 63px;
+
+  color: rgba(255, 254, 232, 0.045);
+
+  font-size: 125px;
+  font-weight: 700;
+
+  letter-spacing: -0.1em;
+  line-height: 1;
+
+  pointer-events: none;
+}
+
+/* Formação, interesses e objetivos */
+
+#sobre .about-details {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  margin-top: 78px;
+
+  border-top: 1px solid rgba(117, 154, 171, 0.55);
+}
+
+#sobre .about-detail {
+  position: relative;
+
+  min-width: 0;
+
+  padding: 23px 28px 0 0;
+}
+
+#sobre .about-detail + .about-detail {
+  padding-left: 28px;
+
+  border-left: 1px solid rgba(117, 154, 171, 0.38);
+}
+
+#sobre .about-detail-number {
+  display: inline-block;
+
+  margin-bottom: 18px;
+
+  color: var(--vinho);
+
+  font-family: "Playfair Display", serif;
+
+  font-size: 23px;
+  font-style: italic;
+}
+
+#sobre .about-detail-label {
+  margin: 0 0 9px !important;
+
+  color: var(--azul-claro) !important;
+
+  font-size: 10px !important;
+  font-weight: 600 !important;
+
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+}
+
+#sobre .about-detail h3 {
+  margin: 0 !important;
+
+  color: var(--azul) !important;
+
+  font-size: 18px !important;
+  font-weight: 500 !important;
+
+  line-height: 1.4 !important;
+  letter-spacing: -0.025em !important;
+}
+
+#sobre .about-detail-description {
+  margin: 10px 0 0 !important;
+
+  color: rgba(30, 37, 43, 0.7) !important;
+
+  font-size: 12px !important;
+  line-height: 1.75 !important;
+
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* =====================================================
+   RESPONSIVIDADE DA SEÇÃO SOBRE
+   ===================================================== */
+
+@media (max-width: 900px) {
+  #sobre .about-heading-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  #sobre .about-intro {
+    max-width: 550px;
+  }
+
+  #sobre .about-main {
+    grid-template-columns: 1fr 0.9fr;
+    gap: 35px;
+  }
+
+  #sobre .about-panel {
+    padding: 24px;
+  }
+
+  #sobre .about-panel-title {
+    font-size: 34px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  #sobre.about-section {
+    padding: 72px 0 75px !important;
+  }
+
+  #sobre > .about-container {
+    width: min(calc(100% - 32px), var(--max-width)) !important;
+  }
+
+  #sobre .about-kicker {
+    margin-bottom: 21px !important;
+  }
+
+  #sobre .about-heading-grid {
+    gap: 18px;
+  }
+
+  #sobre .about-title {
+    font-size: clamp(39px, 10vw, 55px) !important;
+    line-height: 1.03 !important;
+  }
+
+  #sobre .about-intro {
+    font-size: 15px !important;
+    line-height: 1.75 !important;
+  }
+
+  #sobre .about-main {
+    grid-template-columns: 1fr;
+    gap: 40px;
+
+    margin-top: 43px;
+  }
+
+  #sobre .about-copy-title {
+    font-size: 26px !important;
+  }
+
+  #sobre .about-paragraph {
+    font-size: 14px !important;
+  }
+
+  #sobre .about-panel {
+    min-height: 350px;
+
+    padding: 23px 24px 20px;
+
+    border-radius: 21px 21px 55px 21px;
+  }
+
+  #sobre .about-panel-title {
+    font-size: 40px !important;
+  }
+
+  #sobre .about-panel-watermark {
+    font-size: 100px;
+  }
+
+  #sobre .about-details {
+    grid-template-columns: 1fr;
+
+    margin-top: 48px;
+  }
+
+  #sobre .about-detail,
+  #sobre .about-detail + .about-detail {
+    padding: 22px 0 25px;
+
+    border-left: 0;
+
+    border-bottom: 1px solid rgba(117, 154, 171, 0.35);
+  }
+
+  #sobre .about-detail-number {
+    margin-bottom: 10px;
+  }
+
+  #sobre .about-detail h3 {
+    font-size: 18px !important;
+  }
+
+  #sobre .about-detail-description {
+    max-width: 400px;
+    font-size: 13px !important;
+  }
+}
+
+/* ==========================================
+   CONTATO — NOVO DESIGN
+   ========================================== */
+
+#contato {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  background: #253D5B !important;
+  color: #FFFEE8 !important;
+
+  padding: 110px 0 90px !important;
+}
+
+/* Elemento decorativo ao fundo */
+#contato::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+
+  width: 480px;
+  height: 480px;
+
+  top: -270px;
+  right: -170px;
+
+  border: 1px solid rgba(255, 254, 232, 0.12);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+#contato > div {
+  position: relative;
+  z-index: 1;
+
+  width: min(calc(100% - 56px), var(--max-width)) !important;
+  margin: 0 auto !important;
+}
+
+/* Identificação da seção */
+#contato > div > p:first-child {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+
+  width: fit-content;
+
+  padding: 9px 14px !important;
+
+  color: #FFFEE8 !important;
+  background: rgba(255, 254, 232, 0.06);
+
+  border: 1px solid rgba(255, 254, 232, 0.19);
+  border-radius: 999px;
+
+  font-size: 10px !important;
+  letter-spacing: 0.13em;
+}
+
+/* Título principal */
+#contato h2 {
+  max-width: 800px;
+  margin-top: 24px !important;
+
+  color: #FFFEE8 !important;
+
+  font-size: clamp(42px, 6vw, 76px) !important;
+  font-weight: 500 !important;
+  line-height: 1.04 !important;
+  letter-spacing: -0.045em;
+}
+
+/* Texto de apresentação */
+#contato h2 + p {
+  max-width: 590px;
+  margin-top: 20px !important;
+
+  color: rgba(255, 254, 232, 0.72) !important;
+
+  font-size: 14px !important;
+  line-height: 1.85 !important;
+
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* Organização das duas colunas */
+#contato > div > div {
+  display: grid !important;
+
+  grid-template-columns: minmax(250px, 0.85fr) minmax(0, 1.15fr) !important;
+
+  align-items: stretch;
+  gap: 28px !important;
+
+  margin-top: 48px !important;
+}
+
+/* Painel com os links de contato */
+#contato > div > div > div:first-child {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center;
+
+  gap: 14px !important;
+
+  min-width: 0;
+  padding: 26px !important;
+
+  background: rgba(255, 254, 232, 0.055);
+  border: 1px solid rgba(255, 254, 232, 0.14);
+  border-radius: 24px;
+
+  box-sizing: border-box;
+}
+
+/* Cards de e-mail, LinkedIn e outros contatos */
+#contato > div > div > div:first-child a {
+  display: flex !important;
+  align-items: center;
+  gap: 13px !important;
+
+  padding: 16px !important;
+
+  color: #FFFEE8 !important;
+  background: rgba(255, 254, 232, 0.045);
+
+  border: 1px solid rgba(255, 254, 232, 0.12);
+  border-radius: 15px;
+
+  font-size: 13px !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  text-decoration: none;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+#contato > div > div > div:first-child a svg {
+  flex-shrink: 0;
+  color: #759AAB;
+  transition: color 0.25s ease;
+}
+
+#contato > div > div > div:first-child a:hover {
+  color: #FFFEE8 !important;
+  background: rgba(255, 254, 232, 0.11);
+
+  border-color: rgba(255, 254, 232, 0.28);
+
+  transform: translateX(4px);
+}
+
+#contato > div > div > div:first-child a:hover svg {
+  color: #FFFEE8;
+}
+
+/* Formulário: painel em destaque */
+#contato form {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+
+  padding: clamp(24px, 4vw, 38px) !important;
+
+  background: #FFFEE8 !important;
+  border: 1px solid rgba(117, 154, 171, 0.38) !important;
+  border-radius: 24px !important;
+
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.14);
+}
+
+/* Espaçamento entre os campos */
+#contato form > div {
+  margin-top: 0 !important;
+}
+
+#contato form > div + div {
+  margin-top: 21px !important;
+}
+
+/* Rótulos dos campos */
+#contato label {
+  display: block;
+
+  color: #253D5B !important;
+
+  font-size: 11px !important;
+  font-weight: 600;
+  letter-spacing: 0.035em;
+}
+
+/* Campos de texto */
+#contato input,
+#contato textarea {
+  display: block;
+  width: 100% !important;
+  box-sizing: border-box;
+
+  margin-top: 9px !important;
+  padding: 13px 14px !important;
+
+  color: #1E252B !important;
+  background: rgba(117, 154, 171, 0.07) !important;
+
+  border: 1px solid rgba(37, 61, 91, 0.16) !important;
+  border-radius: 11px !important;
+
+  font-family: inherit;
+  font-size: 13px !important;
+
+  outline: none !important;
+  box-shadow: none !important;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+#contato input::placeholder,
+#contato textarea::placeholder {
+  color: rgba(30, 37, 43, 0.42);
+}
+
+#contato input:focus,
+#contato textarea:focus {
+  background: #FFFEE8 !important;
+
+  border-color: #759AAB !important;
+
+  box-shadow: 0 0 0 3px rgba(117, 154, 171, 0.17) !important;
+}
+
+#contato textarea {
+  min-height: 145px !important;
+  resize: vertical;
+}
+
+/* Botão de envio */
+#contato button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 48px;
+
+  margin-top: 24px !important;
+  padding: 13px 20px !important;
+
+  color: #FFFEE8 !important;
+  background: #600819 !important;
+
+  border: 1px solid #600819 !important;
+  border-radius: 12px !important;
+
+  font-family: inherit;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+#contato button[type="submit"]:hover {
+  background: #253D5B !important;
+  border-color: #253D5B !important;
+
+  transform: translateY(-2px);
+}
+
+#contato button[type="submit"]:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Mensagens de validação */
+#contato form p {
+  margin-top: 6px !important;
+
+  font-size: 11px !important;
+  line-height: 1.5 !important;
+
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+   ========================================== */
+
+@media (max-width: 768px) {
+  #contato {
+    padding: 85px 0 65px !important;
+  }
+
+  #contato > div {
+    width: min(calc(100% - 36px), var(--max-width)) !important;
+  }
+
+  #contato > div > div {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 22px !important;
+
+    margin-top: 36px !important;
+  }
+
+  #contato > div > div > div:first-child {
+    padding: 20px !important;
+  }
+
+  #contato form {
+    padding: 24px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #contato h2 {
+    font-size: 39px !important;
+  }
+
+  #contato h2 + p {
+    font-size: 13px !important;
+  }
+
+  #contato > div > div > div:first-child {
+    padding: 15px !important;
+  }
+
+  #contato > div > div > div:first-child a {
+    padding: 14px !important;
+  }
+
+  #contato form {
+    padding: 20px !important;
+    border-radius: 19px !important;
+  }
+}
+
+/* ==========================================
+   TRANSIÇÃO DE CORES ENTRE AS SEÇÕES
+   ========================================== */
+
+/* 01 — INÍCIO: creme */
+#home {
+  background: #FFFEE8 !important;
+  border-bottom: 1px solid rgba(37, 61, 91, 0.2);
+}
+
+/* 02 — SOBRE MIM: azul acinzentado */
+#sobre.about-section {
+  background: #759AAB !important;
+  border-top: 1px solid rgba(37, 61, 91, 0.2);
+  border-bottom: 1px solid rgba(37, 61, 91, 0.25);
+}
+
+/* Contraste dos textos na seção Sobre */
+#sobre .about-kicker,
+#sobre .about-section-label,
+#sobre .about-detail-label {
+  color: #253D5B !important;
+}
+
+#sobre .about-intro,
+#sobre .about-paragraph,
+#sobre .about-detail-description {
+  color: #1E252B !important;
+}
+
+#sobre .about-detail {
+  border-color: rgba(37, 61, 91, 0.3);
+}
+
+#sobre .about-detail + .about-detail {
+  border-left-color: rgba(37, 61, 91, 0.3);
+}
+
+/* 03 — PROJETOS: volta ao creme */
+#projetos {
+  background: #FFFEE8 !important;
+  border-top: 1px solid rgba(37, 61, 91, 0.2);
+  border-bottom: 1px solid rgba(37, 61, 91, 0.2);
+}
+
+/* 04 — EXPERIÊNCIAS: vinho */
+#experiencias {
+  background: #600819 !important;
+  color: #FFFEE8 !important;
+  border-top: 1px solid rgba(255, 254, 232, 0.2);
+  border-bottom: 1px solid rgba(255, 254, 232, 0.2);
+}
+
+/* Linha da timeline */
+#experiencias .space-y-10::before {
+  background: rgba(255, 254, 232, 0.4) !important;
+}
+
+/* 05 — CONTATO: azul-escuro */
+#contato {
+  background: #253D5B !important;
+  color: #FFFEE8 !important;
+  border-top: 1px solid rgba(255, 254, 232, 0.2);
+}
+
+/* O formulário continua claro para facilitar a leitura */
+#contato form {
+  background: #FFFEE8 !important;
+}
+
+/* ==========================================
+   MICROINTERAÇÕES — PORTFÓLIO
+   ========================================== */
+
+/* Transições suaves nos elementos interativos */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #759AAB;
+  outline-offset: 4px;
+}
+
+/* ==========================================
+   1. MENU — LINHA ANIMADA
+   ========================================== */
+
+header nav > div a {
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+header nav > div a::after {
+  content: "";
+  position: absolute;
+
+  left: 0;
+  bottom: -7px;
+
+  width: 100%;
+  height: 1px;
+
+  background: #600819;
+
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+header nav > div a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ==========================================
+   2. INÍCIO — MOVIMENTO DECORATIVO
+   ========================================== */
+
+.visual-star {
+  animation: estrela-suave 3.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.visual-code {
+  animation: flutuar-suave 5s ease-in-out infinite;
+}
+
+@keyframes estrela-suave {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-7px) rotate(8deg);
+  }
+}
+
+@keyframes flutuar-suave {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Botões da página inicial */
+.home-button-primary,
+.home-button-secondary {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.home-button-primary:hover,
+.home-button-secondary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 22px rgba(37, 61, 91, 0.13);
+}
+
+.home-visual .visual-photo {
+  transition:
+    transform 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+.home-visual:hover .visual-photo {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 35px rgba(37, 61, 91, 0.15);
+}
+
+/* ==========================================
+   3. SOBRE MIM — PAINEL EM DESTAQUE
+   ========================================== */
+
+.about-panel {
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.about-panel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 40px rgba(37, 61, 91, 0.15);
+}
+
+.about-panel-symbol {
+  display: inline-block;
+  transition: transform 0.4s ease;
+}
+
+.about-panel:hover .about-panel-symbol {
+  transform: rotate(45deg);
+}
+
+/* Link para os projetos */
+.about-link {
+  transition:
+    gap 0.25s ease,
+    color 0.25s ease;
+}
+
+.about-link-arrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.about-link:hover .about-link-arrow {
+  transform: translate(3px, -3px);
+}
+
+/* ==========================================
+   4. PROJETOS — IMAGENS E TECNOLOGIAS
+   ========================================== */
+
+/* Ampliação delicada das imagens */
+#projetos article > div:last-child > div > div:first-child {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+#projetos article > div:last-child > div > div:first-child img {
+  transition: transform 0.5s ease;
+}
+
+#projetos article:hover
+> div:last-child
+> div
+> div:first-child {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(37, 61, 91, 0.12);
+}
+
+#projetos article:hover
+> div:last-child
+> div
+> div:first-child img {
+  transform: scale(1.035);
+}
+
+/* Etiquetas de tecnologias */
+#projetos article .flex-wrap span {
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+#projetos article .flex-wrap span:hover {
+  color: #FFFEE8 !important;
+  background: #253D5B;
+  border-color: #253D5B !important;
+  transform: translateY(-2px);
+}
+
+/* Botões dos projetos */
+#projetos article a {
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+#projetos article a:hover {
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   5. EXPERIÊNCIAS — TIMELINE
+   ========================================== */
+
+#experiencias article::after {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+#experiencias article:hover::after {
+  transform: scale(1.5);
+  box-shadow: 0 0 0 5px rgba(255, 254, 232, 0.1);
+}
+
+#experiencias article h3 {
+  transition: color 0.25s ease;
+}
+
+#experiencias article:hover h3 {
+  color: #759AAB !important;
+}
+
+/* ==========================================
+   6. CONTATO — LINKS E FORMULÁRIO
+   ========================================== */
+
+#contato > div > div > div:first-child a {
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+#contato > div > div > div:first-child a:hover {
+  transform: translateX(5px);
+}
+
+#contato input,
+#contato textarea {
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+#contato button[type="submit"] {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+#contato button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 9px 22px rgba(96, 8, 25, 0.2);
+}
+
+/* ==========================================
+   7. ACESSIBILIDADE — MOVIMENTO REDUZIDO
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Em telas sensíveis ao hover, não deslocar elementos */
+@media (hover: none) {
+  #projetos article:hover
+  > div:last-child
+  > div
+  > div:first-child {
+    transform: none;
+    box-shadow: none;
+  }
+
+  #projetos article:hover
+  > div:last-child
+  > div
+  > div:first-child img {
+    transform: none;
+  }
+
+  .home-visual:hover .visual-photo {
+    transform: none;
+    box-shadow: none;
   }
 }

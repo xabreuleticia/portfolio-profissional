@@ -1,9 +1,9 @@
-import { Mail, Phone } from "lucide-react"
+import { Mail } from "lucide-react"
 import { FaGithub, FaLinkedinIn, FaWhatsapp } from "react-icons/fa"
 import { useForm } from "react-hook-form"
 import emailjs from "@emailjs/browser"
 
-import { useLanguage } from "../context/LanguageContext"
+import { useLanguage } from "../context/useLanguage"
 
 function Contato() {
   const { language } = useLanguage()
@@ -17,7 +17,7 @@ function Contato() {
 
   const text = {
     pt: {
-      numero: "04 / Contato",
+      numero: "05 / Contato",
       titulo: "Vamos conversar?",
       descricao:
         "Tem uma ideia, projeto ou oportunidade? Entre em contato comigo.",
@@ -34,7 +34,7 @@ function Contato() {
     },
 
     en: {
-      numero: "04 / Contact",
+      numero: "05 / Contact",
       titulo: "Let's talk?",
       descricao:
         "Have an idea, project or opportunity? Get in touch with me.",

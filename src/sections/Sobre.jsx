@@ -1,157 +1,259 @@
-import { useLanguage } from "../context/LanguageContext"
+import { useLanguage } from "../context/useLanguage"
 
 function Sobre() {
   const { language } = useLanguage()
 
   const texts = {
     pt: {
-      numero: "01 / Sobre mim",
-      titulo: "Entre aprender e construir.",
-      descricao:
-        "Um olhar curioso para a tecnologia e para as possibilidades que ela cria.",
+      numero: "01 / SOBRE MIM",
 
-      subtitulo: "Quem sou",
-      texto1:
-        "Sou estudante de Engenharia de Software e tenho interesse em tecnologia, desenvolvimento web e criação de soluções digitais.",
-      texto2:
-        "Gosto de aprender colocando ideias em prática, desenvolvendo projetos e buscando evoluir continuamente.",
+      titulo: "Curiosidade que vira",
+      destaque: "construção.",
 
-      formacao: "Formação",
+      introducao:
+        "Acredito que aprender tecnologia ganha sentido quando transformamos ideias em algo real.",
+
+      subtitulo: "Um pouco sobre mim",
+
+      paragrafo1:
+        "Sou estudante de Engenharia de Software na PUC Minas. Tenho interesse em desenvolvimento web, programação e criação de soluções digitais.",
+
+      paragrafo2:
+        "Gosto de aprender na prática, explorar possibilidades e colaborar com outras pessoas. Para mim, cada projeto é uma oportunidade de desenvolver novas habilidades e transformar conhecimento em experiência.",
+
+      botao: "Conheça meus projetos",
+
+      cartaoRotulo: "MEU JEITO DE APRENDER",
+      cartaoLinha1: "Aprender.",
+      cartaoLinha2: "Experimentar.",
+      cartaoLinha3: "Construir.",
+
+      cartaoDescricao:
+        "Transformar conhecimento em prática, uma ideia de cada vez.",
+
+      cartaoRodape: "ENGENHARIA DE SOFTWARE · PUC MINAS",
+
+      formacaoRotulo: "FORMAÇÃO",
       formacaoTitulo: "Engenharia de Software",
-      formacaoDescricao: "PUC Minas",
+      formacaoDescricao:
+        "Graduação em andamento na PUC Minas.",
 
-      interesses: "Interesses",
+      interessesRotulo: "INTERESSES",
       interessesTitulo: "Tecnologia & Web",
       interessesDescricao:
-        "Desenvolvimento web, programação e criação de soluções digitais.",
+        "Desenvolvimento web, lógica de programação e soluções digitais.",
 
-      objetivos: "Objetivos",
-      objetivosTitulo: "Evoluir construindo",
+      objetivosRotulo: "OBJETIVOS",
+      objetivosTitulo: "Crescer construindo",
       objetivosDescricao:
-        "Aprender continuamente e transformar ideias em projetos.",
+        "Aprofundar conhecimentos, colaborar em projetos e evoluir como desenvolvedora.",
     },
 
     en: {
-      numero: "01 / About me",
-      titulo: "Between learning and building.",
-      descricao:
-        "A curious perspective on technology and the possibilities it creates.",
+      numero: "01 / ABOUT ME",
 
-      subtitulo: "Who I am",
-      texto1:
-        "I am a Software Engineering student interested in technology, web development and creating digital solutions.",
-      texto2:
-        "I enjoy learning by putting ideas into practice, developing projects and continuously improving my skills.",
+      titulo: "Curiosity turned into",
+      destaque: "creation.",
 
-      formacao: "Education",
+      introducao:
+        "I believe learning technology becomes meaningful when we turn ideas into something real.",
+
+      subtitulo: "A little about me",
+
+      paragrafo1:
+        "I am a Software Engineering student at PUC Minas, interested in web development, programming and creating digital solutions.",
+
+      paragrafo2:
+        "I enjoy learning by doing, exploring possibilities and collaborating with others. To me, every project is an opportunity to develop new skills and turn knowledge into experience.",
+
+      botao: "Explore my projects",
+
+      cartaoRotulo: "HOW I LIKE TO LEARN",
+      cartaoLinha1: "Learn.",
+      cartaoLinha2: "Experiment.",
+      cartaoLinha3: "Build.",
+
+      cartaoDescricao:
+        "Turning knowledge into practice, one idea at a time.",
+
+      cartaoRodape: "SOFTWARE ENGINEERING · PUC MINAS",
+
+      formacaoRotulo: "EDUCATION",
       formacaoTitulo: "Software Engineering",
-      formacaoDescricao: "PUC Minas",
+      formacaoDescricao:
+        "Undergraduate degree in progress at PUC Minas.",
 
-      interesses: "Interests",
+      interessesRotulo: "INTERESTS",
       interessesTitulo: "Technology & Web",
       interessesDescricao:
-        "Web development, programming and creating digital solutions.",
+        "Web development, programming logic and digital solutions.",
 
-      objetivos: "Goals",
-      objetivosTitulo: "Keep building",
+      objetivosRotulo: "GOALS",
+      objetivosTitulo: "Grow by building",
       objetivosDescricao:
-        "Continuously learn and turn ideas into projects.",
+        "Expand my knowledge, collaborate on projects and grow as a developer.",
     },
   }
 
   const t = texts[language]
 
   return (
-    <section id="sobre" className="bg-[#FFFEE8] px-6 py-24">
+    <section id="sobre" className="about-section">
+      <div className="about-container">
 
-      <div className="mx-auto max-w-6xl">
+        {/* Título e introdução */}
 
-        <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#759AAB]">
-          {t.numero}
-        </p>
+        <div className="about-heading">
 
-        <h2 className="mt-4 text-4xl font-semibold text-[#253D5B] md:text-5xl">
-          {t.titulo}
-        </h2>
+          <p className="about-kicker">
+            <span className="about-kicker-number">01</span>
+            <span>{t.numero.replace("01 / ", "")}</span>
+          </p>
 
-        <p className="mt-4 max-w-2xl text-sm leading-6 text-[#1E252B]/70">
-          {t.descricao}
-        </p>
+          <div className="about-heading-grid">
 
-        <div className="mt-12 border-y border-[#759AAB]/40 py-12">
+            <h2 className="about-title">
+              {t.titulo}{" "}
+              <span>{t.destaque}</span>
+            </h2>
 
-          <h3 className="text-2xl font-semibold text-[#253D5B]">
-            {t.subtitulo}
-          </h3>
-
-          <div className="mt-6 max-w-3xl">
-
-            <p className="text-sm leading-7 text-[#1E252B]/80">
-              {t.texto1}
-            </p>
-
-            <p className="mt-4 text-sm leading-7 text-[#1E252B]/80">
-              {t.texto2}
+            <p className="about-intro">
+              {t.introducao}
             </p>
 
           </div>
 
         </div>
 
-        <div className="mt-10 grid gap-8 md:grid-cols-3">
+        {/* Apresentação e painel visual */}
 
-          <div className="border-t border-[#759AAB]/40 pt-5">
+        <div className="about-main">
 
-            <p className="text-xs uppercase tracking-[0.2em] text-[#759AAB]">
-              {t.formacao}
+          <div className="about-copy">
+
+            <p className="about-section-label">
+              {t.subtitulo}
             </p>
 
-            <h3 className="mt-3 text-lg font-semibold text-[#253D5B]">
-              {t.formacaoTitulo}
+            <h3 className="about-copy-title">
+              {language === "pt"
+                ? "Aprender é o começo. Construir é o caminho."
+                : "Learning is the beginning. Building is the journey."}
             </h3>
 
-            <p className="mt-2 text-sm text-[#1E252B]/70">
+            <p className="about-paragraph">
+              {t.paragrafo1}
+            </p>
+
+            <p className="about-paragraph">
+              {t.paragrafo2}
+            </p>
+
+            <a
+              href="#projetos"
+              className="about-link"
+            >
+              <span>{t.botao}</span>
+              <span className="about-link-arrow">↗</span>
+            </a>
+
+          </div>
+
+          {/* Painel gráfico */}
+
+          <div className="about-panel">
+
+            <div className="about-panel-top">
+              <span>LA / 2026</span>
+              <span className="about-panel-dot" />
+            </div>
+
+            <div className="about-panel-content">
+
+              <p className="about-panel-label">
+                {t.cartaoRotulo}
+              </p>
+
+              <h3 className="about-panel-title">
+                <span>{t.cartaoLinha1}</span>
+                <span>{t.cartaoLinha2}</span>
+                <span>{t.cartaoLinha3}</span>
+              </h3>
+
+              <p className="about-panel-description">
+                {t.cartaoDescricao}
+              </p>
+
+            </div>
+
+            <div className="about-panel-bottom">
+              <span>{t.cartaoRodape}</span>
+              <span className="about-panel-symbol">✳</span>
+            </div>
+
+            <span className="about-panel-watermark" aria-hidden="true">
+              LA
+            </span>
+
+          </div>
+
+        </div>
+
+        {/* Formação, interesses e objetivos */}
+
+        <div className="about-details">
+
+          <article className="about-detail">
+
+            <span className="about-detail-number">01</span>
+
+            <p className="about-detail-label">
+              {t.formacaoRotulo}
+            </p>
+
+            <h3>{t.formacaoTitulo}</h3>
+
+            <p className="about-detail-description">
               {t.formacaoDescricao}
             </p>
 
-          </div>
+          </article>
 
-          <div className="border-t border-[#759AAB]/40 pt-5">
+          <article className="about-detail">
 
-            <p className="text-xs uppercase tracking-[0.2em] text-[#759AAB]">
-              {t.interesses}
+            <span className="about-detail-number">02</span>
+
+            <p className="about-detail-label">
+              {t.interessesRotulo}
             </p>
 
-            <h3 className="mt-3 text-lg font-semibold text-[#253D5B]">
-              {t.interessesTitulo}
-            </h3>
+            <h3>{t.interessesTitulo}</h3>
 
-            <p className="mt-2 text-sm text-[#1E252B]/70">
+            <p className="about-detail-description">
               {t.interessesDescricao}
             </p>
 
-          </div>
+          </article>
 
-          <div className="border-t border-[#759AAB]/40 pt-5">
+          <article className="about-detail">
 
-            <p className="text-xs uppercase tracking-[0.2em] text-[#759AAB]">
-              {t.objetivos}
+            <span className="about-detail-number">03</span>
+
+            <p className="about-detail-label">
+              {t.objetivosRotulo}
             </p>
 
-            <h3 className="mt-3 text-lg font-semibold text-[#253D5B]">
-              {t.objetivosTitulo}
-            </h3>
+            <h3>{t.objetivosTitulo}</h3>
 
-            <p className="mt-2 text-sm text-[#1E252B]/70">
+            <p className="about-detail-description">
               {t.objetivosDescricao}
             </p>
 
-          </div>
+          </article>
 
         </div>
 
       </div>
-
     </section>
   )
 }

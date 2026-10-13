@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
-import { useLanguage } from "../context/LanguageContext"
+import { useLanguage } from "../context/useLanguage"
 
 function Header() {
   const { language, toggleLanguage } = useLanguage()
@@ -10,6 +10,7 @@ function Header() {
     pt: {
       sobre: "Sobre",
       projetos: "Projetos",
+      atividade: "Atividade",
       experiencias: "Experiências",
       contato: "Contato",
       idioma: "EN",
@@ -18,6 +19,7 @@ function Header() {
     en: {
       sobre: "About",
       projetos: "Projects",
+      atividade: "Coding stats",
       experiencias: "Experience",
       contato: "Contact",
       idioma: "PT",
@@ -57,6 +59,13 @@ function Header() {
             className="text-sm font-medium text-[#1E252B] transition hover:text-[#759AAB]"
           >
             {t.projetos}
+          </a>
+
+          <a
+            href="#wakatime"
+            className="text-sm font-medium text-[#1E252B] transition hover:text-[#759AAB]"
+          >
+            {t.atividade}
           </a>
 
           <a
@@ -107,6 +116,10 @@ function Header() {
 
             <a href="#projetos" onClick={closeMenu}>
               {t.projetos}
+            </a>
+
+            <a href="#wakatime" onClick={closeMenu}>
+              {t.atividade}
             </a>
 
             <a href="#experiencias" onClick={closeMenu}>

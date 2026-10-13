@@ -1,25 +1,6 @@
 export const projetos = [
   {
-    ano: "2025",
-
-    pt: {
-      nome: "Programação 101",
-      descricao:
-        "Curso de extensão introdutório em programação e algoritmos.",
-    },
-
-    en: {
-      nome: "Programming 101",
-      descricao:
-        "Introductory extension course in programming and algorithms.",
-    },
-
-    tecnologias: ["Python"],
-    github: "#",
-    imagem: "/images/programacao101.png",
-  },
-
-  {
+    id: "hydrofix",
     ano: "2026",
 
     pt: {
@@ -34,12 +15,54 @@ export const projetos = [
         "Web platform connecting customers and hydraulic service professionals.",
     },
 
-    tecnologias: ["React", "Java", "Spring Boot"],
-    github: "#",
-    imagem: "/images/hydrofix.png",
+    tecnologias: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Bootstrap 5",
+      "Node.js",
+      "JSON Server",
+    ],
+
+    github:
+      "https://github.com/ICEI-PUC-Minas-PMGES-TI/pmg-es-2026-1-ti1-0427100-hydrofix",
+
+    demo: "",
+
+    imagem: "/images/HydroFix.jpg",
   },
 
   {
+    id: "cobrinha",
+    ano: "2026",
+
+    pt: {
+      nome: "Cobrinha.zip",
+      descricao:
+        "Projeto final da disciplina de Introdução a Algoritmos/Programação, desenvolvido com Python e Pygame.",
+    },
+
+    en: {
+      nome: "Snake.zip",
+      descricao:
+        "Final project for the Introduction to Algorithms/Programming course, developed with Python and Pygame.",
+    },
+
+    tecnologias: [
+      "Python",
+      "Pygame",
+    ],
+
+    github:
+      "https://github.com/abneralmeidacord/snakegame-algoritmos-PUC",
+
+    demo: "",
+
+    imagem: "/images/cobrinha.png",
+  },
+
+  {
+    id: "deliciare",
     ano: "2026",
 
     pt: {
@@ -54,8 +77,19 @@ export const projetos = [
         "Web development project focused on organizing and presenting recipes.",
     },
 
-    tecnologias: ["HTML", "CSS", "JavaScript", "Bootstrap", "JSON Server"],
-    github: "#",
+    tecnologias: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Bootstrap",
+      "JSON Server",
+    ],
+
+    github:
+      "https://github.com/xabreuleticia/Trabalho-pratico-2",
+
+    demo: "",
+
     imagem: "/images/deliciare.png",
   },
 ]

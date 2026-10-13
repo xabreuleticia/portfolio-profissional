@@ -38,4 +38,42 @@ export const experiencias = [
         "Undergraduate degree focused on software development, programming and technology.",
     },
   },
+  {
+  ano: "2026",
+
+  pt: {
+    titulo: "Integrante da WebTech Network",
+    instituicao: "WebTech Network — PUC Minas",
+    periodo: "2026 - atual",
+    descricao:
+      "Participação em uma comunidade de tecnologia voltada ao compartilhamento de conhecimentos e experiências em desenvolvimento web e criação de soluções digitais.",
+  },
+
+  en: {
+    titulo: "WebTech Network Member",
+    instituicao: "WebTech Network — PUC Minas",
+    periodo: "2026 - present",
+    descricao:
+      "Participation in a technology community focused on sharing knowledge and experiences in web development and digital solution building.",
+  },
+},
+{
+  ano: "2026",
+
+  pt: {
+    titulo: "Monitora de Introdução a Algoritmos",
+    instituicao: "PUC Minas",
+    periodo: "2026 - atual",
+    descricao:
+      "Apoio a estudantes no aprendizado de lógica de programação e fundamentos de algoritmos, auxiliando na compreensão de conceitos e na resolução de exercícios práticos.",
+  },
+
+  en: {
+    titulo: "Introduction to Algorithms Teaching Assistant",
+    instituicao: "PUC Minas",
+    periodo: "2026 - present",
+    descricao:
+      "Supporting students in learning programming logic and algorithm fundamentals, helping them understand concepts and solve practical exercises.",
+  },
+},
 ]

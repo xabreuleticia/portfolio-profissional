@@ -1,4 +1,4 @@
-import { useLanguage } from "../context/LanguageContext"
+import { useLanguage } from "../context/useLanguage"
 import { experiencias } from "../data/experiencias"
 
 function Experiencias() {
@@ -6,14 +6,14 @@ function Experiencias() {
 
   const text = {
     pt: {
-      numero: "03 / Experiências",
+      numero: "04 / Experiências",
       titulo: "Minha trajetória.",
       descricao:
         "Experiências, aprendizados e momentos que contribuíram para minha formação.",
     },
 
     en: {
-      numero: "03 / Experience",
+      numero: "04 / Experience",
       titulo: "My journey.",
       descricao:
         "Experiences, learning and moments that have contributed to my development.",

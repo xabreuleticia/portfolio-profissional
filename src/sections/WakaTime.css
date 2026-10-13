@@ -1,0 +1,619 @@
+/* =========================================================
+   WAKATIME — CADERNO DE CÓDIGO
+   Paleta do portfólio: creme, vinho, azul e azul acinzentado.
+   ========================================================= */
+
+.waka-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 104px 0 112px;
+  color: #1E252B;
+  background: #FFFEE8;
+  border-top: 1px solid rgba(117, 154, 171, 0.5);
+  border-bottom: 1px solid rgba(117, 154, 171, 0.5);
+  scroll-margin-top: 76px;
+}
+
+.waka-section::before,
+.waka-section::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  pointer-events: none;
+  border: 1px solid rgba(117, 154, 171, 0.22);
+  border-radius: 50%;
+}
+
+.waka-section::before {
+  top: -265px;
+  right: -120px;
+  width: 440px;
+  height: 440px;
+}
+
+.waka-section::after {
+  right: -72px;
+  bottom: -230px;
+  width: 310px;
+  height: 310px;
+  border-style: dashed;
+}
+
+.waka-container {
+  position: relative;
+  width: min(calc(100% - 56px), 1120px);
+  margin: 0 auto;
+}
+
+.waka-kicker {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 0 0 24px;
+  color: #600819;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  line-height: 1.5;
+}
+
+.waka-kicker-dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #600819;
+  box-shadow: 0 0 0 4px rgba(96, 8, 25, 0.1);
+  animation: waka-kicker-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes waka-kicker-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(96, 8, 25, 0.1); }
+  50% { box-shadow: 0 0 0 7px rgba(96, 8, 25, 0.04); }
+}
+
+.waka-heading-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(250px, 0.65fr);
+  align-items: end;
+  gap: 56px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(117, 154, 171, 0.5);
+}
+
+.waka-title {
+  max-width: 700px;
+  margin: 0;
+  color: #253D5B;
+  font-size: clamp(39px, 5vw, 64px);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.055em;
+}
+
+.waka-title span {
+  display: inline-block;
+  color: #600819;
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.045em;
+}
+
+.waka-intro {
+  max-width: 390px;
+  margin: 0 0 3px;
+  color: rgba(30, 37, 43, 0.75);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.waka-overview {
+  display: grid;
+  grid-template-columns: minmax(245px, 0.68fr) minmax(0, 1.45fr);
+  align-items: stretch;
+  gap: 24px;
+  margin-top: 34px;
+}
+
+/* Cartão editorial, com forma assimétrica inspirada no restante do site. */
+.waka-note {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 100%;
+  padding: 29px 27px 25px;
+  overflow: hidden;
+  color: #FFFEE8;
+  background: #253D5B;
+  border-radius: 5px 5px 54px 5px;
+  box-shadow: 8px 8px 0 rgba(117, 154, 171, 0.28);
+}
+
+.waka-note::before {
+  position: absolute;
+  top: -56px;
+  right: -48px;
+  width: 170px;
+  height: 170px;
+  content: "";
+  border: 1px solid rgba(255, 254, 232, 0.15);
+  border-radius: 50%;
+}
+
+.waka-note::after {
+  position: absolute;
+  top: -26px;
+  right: -18px;
+  width: 108px;
+  height: 108px;
+  content: "";
+  border: 1px dashed rgba(255, 254, 232, 0.17);
+  border-radius: 50%;
+}
+
+.waka-note-orbit {
+  position: absolute;
+  top: 22px;
+  right: 21px;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  color: #FFFEE8;
+  background: #600819;
+  border: 1px solid rgba(255, 254, 232, 0.28);
+  border-radius: 50%;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  transform: rotate(-9deg);
+}
+
+.waka-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 45px;
+  height: 45px;
+  margin-bottom: 32px;
+  color: #253D5B;
+  background: #FFFEE8;
+  border-radius: 14px 14px 14px 4px;
+}
+
+.waka-note-label {
+  position: relative;
+  margin: 0 0 12px;
+  color: #A9C5D0;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.6;
+}
+
+.waka-note h3 {
+  position: relative;
+  max-width: 280px;
+  margin: 0;
+  color: #FFFEE8;
+  font-size: clamp(25px, 2.5vw, 31px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+.waka-note-description {
+  position: relative;
+  max-width: 290px;
+  margin: 17px 0 0;
+  color: rgba(255, 254, 232, 0.76);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.waka-note-footer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: auto;
+  padding-top: 34px;
+  color: rgba(255, 254, 232, 0.73);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+}
+
+.waka-note-footer svg { flex: 0 0 auto; color: #A9C5D0; }
+
+.waka-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  min-width: 0;
+}
+
+/* Status strip: simple and discreet, not another statistics card. */
+.waka-live {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: 15px 18px;
+  color: #1E252B;
+  background: rgba(255, 255, 255, 0.46);
+  border: 1px solid rgba(117, 154, 171, 0.44);
+  border-left: 3px solid #759AAB;
+  border-radius: 4px 14px 14px 4px;
+}
+
+.waka-live-active { border-left-color: #600819; }
+.waka-live-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+
+.waka-live-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #253D5B;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.waka-live-active .waka-live-status { color: #600819; }
+
+.waka-live-dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.waka-live-active .waka-live-dot { animation: waka-live-pulse 1.7s ease-out infinite; }
+
+@keyframes waka-live-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(96, 8, 25, 0.25); }
+  100% { box-shadow: 0 0 0 7px rgba(96, 8, 25, 0); }
+}
+
+.waka-live-detail { color: rgba(30, 37, 43, 0.58); font-size: 10px; }
+.waka-live-meta { display: flex; flex-wrap: wrap; gap: 8px 18px; color: rgba(30, 37, 43, 0.75); font-size: 11px; }
+.waka-live-meta span { display: inline-flex; align-items: center; gap: 6px; }
+.waka-live-meta svg { color: #759AAB; }
+
+.waka-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 13px;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(117, 154, 171, 0.42);
+}
+
+.waka-toolbar-heading { display: flex; flex-direction: column; gap: 5px; }
+.waka-overline { color: #600819; font-size: 9px; font-weight: 700; letter-spacing: 0.13em; }
+.waka-toolbar-caption { color: rgba(30, 37, 43, 0.62); font-size: 10px; }
+
+.waka-ranges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(117, 154, 171, 0.12);
+  border: 1px solid rgba(117, 154, 171, 0.28);
+  border-radius: 999px;
+}
+
+.waka-ranges button {
+  min-height: 31px;
+  padding: 0 11px;
+  color: rgba(37, 61, 91, 0.78);
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 9px;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.waka-ranges button:hover { color: #600819; }
+.waka-ranges button.active { color: #FFFEE8; background: #600819; font-weight: 700; }
+.waka-ranges button:focus-visible { outline: 2px solid #253D5B; outline-offset: 3px; }
+
+.waka-message,
+.waka-loading,
+.waka-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px;
+  border-radius: 13px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.waka-message { flex-direction: column; text-align: center; }
+.waka-message strong { font-size: 13px; }
+.waka-message span { opacity: 0.8; }
+.waka-message.is-error { color: #7E1D2D; background: #FFF0F0; border: 1px solid #DBA4AA; }
+.waka-message.is-warning { color: #75510B; background: #FFF7DD; border: 1px solid #E8D395; }
+.waka-loading { color: rgba(37, 61, 91, 0.8); background: rgba(117, 154, 171, 0.08); }
+.waka-empty { color: rgba(37, 61, 91, 0.7); border: 1px dashed rgba(117, 154, 171, 0.5); }
+
+.waka-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(117, 154, 171, 0.3);
+  border-top-color: #600819;
+  border-radius: 50%;
+  animation: waka-spin 0.8s linear infinite;
+}
+
+@keyframes waka-spin { to { transform: rotate(360deg); } }
+
+.waka-body { display: flex; flex-direction: column; gap: 14px; transition: opacity 0.2s ease; }
+.waka-body.is-updating { opacity: 0.58; pointer-events: none; }
+
+.waka-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.waka-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+  min-height: 132px;
+  padding: 15px 13px;
+  color: #1E252B;
+  background: rgba(255, 255, 255, 0.48);
+  border: 1px solid rgba(117, 154, 171, 0.4);
+  border-radius: 4px 15px 15px 15px;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.waka-metric:hover { transform: translateY(-3px); border-color: #759AAB; box-shadow: 0 8px 18px rgba(37, 61, 91, 0.07); }
+.waka-metric:first-child { color: #FFFEE8; background: #600819; border-color: #600819; }
+
+.waka-metric-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  color: rgba(37, 61, 91, 0.75);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.waka-metric:first-child .waka-metric-label { color: rgba(255, 254, 232, 0.78); }
+.waka-metric-label svg { color: #759AAB; flex: 0 0 auto; }
+.waka-metric:first-child .waka-metric-label svg { color: #D9B6BD; }
+.waka-metric-value { color: #253D5B; font-size: clamp(19px, 1.8vw, 25px); font-weight: 600; letter-spacing: -0.045em; line-height: 1.15; overflow-wrap: anywhere; }
+.waka-metric:first-child .waka-metric-value { color: #FFFEE8; }
+.waka-metric-note { margin-top: auto; color: rgba(30, 37, 43, 0.58); font-size: 9px; line-height: 1.45; }
+.waka-metric:first-child .waka-metric-note { color: rgba(255, 254, 232, 0.65); }
+
+.waka-panel {
+  min-width: 0;
+  padding: 20px 21px;
+  color: #1E252B;
+  background: rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(117, 154, 171, 0.45);
+  border-radius: 4px 18px 18px 18px;
+}
+
+.waka-panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+.waka-panel h3 { margin: 0; color: #253D5B; font-size: 14px; font-weight: 700; }
+.waka-panel-heading p { margin: 5px 0 0; color: rgba(30, 37, 43, 0.6); font-size: 10px; }
+.waka-language-count { display: grid; place-items: center; width: 35px; height: 35px; color: #FFFEE8; background: #253D5B; border-radius: 50%; font-size: 10px; font-weight: 700; }
+
+.waka-stack {
+  display: flex;
+  gap: 3px;
+  height: 9px;
+  margin-bottom: 23px;
+  overflow: hidden;
+  background: rgba(117, 154, 171, 0.13);
+  border-radius: 999px;
+}
+
+.waka-stack span { display: block; min-width: 3px; border-radius: 999px; transition: flex-grow 0.3s ease; }
+
+.waka-language-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 24px; margin: 0; padding: 0; list-style: none; }
+.waka-language-list li { min-width: 0; }
+
+.waka-language-heading {
+  display: grid;
+  grid-template-columns: 8px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+}
+
+.waka-language-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--language-color); }
+.waka-language-name { overflow: hidden; color: #1E252B; font-weight: 700; white-space: nowrap; text-overflow: ellipsis; }
+.waka-language-time { color: rgba(30, 37, 43, 0.58); white-space: nowrap; font-size: 9px; }
+.waka-language-heading strong { min-width: 38px; color: #253D5B; font-size: 9px; text-align: right; }
+.waka-progress { height: 4px; margin-top: 9px; overflow: hidden; background: rgba(117, 154, 171, 0.17); border-radius: 999px; }
+.waka-progress span { display: block; height: 100%; background: var(--language-color); border-radius: inherit; animation: waka-progress-enter 0.7s ease both; }
+@keyframes waka-progress-enter { from { width: 0; } }
+
+.waka-other-languages {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 10px;
+  color: rgba(30, 37, 43, 0.65);
+  border-top: 1px solid rgba(117, 154, 171, 0.24);
+  font-size: 9px;
+}
+
+.waka-other-languages strong { color: #253D5B; white-space: nowrap; font-size: 9px; }
+.waka-source { margin: 0; color: rgba(30, 37, 43, 0.49); font-size: 9px; line-height: 1.6; }
+
+@media (max-width: 1020px) {
+  .waka-heading-grid { grid-template-columns: 1fr; gap: 17px; }
+  .waka-intro { max-width: 600px; }
+  .waka-overview { grid-template-columns: minmax(210px, 0.68fr) minmax(0, 1.35fr); gap: 18px; }
+  .waka-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .waka-metric { min-height: 122px; }
+  .waka-ranges button { padding-inline: 9px; }
+}
+
+@media (max-width: 760px) {
+  .waka-section { padding: 77px 0 82px; }
+  .waka-container { width: min(calc(100% - 32px), 1120px); }
+  .waka-overview { grid-template-columns: 1fr; margin-top: 28px; }
+  .waka-note { min-height: 300px; padding: 24px; }
+  .waka-note-footer { margin-top: 25px; }
+  .waka-toolbar { align-items: flex-start; }
+  .waka-ranges { width: 100%; justify-content: space-between; }
+  .waka-ranges button { flex: 1 1 auto; padding-inline: 8px; }
+}
+
+@media (max-width: 520px) {
+  .waka-container { width: min(calc(100% - 26px), 1120px); }
+  .waka-title { font-size: clamp(36px, 10vw, 49px); }
+  .waka-note { min-height: 280px; }
+  .waka-note-orbit { width: 42px; height: 42px; top: 19px; right: 18px; }
+  .waka-metrics { gap: 8px; }
+  .waka-metric { min-height: 126px; padding: 13px 11px; }
+  .waka-metric-label { font-size: 8px; }
+  .waka-metric-value { font-size: 20px; }
+  .waka-panel { padding: 16px 14px; }
+  .waka-language-list { grid-template-columns: 1fr; gap: 15px; }
+  .waka-language-heading { grid-template-columns: 8px minmax(0, 1fr) auto auto; }
+  .waka-live-header { align-items: flex-start; flex-direction: column; }
+  .waka-ranges { border-radius: 14px; }
+  .waka-ranges button { min-height: 33px; font-size: 9px; }
+  .waka-other-languages { align-items: flex-start; flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .waka-section *,
+  .waka-section *::before,
+  .waka-section *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Movimento suave dos elementos decorativos */
+.waka-section::before {
+  animation: waka-orbit-drift 28s ease-in-out infinite alternate;
+}
+
+.waka-section::after {
+  animation: waka-orbit-drift 34s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes waka-orbit-drift {
+  from {
+    transform: translate3d(0, -8px, 0) rotate(-4deg);
+  }
+
+  to {
+    transform: translate3d(-22px, 18px, 0) rotate(8deg);
+  }
+}
+
+/* Entrada dos elementos ao chegar à seção */
+.waka-section .waka-section-header,
+.waka-section .waka-note,
+.waka-section .waka-dashboard {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 800ms ease,
+    transform 800ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.waka-section.is-visible .waka-section-header,
+.waka-section.is-visible .waka-note,
+.waka-section.is-visible .waka-dashboard {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.waka-section.is-visible .waka-note {
+  transition-delay: 120ms;
+}
+
+.waka-section.is-visible .waka-dashboard {
+  transition-delay: 240ms;
+}
+
+/* Flutuação do detalhe circular */
+.waka-note-orbit {
+  animation: waka-orbit-float 5.5s ease-in-out infinite;
+}
+
+@keyframes waka-orbit-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-9deg);
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(4deg);
+  }
+}
+
+/* Resposta visual dos cartões */
+.waka-metric,
+.waka-note,
+.waka-panel {
+  transition:
+    transform 300ms ease,
+    box-shadow 300ms ease,
+    border-color 300ms ease;
+}
+
+.waka-metric:hover,
+.waka-panel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px rgba(37, 61, 91, 0.1);
+}
+
+.waka-note:hover {
+  box-shadow: 12px 12px 0 rgba(117, 154, 171, 0.34);
+}
+
+/* Respeita a preferência por movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  .waka-section::before,
+  .waka-section::after,
+  .waka-note-orbit {
+    animation: none !important;
+  }
+
+  .waka-section .waka-section-header,
+  .waka-section .waka-note,
+  .waka-section .waka-dashboard {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .waka-metric:hover,
+  .waka-panel:hover,
+  .waka-note:hover {
+    transform: none;
+  }
+}

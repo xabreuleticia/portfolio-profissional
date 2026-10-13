@@ -1,4 +1,5 @@
 import { LanguageProvider } from "./context/LanguageContext"
+import WakaTime from "./sections/WakaTime"
 
 import Header from "./components/Header"
 import Footer from "./components/Footer"
@@ -18,6 +19,7 @@ function App() {
         <Home />
         <Sobre />
         <Projetos />
+        <WakaTime/>
         <Experiencias />
         <Contato />
       </main>
