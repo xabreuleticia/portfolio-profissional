@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Letícia Abreu — portfólio</title>
+  <desc id="desc">Monograma geométrico integrado a sinais de código, em azul-marinho, creme, azul-acinzentado e vinho.</desc>
+  <rect width="128" height="128" rx="27" fill="#253D5B"/>
+  <rect x="7.5" y="7.5" width="113" height="113" rx="21" fill="none" stroke="#759AAB" stroke-opacity="0.38" stroke-width="1.25"/>
+
+  <!-- Code brackets frame the connected LA monogram. -->
+  <path d="M31 44 L22 56 L31 68" fill="none" stroke="#759AAB" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M97 44 L106 56 L97 68" fill="none" stroke="#759AAB" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Single, geometric stroke links the L and A. -->
+  <path d="M40 38 V79 H55 L73 40 L90 79 M65.5 63 H82" fill="none" stroke="#FFFEE8" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Burgundy crossbar is the single signature accent. -->
+  <path d="M65.5 63 H82" fill="none" stroke="#8F3348" stroke-width="4" stroke-linecap="round"/>
+</svg>

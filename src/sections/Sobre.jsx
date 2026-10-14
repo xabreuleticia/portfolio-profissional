@@ -1,6 +1,6 @@
 import { useLanguage } from "../context/useLanguage"
 
-function Sobre() {
+function Sobre({ onOpenPersonalMap }) {
   const { language } = useLanguage()
 
   const texts = {
@@ -22,6 +22,7 @@ function Sobre() {
         "Gosto de aprender na prática, explorar possibilidades e colaborar com outras pessoas. Para mim, cada projeto é uma oportunidade de desenvolver novas habilidades e transformar conhecimento em experiência.",
 
       botao: "Conheça meus projetos",
+      botaoMapa: "Explorar meu mapa pessoal",
 
       cartaoRotulo: "MEU JEITO DE APRENDER",
       cartaoLinha1: "Aprender.",
@@ -67,6 +68,7 @@ function Sobre() {
         "I enjoy learning by doing, exploring possibilities and collaborating with others. To me, every project is an opportunity to develop new skills and turn knowledge into experience.",
 
       botao: "Explore my projects",
+      botaoMapa: "Explore my personal map",
 
       cartaoRotulo: "HOW I LIKE TO LEARN",
       cartaoLinha1: "Learn.",
@@ -149,13 +151,24 @@ function Sobre() {
               {t.paragrafo2}
             </p>
 
-            <a
-              href="#projetos"
-              className="about-link"
-            >
-              <span>{t.botao}</span>
-              <span className="about-link-arrow">↗</span>
-            </a>
+            <div className="about-actions">
+              <a
+                href="#projetos"
+                className="about-link"
+              >
+                <span>{t.botao}</span>
+                <span className="about-link-arrow">↗</span>
+              </a>
+
+              <button
+                type="button"
+                className="about-map-button"
+                onClick={onOpenPersonalMap}
+              >
+                <span>{t.botaoMapa}</span>
+                <span className="about-map-button-icon" aria-hidden="true">↗</span>
+              </button>
+            </div>
 
           </div>
 

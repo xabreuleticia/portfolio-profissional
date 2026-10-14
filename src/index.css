@@ -2960,3 +2960,271 @@ header nav > div a:hover::after {
     box-shadow: none;
   }
 }
+
+/* =========================================================
+   DETALHES AUTORAIS — PORTFÓLIO LETÍCIA ABREU
+   Acrescente este bloco ao final de src/index.css.
+   Mantém a paleta, a estrutura e as classes já existentes.
+   ========================================================= */
+
+:root {
+  --detalhe-linha: rgba(37, 61, 91, 0.22);
+  --detalhe-vinho-suave: rgba(96, 8, 25, 0.14);
+}
+
+/* Seleção de texto com as cores da identidade visual */
+::selection {
+  color: var(--creme);
+  background: var(--vinho);
+}
+
+/* Barra de rolagem discreta, sem competir com o conteúdo */
+html {
+  scrollbar-color: var(--azul-claro) var(--creme);
+  scrollbar-width: thin;
+}
+
+/* Pequeno traço editorial antes da frase de abertura */
+.home-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.home-label::before {
+  content: "";
+  display: inline-block;
+  flex: 0 0 22px;
+  width: 22px;
+  height: 1px;
+  background: var(--vinho);
+  opacity: 0.78;
+  transform-origin: left center;
+  transition: flex-basis 260ms ease, opacity 260ms ease;
+}
+
+.home-text:hover .home-label::before {
+  flex-basis: 32px;
+  opacity: 1;
+}
+
+/* Identificadores de seção com um traço fino, como marca de edição */
+#projetos > div > p:first-child,
+#experiencias > div > p:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#projetos > div > p:first-child::before,
+#experiencias > div > p:first-child::before {
+  content: "";
+  display: inline-block;
+  width: 19px;
+  height: 1px;
+  flex: 0 0 19px;
+  background: currentColor;
+  opacity: 0.72;
+}
+
+/* Moldura de canto nas imagens: lembra marcas de enquadramento */
+#projetos article > div:last-child > div > div:first-child {
+  isolation: isolate;
+}
+
+#projetos article > div:last-child > div > div:first-child::before,
+#projetos article > div:last-child > div > div:first-child::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  width: 17px;
+  height: 17px;
+  border-color: rgba(255, 254, 232, 0.9);
+  border-style: solid;
+  pointer-events: none;
+  opacity: 0.9;
+  transition: width 280ms ease, height 280ms ease, opacity 280ms ease;
+}
+
+#projetos article > div:last-child > div > div:first-child::before {
+  top: 11px;
+  left: 11px;
+  border-width: 1px 0 0 1px;
+}
+
+#projetos article > div:last-child > div > div:first-child::after {
+  right: 11px;
+  bottom: 11px;
+  border-width: 0 1px 1px 0;
+}
+
+#projetos article:hover > div:last-child > div > div:first-child::before,
+#projetos article:hover > div:last-child > div > div:first-child::after {
+  width: 25px;
+  height: 25px;
+  opacity: 1;
+}
+
+/* Sublinhado curto nos títulos dos projetos; cresce só na interação */
+#projetos article h3 {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+}
+
+#projetos article h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+  width: 23px;
+  height: 1px;
+  background: var(--vinho);
+  opacity: 0.72;
+  transform-origin: left center;
+  transition: width 280ms ease, opacity 280ms ease;
+}
+
+#projetos article:hover h3::after {
+  width: 44px;
+  opacity: 1;
+}
+
+/* Os números do Sobre ganham resposta, sem deslocar o layout */
+#sobre .about-detail-number {
+  transition: transform 240ms ease, color 240ms ease;
+}
+
+#sobre .about-detail:hover .about-detail-number {
+  color: var(--vinho);
+  transform: translateY(-2px) rotate(-2deg);
+}
+
+/* Halo muito sutil nos pontos da linha do tempo */
+#experiencias article::after {
+  box-shadow: 0 0 0 4px rgba(255, 254, 232, 0.07);
+}
+
+/* Pequeno acabamento na borda superior do rodapé */
+footer {
+  position: relative;
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: max(28px, calc((100vw - var(--max-width)) / 2));
+  width: 46px;
+  height: 2px;
+  background: var(--vinho);
+  opacity: 0.86;
+}
+
+/* Em dispositivos sem hover, os detalhes continuam decorativos */
+@media (hover: none) {
+  .home-text:hover .home-label::before {
+    flex-basis: 22px;
+    opacity: 0.78;
+  }
+
+  #projetos article:hover > div:last-child > div > div:first-child::before,
+  #projetos article:hover > div:last-child > div > div:first-child::after {
+    width: 17px;
+    height: 17px;
+  }
+
+  #projetos article:hover h3::after {
+    width: 23px;
+  }
+}
+
+@media (max-width: 768px) {
+  footer::before {
+    left: 16px;
+    width: 34px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-label::before,
+  #projetos article > div:last-child > div > div:first-child::before,
+  #projetos article > div:last-child > div > div:first-child::after,
+  #projetos article h3::after,
+  #sobre .about-detail-number {
+    transition: none !important;
+  }
+}
+
+
+
+/* =========================================================
+   MAPA PESSOAL — acesso somente pela seção Sobre mim
+   ========================================================= */
+#sobre .about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 27px;
+  margin-top: 17px;
+}
+
+#sobre .about-actions .about-link {
+  margin-top: 0;
+}
+
+#sobre .about-actions .about-map-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 0;
+  padding: 12px 13px 12px 19px;
+  border: 1px solid var(--azul) !important;
+  border-radius: 999px !important;
+  background: var(--azul) !important;
+  color: var(--creme) !important;
+  font-family: inherit;
+  font-size: 12px !important;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 7px 18px rgba(37, 61, 91, 0.12);
+  transition: background-color 0.22s ease, border-color 0.22s ease, color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+#sobre .about-actions .about-map-button:hover {
+  border-color: var(--vinho) !important;
+  background: var(--vinho) !important;
+  color: var(--creme) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 11px 24px rgba(96, 8, 25, 0.16);
+}
+
+#sobre .about-actions .about-map-button:focus-visible {
+  outline: 3px solid rgba(117, 154, 171, 0.72);
+  outline-offset: 4px;
+}
+
+#sobre .about-map-button-icon {
+  display: grid;
+  flex: 0 0 29px;
+  width: 29px;
+  height: 29px;
+  place-items: center;
+  border: 1px solid rgba(255, 254, 232, 0.45);
+  border-radius: 50%;
+  font-size: 16px;
+  line-height: 1;
+  transition: transform 0.22s ease, background-color 0.22s ease;
+}
+
+#sobre .about-actions .about-map-button:hover .about-map-button-icon {
+  background: rgba(255, 254, 232, 0.12);
+  transform: translate(2px, -2px);
+}
+
+.personal-map-page > .personal-map-main {
+  padding-top: 0;
+}

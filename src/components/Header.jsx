@@ -9,6 +9,7 @@ function Header() {
   const text = {
     pt: {
       sobre: "Sobre",
+      habilidades: "Habilidades",
       projetos: "Projetos",
       atividade: "Atividade",
       experiencias: "Experiências",
@@ -18,6 +19,7 @@ function Header() {
 
     en: {
       sobre: "About",
+      habilidades: "Skills",
       projetos: "Projects",
       atividade: "Coding stats",
       experiencias: "Experience",
@@ -52,6 +54,13 @@ function Header() {
             className="text-sm font-medium text-[#1E252B] transition hover:text-[#759AAB]"
           >
             {t.sobre}
+          </a>
+
+          <a
+            href="#habilidades"
+            className="text-sm font-medium text-[#1E252B] transition hover:text-[#759AAB]"
+          >
+            {t.habilidades}
           </a>
 
           <a
@@ -112,6 +121,10 @@ function Header() {
 
             <a href="#sobre" onClick={closeMenu}>
               {t.sobre}
+            </a>
+
+            <a href="#habilidades" onClick={closeMenu}>
+              {t.habilidades}
             </a>
 
             <a href="#projetos" onClick={closeMenu}>
