@@ -10,7 +10,7 @@ function Projetos() {
       titulo: "Ideias que viraram código.",
       descricao:
         "Uma linha do tempo dos projetos que fizeram parte da minha trajetória.",
-      github: "Ver no GitHub →",
+      github: "Ver no GitHub",
     },
 
     en: {
@@ -18,7 +18,7 @@ function Projetos() {
       titulo: "Ideas turned into code.",
       descricao:
         "A timeline of projects that have been part of my journey.",
-      github: "View on GitHub →",
+      github: "View on GitHub",
     },
   }
 
@@ -120,7 +120,7 @@ function Projetos() {
                         href={projeto.github}
                         target="_blank"
                         rel="noreferrer"
-                        className="mt-7 w-fit rounded-full border border-[#FFFEE8]/40 px-5 py-2 text-sm transition hover:bg-[#FFFEE8] hover:text-[#253D5B]"
+                        className="project-github-button mt-7 w-fit rounded-full border border-[#FFFEE8]/40 px-5 py-2 text-sm transition hover:bg-[#FFFEE8] hover:text-[#253D5B]"
                       >
                         {t.github}
                       </a>

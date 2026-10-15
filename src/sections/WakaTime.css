@@ -617,3 +617,23 @@
     transform: none;
   }
 }
+
+/* Botões de período: mesma linguagem visual do restante do portfólio. */
+.waka-ranges button {
+  min-height: 34px;
+  padding: 0 13px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  transition: color 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
+}
+
+.waka-ranges button:hover:not(.active) {
+  background: rgba(255, 254, 232, 0.78);
+  color: #600819;
+}
+
+.waka-ranges button.active {
+  box-shadow: 0 3px 9px rgba(96, 8, 25, 0.18);
+}

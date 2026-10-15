@@ -1,14 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react"
-import {
-  ArrowLeft,
-  ArrowUpRight,
-  Camera,
-  ChevronLeft,
-  ChevronRight,
-  Pause,
-  Play,
-  X,
-} from "lucide-react"
+import { ArrowLeft, Camera, ChevronLeft, ChevronRight, Pause, Play, X } from "lucide-react"
 import { useLanguage } from "../context/useLanguage"
 import {
   mapaPessoalCapa,
@@ -21,342 +12,403 @@ const copy = {
   pt: {
     voltar: "Sobre mim",
     idioma: "EN",
-    nomeColecao: "Caderno pessoal",
-    fotoCapaAlt: "Fotografia de capa do mapa pessoal",
-    capaPlaceholder: "Adicione sua fotografia de capa",
-    viagensKicker: "CADERNO DE VIAGENS",
-    hobbiesKicker: "FORA DA ROTA",
-    verMais: "Ver mais",
-    fecharDetalhes: "Voltar às fotografias",
-    secaoFotos: "Mais deste lugar",
-    historia: "Sobre este lugar",
-    fotosPlaceholder: "Adicione fotografias deste lugar",
-    fotoLabel: "FOTO EM BRANCO",
-    fotoHint: "Adicione uma imagem e personalize a legenda no arquivo de dados.",
-    anterior: "Slide anterior",
-    proximo: "Próximo slide",
-    pausar: "Pausar passagem automática",
-    retomar: "Retomar passagem automática",
-    instrucao: "Use as setas ou deslize para explorar",
-    altVazio: "Espaço reservado para adicionar sua própria fotografia",
-    semLegenda: "Escreva sua legenda aqui.",
+    abrir: "Abrir álbum",
+    capaAlt: "Capa do álbum de recordações",
+    fotoAlt: "Espaço para fotografia",
+    fotoAbrir: "Ampliar fotografia",
+    fotoFechar: "Fechar fotografia",
+    anterior: "Abrir página anterior",
+    proximo: "Virar para a próxima página",
+    pausar: "Pausar virada automática",
+    retomar: "Retomar virada automática",
+    dataVazia: "Espaço em branco para a data",
   },
   en: {
     voltar: "About me",
     idioma: "PT",
-    nomeColecao: "Personal journal",
-    fotoCapaAlt: "Personal map cover photograph",
-    capaPlaceholder: "Add your cover photograph",
-    viagensKicker: "TRAVEL JOURNAL",
-    hobbiesKicker: "OFF THE ROUTE",
-    verMais: "Explore",
-    fecharDetalhes: "Back to photographs",
-    secaoFotos: "More from this place",
-    historia: "About this place",
-    fotosPlaceholder: "Add photographs of this place",
-    fotoLabel: "PHOTO PLACEHOLDER",
-    fotoHint: "Add an image and personalize its caption in the data file.",
-    anterior: "Previous slide",
-    proximo: "Next slide",
-    pausar: "Pause automatic playback",
-    retomar: "Resume automatic playback",
-    instrucao: "Use the arrows or swipe to explore",
-    altVazio: "Space reserved for your own photograph",
-    semLegenda: "Write your caption here.",
+    abrir: "Open album",
+    capaAlt: "Memory album cover",
+    fotoAlt: "Photograph placeholder",
+    fotoAbrir: "Enlarge photograph",
+    fotoFechar: "Close photograph",
+    anterior: "Turn to previous page",
+    proximo: "Turn to next page",
+    pausar: "Pause automatic page turning",
+    retomar: "Resume automatic page turning",
+    dataVazia: "Blank space for the date",
   },
 }
 
 const temasViagem = [
-  { bg: "#E9E0D1", ink: "#253D5B", muted: "#526171", accent: "#895447", frame: "#D5C8B7", soft: "#F4EEE5" },
-  { bg: "#DDE7EB", ink: "#1E303A", muted: "#4E646D", accent: "#9B5961", frame: "#C4D5DB", soft: "#EDF3F4" },
-  { bg: "#DDEAE6", ink: "#243D39", muted: "#506963", accent: "#9B6254", frame: "#C3D8D1", soft: "#EFF5F2" },
-  { bg: "#F0DFD7", ink: "#49322F", muted: "#775B54", accent: "#8B3948", frame: "#DFC5BB", soft: "#F8EDE7" },
-  { bg: "#E9E8DA", ink: "#384536", muted: "#5E6A57", accent: "#91634E", frame: "#D5D9C6", soft: "#F4F3E9" },
-  { bg: "#E5E5E1", ink: "#252D35", muted: "#606870", accent: "#7B3948", frame: "#CED1CE", soft: "#F5F4F0" },
-  { bg: "#D7E6EA", ink: "#223C4B", muted: "#526F79", accent: "#8F5149", frame: "#BFD7DE", soft: "#EDF5F6" },
-  { bg: "#DDE5D9", ink: "#2B4036", muted: "#596C60", accent: "#7D4A44", frame: "#C5D4C3", soft: "#F0F4EC" },
+  { paper: "#f7f0e4", inner: "#eee3d3", accent: "#94624e" },
+  { paper: "#e8eff0", inner: "#dce7e9", accent: "#92515b" },
+  { paper: "#e8eee6", inner: "#dce7dc", accent: "#90634f" },
+  { paper: "#f1e2dc", inner: "#e8d2ca", accent: "#8d3549" },
+  { paper: "#f0eedf", inner: "#e5e4d2", accent: "#91644c" },
+  { paper: "#e9e9e5", inner: "#dedfdb", accent: "#7d3948" },
+  { paper: "#e1ecee", inner: "#cfe1e5", accent: "#8a5147" },
+  { paper: "#e4eadf", inner: "#d4dfd0", accent: "#7d4b43" },
 ]
 
 const temasHobbies = [
-  { bg: "#EDE3DA", ink: "#3E3431", muted: "#75605A", accent: "#8B3948", frame: "#D8C9BE", soft: "#F7F0E9" },
-  { bg: "#E2E7F0", ink: "#253D5B", muted: "#5C6D85", accent: "#8C4B58", frame: "#C9D3E3", soft: "#F0F3F8" },
-  { bg: "#E4E9DC", ink: "#304335", muted: "#5F715F", accent: "#935C4B", frame: "#CDD8C1", soft: "#F2F5EC" },
+  { paper: "#eee4d9", inner: "#e1d3c6", accent: "#8b3948" },
+  { paper: "#e7eaf2", inner: "#d7deeb", accent: "#7e4c5b" },
+  { paper: "#e6ebde", inner: "#d6e0c9", accent: "#855644" },
 ]
 
-function themeStyle(theme) {
+const angles = [-0.9, 0.65, -0.45, 0.8, -0.55, 0.35, -0.7, 0.5]
+const PHOTOS_PER_SPREAD = 12
+
+function makePhotoSlides(items, type, themes) {
+  return items.flatMap((item, index) => {
+    const allPhotos = Array.isArray(item?.fotos) ? item.fotos : []
+    const sourcePhotos = allPhotos.length ? allPhotos : [{ id: `${item.id}-foto-vazia`, src: "", pt: {}, en: {} }]
+    const spreads = []
+
+    for (let start = 0; start < sourcePhotos.length; start += PHOTOS_PER_SPREAD) {
+      spreads.push(sourcePhotos.slice(start, start + PHOTOS_PER_SPREAD))
+    }
+
+    return spreads.map((photos, spreadIndex) => ({
+      id: `${item.id}-spread-${spreadIndex + 1}`,
+      type,
+      item,
+      photos,
+      spreadIndex,
+      theme: themes[index % themes.length],
+    }))
+  })
+}
+
+function albumTheme(theme) {
   return {
-    "--story-bg": theme.bg,
-    "--story-ink": theme.ink,
-    "--story-muted": theme.muted,
-    "--story-accent": theme.accent,
-    "--story-frame": theme.frame,
-    "--story-soft": theme.soft,
+    "--paper-color": theme.paper,
+    "--paper-inner": theme.inner,
+    "--paper-accent": theme.accent,
   }
 }
 
-function getPrimaryPhoto(item) {
-  return item?.fotos?.[0] || null
+function Polaroid({ photo, language, fallbackLocal, index, onOpen, text }) {
+  const localized = photo?.[language] || photo?.pt || {}
+  const local = localized.local || fallbackLocal
+  const date = localized.data || photo?.data || ""
+  const alt = photo?.alt?.[language] || local || text.fotoAlt
+  const isFilled = Boolean(photo?.src)
+
+  const picture = (
+    <span className="memory-polaroid-image">
+      {isFilled ? (
+        <img src={photo.src} alt={alt} loading="lazy" />
+      ) : (
+        <span className="memory-polaroid-empty" aria-hidden="true">
+          <Camera size={19} strokeWidth={1.15} />
+        </span>
+      )}
+    </span>
+  )
+
+  return (
+    <div
+      className={`memory-polaroid memory-polaroid--${index}`}
+      style={{ "--polaroid-angle": `${angles[index % angles.length]}deg` }}
+    >
+      {isFilled ? (
+        <button
+          type="button"
+          className="memory-polaroid-photo-button"
+          onClick={() => onOpen({ src: photo.src, alt, local, date })}
+          aria-label={`${text.fotoAbrir}: ${local}${date ? `, ${date}` : ""}`}
+        >
+          {picture}
+        </button>
+      ) : (
+        <div className="memory-polaroid-photo-button memory-polaroid-photo-button--empty" role="img" aria-label={text.fotoAlt}>
+          {picture}
+        </div>
+      )}
+      <div className="memory-polaroid-caption">
+        <span className="memory-polaroid-place">{local}</span>
+        <span className={`memory-polaroid-date ${date ? "memory-polaroid-date--filled" : ""}`}>
+          {date || <span className="memory-date-blank" aria-label={text.dataVazia} />}
+        </span>
+      </div>
+    </div>
+  )
 }
 
-function getTitle(content) {
-  return [content?.nome, content?.complemento].filter(Boolean).join(" ")
-}
-
-function MapaPessoal({ onBack }) {
+function MemoryAlbum({ onBack }) {
   const { language, toggleLanguage } = useLanguage()
   const text = copy[language] || copy.pt
   const [activeIndex, setActiveIndex] = useState(0)
-  const [detailOpen, setDetailOpen] = useState(false)
-  const [fotoAberta, setFotoAberta] = useState(null)
   const [autoplayPaused, setAutoplayPaused] = useState(() => (
-    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches
   ))
+  const [pointerInside, setPointerInside] = useState(false)
+  const [openedPhoto, setOpenedPhoto] = useState(null)
   const touchStartX = useRef(null)
+  const turnSequence = useRef(0)
+  const [turningPage, setTurningPage] = useState(null)
 
   const slides = [
     { id: "cover", type: "cover" },
-    ...mapaPessoalDestinos.map((destino, index) => ({
-      id: destino.id,
-      type: "destination",
-      item: destino,
-      theme: temasViagem[index % temasViagem.length],
-    })),
-    ...mapaPessoalHobbies.map((hobby, index) => ({
-      id: hobby.id,
-      type: "hobby",
-      item: hobby,
-      theme: temasHobbies[index % temasHobbies.length],
-    })),
+    ...makePhotoSlides(mapaPessoalDestinos, "travel", temasViagem),
+    ...makePhotoSlides(mapaPessoalHobbies, "hobby", temasHobbies),
   ]
   const totalSlides = slides.length
   const activeSlide = slides[activeIndex]
-  const activeHasPhoto = activeSlide?.type === "cover"
-    ? Boolean(mapaPessoalCapa.src)
-    : Boolean(activeSlide?.item?.fotos?.[0]?.src)
-  const activeInk = activeSlide?.type === "cover" || activeHasPhoto
-    ? "#FFF4E8"
-    : (activeSlide?.theme?.ink || "#253D5B")
 
-  const previousSlide = useCallback(() => {
-    setDetailOpen(false)
-    setFotoAberta(null)
-    setActiveIndex((current) => (current - 1 + totalSlides) % totalSlides)
-  }, [totalSlides])
+  const beginTurn = useCallback((direction) => {
+    if (turningPage) return
 
-  const nextSlide = useCallback(() => {
-    setDetailOpen(false)
-    setFotoAberta(null)
-    setActiveIndex((current) => (current + 1) % totalSlides)
-  }, [totalSlides])
+    const fromIndex = activeIndex
+    const toIndex = direction === "next"
+      ? (activeIndex + 1) % totalSlides
+      : (activeIndex - 1 + totalSlides) % totalSlides
+
+    setOpenedPhoto(null)
+
+    // Em telas compactas ou com movimento reduzido, não executa o efeito 3D.
+    // Isso evita desalinhamento no layout móvel, que não usa uma dupla de páginas.
+    const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches
+    const compactLayout = window.matchMedia?.("(max-width: 600px)")?.matches
+    if (reducedMotion || compactLayout) {
+      setActiveIndex(toIndex)
+      setTurningPage(null)
+      return
+    }
+
+    turnSequence.current += 1
+    setTurningPage({
+      key: turnSequence.current,
+      direction,
+      fromIndex,
+      toIndex,
+      cover: fromIndex === 0 || toIndex === 0,
+    })
+  }, [activeIndex, totalSlides, turningPage])
+
+  const previousPage = useCallback(() => beginTurn("previous"), [beginTurn])
+  const nextPage = useCallback(() => beginTurn("next"), [beginTurn])
+
+  // Fallback de segurança: se o navegador interromper a animação (por exemplo,
+  // ao redimensionar a janela), conclui a virada após a duração prevista.
+  useEffect(() => {
+    if (!turningPage) return undefined
+
+    const turnKey = turningPage.key
+    const targetIndex = turningPage.toIndex
+    const fallback = window.setTimeout(() => {
+      setActiveIndex(targetIndex)
+      setTurningPage((current) => current?.key === turnKey ? null : current)
+    }, 1150)
+
+    return () => window.clearTimeout(fallback)
+  }, [turningPage])
 
   useEffect(() => {
-    if (autoplayPaused || detailOpen || fotoAberta) return undefined
+    if (autoplayPaused || pointerInside || openedPhoto || turningPage) return undefined
+
     const timer = window.setInterval(() => {
-      if (document.visibilityState === "visible") {
-        setActiveIndex((current) => (current + 1) % totalSlides)
-      }
-    }, 8500)
+      if (document.visibilityState === "visible") nextPage()
+    }, 11000)
+
     return () => window.clearInterval(timer)
-  }, [activeIndex, autoplayPaused, detailOpen, fotoAberta, totalSlides])
+  }, [activeIndex, autoplayPaused, nextPage, openedPhoto, pointerInside, turningPage])
 
   useEffect(() => {
-    const preference = window.matchMedia("(prefers-reduced-motion: reduce)")
-    function handlePreference(event) {
+    const preference = window.matchMedia?.("(prefers-reduced-motion: reduce)")
+    if (!preference) return undefined
+
+    const handlePreference = (event) => {
       if (event.matches) setAutoplayPaused(true)
     }
+
     preference.addEventListener?.("change", handlePreference)
     return () => preference.removeEventListener?.("change", handlePreference)
   }, [])
 
   useEffect(() => {
     function handleKeyboard(event) {
-      if (event.key === "Escape") {
-        if (fotoAberta) setFotoAberta(null)
-        else if (detailOpen) setDetailOpen(false)
+      if (event.key === "Escape" && openedPhoto) {
+        setOpenedPhoto(null)
         return
       }
-      if (detailOpen || fotoAberta || event.altKey || event.ctrlKey || event.metaKey) return
+      if (openedPhoto || event.altKey || event.ctrlKey || event.metaKey) return
       if (event.target?.closest?.("input, textarea, select, [contenteditable='true']")) return
+
       if (event.key === "ArrowRight") {
         event.preventDefault()
-        nextSlide()
+        nextPage()
       } else if (event.key === "ArrowLeft") {
         event.preventDefault()
-        previousSlide()
+        previousPage()
       }
     }
+
     window.addEventListener("keydown", handleKeyboard)
     return () => window.removeEventListener("keydown", handleKeyboard)
-  }, [detailOpen, fotoAberta, nextSlide, previousSlide])
+  }, [openedPhoto, nextPage, previousPage])
 
   function handleTouchStart(event) {
-    if (detailOpen) return
     touchStartX.current = event.changedTouches[0]?.clientX ?? null
   }
 
   function handleTouchEnd(event) {
-    if (detailOpen || touchStartX.current === null) return
-    const delta = event.changedTouches[0].clientX - touchStartX.current
-    if (Math.abs(delta) > 55) {
-      if (delta < 0) nextSlide()
-      else previousSlide()
+    if (touchStartX.current === null) return
+    const endX = event.changedTouches[0]?.clientX
+    if (typeof endX === "number") {
+      const delta = endX - touchStartX.current
+      if (Math.abs(delta) > 55) {
+        if (delta < 0) nextPage()
+        else previousPage()
+      }
     }
     touchStartX.current = null
   }
 
   function renderCover() {
-    const capa = mapaPessoalCapa[language] || mapaPessoalCapa.pt
+    const cover = mapaPessoalCapa[language] || mapaPessoalCapa.pt
+
     return (
-      <article className={`journal-teaser journal-teaser--cover ${mapaPessoalCapa.src ? "journal-teaser--has-image" : "journal-teaser--placeholder"}`}>
+      <div className={`memory-cover ${mapaPessoalCapa.src ? "memory-cover--with-photo" : "memory-cover--blank"}`}>
         {mapaPessoalCapa.src ? (
-          <img className="journal-teaser-image" src={mapaPessoalCapa.src} alt={mapaPessoalCapa.alt?.[language] || text.fotoCapaAlt} fetchPriority="high" />
+          <img
+            className="memory-cover-photo"
+            src={mapaPessoalCapa.src}
+            alt={mapaPessoalCapa.alt?.[language] || text.capaAlt}
+            fetchPriority="high"
+          />
         ) : (
-          <div className="journal-teaser-art journal-teaser-art--cover" aria-hidden="true">
-            <span className="journal-cover-art-shape journal-cover-art-shape--one" />
-            <span className="journal-cover-art-shape journal-cover-art-shape--two" />
-            <span className="journal-cover-art-grain" />
-            <span className="journal-placeholder-note"><Camera size={15} />{text.capaPlaceholder}</span>
-          </div>
+          <div className="memory-cover-photo-placeholder" aria-hidden="true" />
         )}
-        <div className="journal-teaser-shade journal-teaser-shade--cover" />
-        <div className="journal-teaser-content journal-teaser-content--cover">
-          <h1>{capa.titulo}<br /><em>{capa.destaque}</em></h1>
+        <span className="memory-cover-vignette" aria-hidden="true" />
+        <div className="memory-cover-title">
+          <h1>
+            {cover.titulo || "Memórias"}
+            {cover.destaque && <em>{cover.destaque}</em>}
+          </h1>
+          <button type="button" className="memory-cover-open" onClick={nextPage}>
+            <span>{cover.comecar || text.abrir}</span>
+          </button>
         </div>
-      </article>
+        <span className="memory-cover-monogram" aria-hidden="true">LA</span>
+      </div>
     )
   }
 
-  function renderTeaser(slide) {
+  function getSpreadParts(slide) {
     const item = slide.item
-    const content = item[language] || item.pt
-    const primaryPhoto = getPrimaryPhoto(item)
-    const title = getTitle(content)
-    const theme = slide.theme || temasViagem[0]
-    const hasPhoto = Boolean(primaryPhoto?.src)
+    const content = item?.[language] || item?.pt || {}
+    const fallbackLocal = slide.type === "hobby"
+      ? content.nome || "Hobby"
+      : [content.nome, content.complemento].filter(Boolean).join(" ")
+    const photos = slide.photos || item?.fotos || []
+    const splitIndex = Math.ceil(photos.length / 2)
+
+    return {
+      item,
+      content,
+      fallbackLocal,
+      photos,
+      leftPhotos: photos.slice(0, splitIndex),
+      rightPhotos: photos.slice(splitIndex),
+    }
+  }
+
+  function renderBookPage(slide, side, photos, indexOffset = 0) {
+    const { item, fallbackLocal } = getSpreadParts(slide)
 
     return (
-      <article
-        className={`journal-teaser ${hasPhoto ? "journal-teaser--has-image" : "journal-teaser--placeholder"} journal-teaser--${slide.type}`}
-        style={themeStyle(theme)}
+      <div
+        className={`memory-book-page memory-book-page--${side} memory-book-page--count-${Math.min(6, photos.length)}`}
+        style={albumTheme(slide.theme)}
       >
-        {hasPhoto ? (
-          <img className="journal-teaser-image" src={primaryPhoto.src} alt={primaryPhoto.alt?.[language] || title} loading="eager" />
-        ) : (
-          <div className="journal-teaser-art" aria-hidden="true">
-            <span className="journal-teaser-art-orbit journal-teaser-art-orbit--one" />
-            <span className="journal-teaser-art-orbit journal-teaser-art-orbit--two" />
-            <span className="journal-teaser-art-landscape" />
-            <span className="journal-placeholder-note"><Camera size={15} />{text.capaPlaceholder}</span>
-          </div>
-        )}
-        <div className="journal-teaser-shade" />
-        <div className="journal-teaser-content">
-          <h1>{title}</h1>
-          <button className="journal-teaser-more" type="button" onClick={() => setDetailOpen(true)}>
-            <span>{text.verMais}</span><ArrowUpRight size={17} strokeWidth={1.7} />
-          </button>
-        </div>
-        {primaryPhoto?.src && primaryPhoto[language]?.legenda && (
-          <p className="journal-teaser-image-caption">{primaryPhoto[language].legenda}</p>
-        )}
-      </article>
+        {photos.map((photo, index) => (
+          <Polaroid
+            key={photo.id || `${item.id}-${side}-${index}`}
+            photo={photo}
+            language={language}
+            fallbackLocal={fallbackLocal}
+            index={index + indexOffset}
+            onOpen={setOpenedPhoto}
+            text={text}
+          />
+        ))}
+      </div>
     )
   }
 
-  function renderDetails(slide) {
-    if (!slide || slide.type === "cover") return null
-    const item = slide.item
-    const content = item[language] || item.pt
-    const title = getTitle(content)
-    const isTravel = slide.type === "destination"
-    const photos = item.fotos || []
-    const style = themeStyle(slide.theme || temasViagem[0])
+  function renderSpread(slide) {
+    const { fallbackLocal, leftPhotos, rightPhotos } = getSpreadParts(slide)
 
     return (
-      <div className="journal-detail-screen" style={style} role="dialog" aria-modal="true" aria-label={title}>
-        <div className="journal-detail-topbar">
-          <button className="journal-detail-back" type="button" onClick={() => setDetailOpen(false)}>
-            <ArrowLeft size={17} /><span>{text.fecharDetalhes}</span>
-          </button>
-          <button className="journal-detail-close" type="button" onClick={() => setDetailOpen(false)} aria-label={text.fecharDetalhes}>
-            <X size={21} />
-          </button>
-        </div>
-        <div className="journal-detail-scroll">
-          <div className="journal-detail-heading">
-            <p className="journal-detail-kicker">{isTravel ? content.regiao : (content.tipo || text.hobbiesKicker)}</p>
-            <h2>{title}</h2>
-            <p className="journal-detail-summary">{isTravel ? content.resumo : content.descricao}</p>
-            <p className="journal-detail-description">{isTravel ? content.detalhe : (content.detalhe || (language === "pt" ? "Um espaço para guardar imagens e pequenos detalhes deste interesse." : "A space to keep images and little details about this interest."))}</p>
-          </div>
-          <div className="journal-detail-gallery-section">
-            <div className="journal-detail-gallery-heading">
-              <p>{text.secaoFotos}</p>
-              <span>{String(photos.length).padStart(2, "0")} {language === "pt" ? "fotografias" : "photographs"}</span>
-            </div>
-            <div className="journal-detail-gallery">
-              {photos.map((foto, index) => {
-                const photoText = foto[language] || foto.pt
-                const hasPhoto = Boolean(foto.src)
-                return (
-                  <figure className={`journal-detail-photo journal-detail-photo--${index + 1}`} key={foto.id}>
-                    <div className="journal-detail-photo-frame">
-                      {hasPhoto ? (
-                        <button
-                          type="button"
-                          className="journal-detail-photo-button"
-                          onClick={() => setFotoAberta({ ...foto, ...photoText, alt: foto.alt?.[language] || title })}
-                          aria-label={`${text.abrirFoto || "Open photo"}: ${photoText.local}`}
-                        >
-                          <img src={foto.src} alt={foto.alt?.[language] || photoText.local || title} loading="lazy" />
-                          <span className="journal-detail-photo-open"><ArrowUpRight size={17} /></span>
-                        </button>
-                      ) : (
-                        <div className="journal-detail-photo-placeholder">
-                          <Camera size={22} strokeWidth={1.4} />
-                          <span>{text.fotoLabel}</span>
-                          <strong>{photoText.tipo || title}</strong>
-                          <small>{photoText.dica || text.fotosPlaceholder}</small>
-                        </div>
-                      )}
-                    </div>
-                    <figcaption>
-                      <span>{photoText.tipo || text.fotoLabel}</span>
-                      <p>{photoText.legenda || text.semLegenda}</p>
-                    </figcaption>
-                  </figure>
-                )
-              })}
-            </div>
-          </div>
+      <div className={`memory-spread memory-spread--${slide.type}`} style={albumTheme(slide.theme)}>
+        <div className="memory-book" aria-label={fallbackLocal}>
+          {renderBookPage(slide, "left", leftPhotos, 0)}
+          {renderBookPage(slide, "right", rightPhotos, leftPhotos.length)}
+          <span className="memory-book-spine" aria-hidden="true" />
+          <span className="memory-book-page-curl memory-book-page-curl--left" aria-hidden="true" />
+          <span className="memory-book-page-curl memory-book-page-curl--right" aria-hidden="true" />
         </div>
       </div>
     )
   }
 
-  function slideLabel(slide) {
-    if (slide.type === "cover") return text.nomeColecao
-    const content = slide.item?.[language] || slide.item?.pt
-    return getTitle(content) || text.nomeColecao
+  // Durante uma virada normal, o conteúdo de fundo é um composto estável:
+  // próximo: página esquerda atual + página direita do destino;
+  // anterior: página esquerda do destino + página direita atual.
+  function renderHybridSpread(turn) {
+    const fromSlide = slides[turn.fromIndex]
+    const toSlide = slides[turn.toIndex]
+    const fromParts = getSpreadParts(fromSlide)
+    const toParts = getSpreadParts(toSlide)
+
+    const leftSlide = turn.direction === "next" ? fromSlide : toSlide
+    const leftPhotos = turn.direction === "next" ? fromParts.leftPhotos : toParts.leftPhotos
+    const rightSlide = turn.direction === "next" ? toSlide : fromSlide
+    const rightPhotos = turn.direction === "next" ? toParts.rightPhotos : fromParts.rightPhotos
+    const fallbackLocal = [
+      (leftSlide?.item?.[language] || leftSlide?.item?.pt)?.nome,
+      (rightSlide?.item?.[language] || rightSlide?.item?.pt)?.nome,
+    ].filter(Boolean).join(" · ")
+
+    return (
+      <div className="memory-spread memory-spread--hybrid" style={albumTheme(fromSlide.theme)}>
+        <div className="memory-book" aria-label={fallbackLocal}>
+          {renderBookPage(leftSlide, "left", leftPhotos, 0)}
+          {renderBookPage(rightSlide, "right", rightPhotos, leftPhotos.length)}
+          <span className="memory-book-spine" aria-hidden="true" />
+          <span className="memory-book-page-curl memory-book-page-curl--left" aria-hidden="true" />
+          <span className="memory-book-page-curl memory-book-page-curl--right" aria-hidden="true" />
+        </div>
+      </div>
+    )
   }
 
   return (
-    <div
-      className={`personal-map-carousel ${detailOpen ? "personal-map-carousel--details-open" : ""}`}
-      style={{ "--carousel-ui-ink": activeInk, "--slide-count": totalSlides }}
-    >
-      <div className="journal-topbar" role="banner">
-        <button type="button" className="journal-back" onClick={onBack}>
-          <ArrowLeft size={16} strokeWidth={1.8} />
+    <div className="personal-memory-book" aria-label={language === "pt" ? "Álbum de recordações" : "Memory album"}>
+      <span className="memory-table-grain" aria-hidden="true" />
+      <div className="memory-toolbar">
+        <button type="button" className="memory-back-button" onClick={onBack}>
+          <ArrowLeft size={16} strokeWidth={1.6} />
           <span>{text.voltar}</span>
         </button>
-        <div className="journal-brand" aria-label={text.nomeColecao}>
-          <span className="journal-brand-monogram">LA</span>
-          <span className="journal-brand-label">{text.nomeColecao}</span>
+        <div className="memory-toolbar-center">
+          <span className="memory-toolbar-mark" aria-hidden="true">LA</span>
+          <span className="memory-toolbar-label">{language === "pt" ? "ÁLBUM DE MEMÓRIAS" : "MEMORY ALBUM"}</span>
+          <button
+            type="button"
+            className="memory-play-button"
+            onClick={() => setAutoplayPaused((paused) => !paused)}
+            aria-label={autoplayPaused ? text.retomar : text.pausar}
+            title={autoplayPaused ? text.retomar : text.pausar}
+          >
+            {autoplayPaused ? <Play size={12} fill="currentColor" /> : <Pause size={12} />}
+          </button>
         </div>
         <button
           type="button"
-          className="journal-language"
+          className="memory-language-button"
           onClick={toggleLanguage}
           aria-label={language === "pt" ? "Switch to English" : "Mudar para português"}
         >
@@ -364,75 +416,136 @@ function MapaPessoal({ onBack }) {
         </button>
       </div>
 
-      <div className="journal-viewport" role="region" aria-label={text.nomeColecao} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+      <div
+        className="memory-viewport"
+        onMouseEnter={() => setPointerInside(true)}
+        onMouseLeave={() => setPointerInside(false)}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         <div
-          className="journal-track"
-          style={{ transform: `translate3d(-${(activeIndex * 100) / totalSlides}%, 0, 0)` }}
+          className={`memory-track ${turningPage ? "memory-track--turning" : ""}`}
+          style={{
+            "--memory-slide-count": totalSlides,
+            transform: `translate3d(-${(activeIndex * 100) / totalSlides}%, 0, 0)`,
+          }}
         >
           {slides.map((slide, index) => {
             const active = index === activeIndex
-            const content = slide.type === "cover" ? renderCover() : renderTeaser(slide)
+            const content = slide.type === "cover"
+              ? renderCover()
+              : (active && turningPage && !turningPage.cover
+                ? renderHybridSpread(turningPage)
+                : renderSpread(slide))
+
             return (
-              <section
+              <div
                 key={slide.id}
-                className={`journal-slide journal-slide--${slide.type}`}
-                aria-label={slideLabel(slide)}
+                className={`memory-slide ${active ? "memory-slide--active" : ""} memory-slide--${slide.type}`}
                 aria-hidden={!active}
-                inert={!active || detailOpen}
+                inert={!active}
               >
                 {content}
-              </section>
+              </div>
             )
           })}
         </div>
+
+        {turningPage && (
+          <div className="memory-leaf-stage" aria-hidden="true" inert>
+            <div className="memory-leaf-frame">
+              <div
+                key={turningPage.key}
+                className={`memory-leaf-turn memory-leaf-turn--${turningPage.direction} ${turningPage.cover ? "memory-leaf-turn--cover" : ""}`}
+                onAnimationEnd={(event) => {
+                  if (event.target !== event.currentTarget) return
+                  const completedTurn = turningPage
+                  setActiveIndex(completedTurn.toIndex)
+                  setTurningPage((current) => current?.key === completedTurn.key ? null : current)
+                }}
+              >
+                <div className="memory-leaf-turn__front">
+                  <div className="memory-leaf-turn__content">
+                    {turningPage.cover
+                      ? (turningPage.fromIndex === 0
+                        ? renderCover()
+                        : renderSpread(slides[turningPage.fromIndex]))
+                      : (() => {
+                        const sourceSlide = slides[turningPage.fromIndex]
+                        const sourceParts = getSpreadParts(sourceSlide)
+                        return renderBookPage(
+                          sourceSlide,
+                          turningPage.direction === "next" ? "right" : "left",
+                          turningPage.direction === "next" ? sourceParts.rightPhotos : sourceParts.leftPhotos,
+                          turningPage.direction === "next" ? sourceParts.leftPhotos.length : 0,
+                        )
+                      })()}
+                  </div>
+                </div>
+                <div className="memory-leaf-turn__back">
+                  <div className="memory-leaf-turn__back-content">
+                    {turningPage.cover
+                      ? (turningPage.toIndex === 0
+                        ? renderCover()
+                        : renderSpread(slides[turningPage.toIndex]))
+                      : (() => {
+                        const destinationSlide = slides[turningPage.toIndex]
+                        const destinationParts = getSpreadParts(destinationSlide)
+                        return renderBookPage(
+                          destinationSlide,
+                          turningPage.direction === "next" ? "left" : "right",
+                          turningPage.direction === "next" ? destinationParts.leftPhotos : destinationParts.rightPhotos,
+                          turningPage.direction === "next" ? 0 : destinationParts.leftPhotos.length,
+                        )
+                      })()}
+                  </div>
+                </div>
+                <div className="memory-leaf-turn__edge" />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
-      <footer className={`journal-controls ${activeIndex === 0 ? "journal-controls--cover" : ""} ${detailOpen ? "journal-controls--hidden" : ""}`}>
-        <div className="journal-controls-progress">
-          <div className="journal-progress-track" aria-hidden="true">
-            <span style={{ width: `${((activeIndex + 1) / totalSlides) * 100}%` }} />
-          </div>
-          <span className="journal-controls-hint">{text.instrucao}</span>
-          <span className="journal-sr-only" aria-live="polite">{activeIndex + 1} / {totalSlides}: {slideLabel(activeSlide)}</span>
-        </div>
-        <div className="journal-controls-buttons">
-          <button className="journal-control-button" type="button" onClick={previousSlide} aria-label={text.anterior} title={text.anterior}>
-            <ChevronLeft size={20} strokeWidth={1.65} />
-          </button>
-          <button
-            className="journal-control-button journal-control-button--play"
-            type="button"
-            onClick={() => setAutoplayPaused((paused) => !paused)}
-            aria-label={autoplayPaused ? text.retomar : text.pausar}
-            title={autoplayPaused ? text.retomar : text.pausar}
-          >
-            {autoplayPaused ? <Play size={15} fill="currentColor" /> : <Pause size={15} />}
-          </button>
-          <button className="journal-control-button" type="button" onClick={nextSlide} aria-label={text.proximo} title={text.proximo}>
-            <ChevronRight size={20} strokeWidth={1.65} />
-          </button>
-        </div>
-      </footer>
+      <div className="memory-navigation" aria-label={language === "pt" ? "Controles do álbum" : "Album controls"}>
+        <button type="button" className="memory-page-button memory-page-button--previous" onClick={previousPage} aria-label={text.anterior} title={text.anterior}>
+          <ChevronLeft size={21} strokeWidth={1.45} />
+        </button>
+        <button type="button" className="memory-page-button memory-page-button--next" onClick={nextPage} aria-label={text.proximo} title={text.proximo}>
+          <ChevronRight size={21} strokeWidth={1.45} />
+        </button>
+      </div>
 
-      {detailOpen && renderDetails(activeSlide)}
-
-      {fotoAberta && (
-        <div className="journal-lightbox" role="presentation" onMouseDown={(event) => {
-          if (event.target === event.currentTarget) setFotoAberta(null)
-        }}>
-          <div className="journal-lightbox-panel" role="dialog" aria-modal="true" aria-label={fotoAberta.local}>
-            <button type="button" className="journal-lightbox-close" onClick={() => setFotoAberta(null)} aria-label={language === "pt" ? "Fechar foto" : "Close photo"}>
-              <X size={21} />
+      {openedPhoto && (
+        <div
+          className="memory-photo-overlay"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setOpenedPhoto(null)
+          }}
+        >
+          <div className="memory-photo-enlarged" role="dialog" aria-modal="true" aria-label={openedPhoto.local}>
+            <button type="button" className="memory-photo-close" onClick={() => setOpenedPhoto(null)} aria-label={text.fotoFechar}>
+              <X size={19} />
             </button>
-            {fotoAberta.src && <img src={fotoAberta.src} alt={fotoAberta.alt || fotoAberta.local} />}
-            <p className="journal-lightbox-label">{fotoAberta.tipo}</p>
-            <h2>{fotoAberta.local}</h2>
-            <p>{fotoAberta.legenda}</p>
+            <div className="memory-photo-enlarged-image">
+              <img src={openedPhoto.src} alt={openedPhoto.alt} />
+            </div>
+            <div className="memory-photo-enlarged-caption">
+              <span>{openedPhoto.local}</span>
+              {openedPhoto.date && <small>{openedPhoto.date}</small>}
+            </div>
           </div>
         </div>
       )}
+
+      <span className="memory-sr-only" aria-live="polite">
+        {activeSlide?.type === "cover"
+          ? (language === "pt" ? "Capa do álbum" : "Album cover")
+          : ((activeSlide?.item?.[language] || activeSlide?.item?.pt)?.nome || "")}
+      </span>
     </div>
   )
 }
 
-export default MapaPessoal
+export default MemoryAlbum

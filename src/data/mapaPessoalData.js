@@ -5,82 +5,33 @@
 // Edite os textos pt e en para manter a experiência bilíngue.
 
 export const mapaPessoalCapa = {
+  // Troque por uma foto horizontal/landscape para ser a capa do álbum.
   src: "",
-  alt: { pt: "", en: "" },
+  alt: { pt: "Capa do álbum de recordações", en: "Memory album cover" },
   pt: {
-    kicker: "CADERNO VISUAL · VIAGENS & MEMÓRIAS",
-    titulo: "Um pouco de mundo,",
-    destaque: "um pouco de mim.",
-    intro: "Lugares que conheci, detalhes que guardei e interesses que também contam a minha história.",
-    dica: "Adicione aqui sua foto de capa",
-    legenda: "Um arquivo visual de lugares, descobertas e momentos.",
-    comecar: "Entrar neste mundo",
+    titulo: "Memórias",
+    destaque: "para guardar",
+    comecar: "Abrir álbum",
   },
   en: {
-    kicker: "VISUAL JOURNAL · TRAVEL & MEMORIES",
-    titulo: "A little more world,",
-    destaque: "a little more me.",
-    intro: "Places I have visited, details I kept, and interests that are part of my story, too.",
-    dica: "Add your cover photo here",
-    legenda: "A visual collection of places, discoveries, and moments.",
-    comecar: "Step into this world",
+    titulo: "Memories",
+    destaque: "to keep",
+    comecar: "Open album",
   },
 }
 
+// Para personalizar cada Polaroid, altere `src`, `pt.local`, `pt.data`,
+// `en.local` e `en.data`. Imagens devem ficar em public/images/mapa-pessoal/.
 function criarFotos(id, nomePt, nomeEn) {
-  return [
-    {
-      id: `${id}-principal`,
-      src: "",
-      alt: { pt: "", en: "" },
-      pt: {
-        tipo: "FOTO DE DESTAQUE",
-        local: nomePt,
-        dica: `Adicione uma foto de destaque de ${nomePt}.`,
-        legenda: "Escreva aqui uma legenda curta para esta fotografia.",
-      },
-      en: {
-        tipo: "FEATURED PHOTOGRAPH",
-        local: nomeEn,
-        dica: `Add a featured photograph of ${nomeEn}.`,
-        legenda: "Write a short caption for this photograph.",
-      },
-    },
-    {
-      id: `${id}-detalhe`,
-      src: "",
-      alt: { pt: "", en: "" },
-      pt: {
-        tipo: "UM DETALHE",
-        local: nomePt,
-        dica: "Escolha um segundo enquadramento, uma paisagem ou um detalhe do lugar.",
-        legenda: "Troque por uma memória ou observação sua.",
-      },
-      en: {
-        tipo: "A DETAIL",
-        local: nomeEn,
-        dica: "Choose another angle, a landscape, or a detail of the place.",
-        legenda: "Replace this with your own memory or observation.",
-      },
-    },
-    {
-      id: `${id}-memoria`,
-      src: "",
-      alt: { pt: "", en: "" },
-      pt: {
-        tipo: "OUTRO REGISTRO",
-        local: nomePt,
-        dica: "Reserve este espaço para outra foto que complete a história.",
-        legenda: "Adicione uma legenda quando escolher a imagem.",
-      },
-      en: {
-        tipo: "ANOTHER MOMENT",
-        local: nomeEn,
-        dica: "Save this space for another photo that completes the story.",
-        legenda: "Add a caption after choosing the image.",
-      },
-    },
-  ]
+  // Seis espaços iniciais por destino; acrescente/remova objetos conforme seu álbum.
+  // O componente cria automaticamente novas páginas para coleções maiores.
+  return Array.from({ length: 6 }, (_, index) => ({
+    id: `${id}-foto-${index + 1}`,
+    src: "",
+    alt: { pt: "", en: "" },
+    pt: { local: nomePt, data: "" },
+    en: { local: nomeEn, data: "" },
+  }))
 }
 
 function criarDestino({
@@ -135,12 +86,12 @@ export const mapaPessoalDestinos = [
     id: "nova-york",
     regiaoPt: "ESTADOS UNIDOS",
     nomePt: "Nova York",
-    complementoPt: "",
+    complementoPt: "em foco",
     resumoPt: "Outro destino para registrar nesta coleção de viagens.",
     detalhePt: "Espaço para fotografias de ruas, arquitetura e atrações escolhidas por você.",
     regiaoEn: "UNITED STATES",
     nomeEn: "New York",
-    complementoEn: "",
+    complementoEn: "in focus",
     resumoEn: "Another destination in this collection of travels.",
     detalheEn: "A space for photographs of streets, architecture, and attractions you choose.",
   }),
@@ -148,12 +99,12 @@ export const mapaPessoalDestinos = [
     id: "florianopolis",
     regiaoPt: "SANTA CATARINA · BRASIL",
     nomePt: "Florianópolis",
-    complementoPt: "",
+    complementoPt: "litoral catarinense",
     resumoPt: "Um espaço para guardar registros de Florianópolis.",
     detalhePt: "Adicione uma paisagem, um ponto visitado ou uma fotografia que represente o destino.",
     regiaoEn: "SANTA CATARINA · BRAZIL",
     nomeEn: "Florianópolis",
-    complementoEn: "",
+    complementoEn: "Santa Catarina coast",
     resumoEn: "A space to keep photographs from Florianópolis.",
     detalheEn: "Add a landscape, a place you visited, or a photograph that represents the destination.",
   }),
@@ -174,12 +125,12 @@ export const mapaPessoalDestinos = [
     id: "curitiba",
     regiaoPt: "PARANÁ · BRASIL",
     nomePt: "Curitiba",
-    complementoPt: "",
+    complementoPt: "um registro da cidade",
     resumoPt: "Um espaço para reunir fotografias de Curitiba.",
     detalhePt: "Escolha os pontos, a arquitetura ou os detalhes que você quiser recordar.",
     regiaoEn: "PARANÁ · BRAZIL",
     nomeEn: "Curitiba",
-    complementoEn: "",
+    complementoEn: "a city journal",
     resumoEn: "A space to collect photographs from Curitiba.",
     detalheEn: "Choose the places, architecture, or details you want to remember.",
   }),
@@ -187,12 +138,12 @@ export const mapaPessoalDestinos = [
     id: "sao-paulo",
     regiaoPt: "SÃO PAULO · BRASIL",
     nomePt: "São Paulo",
-    complementoPt: "",
+    complementoPt: "entre ruas e descobertas",
     resumoPt: "Um espaço para reunir fotografias de São Paulo.",
     detalhePt: "Escolha paisagens urbanas, arquitetura ou algum lugar que queira destacar.",
     regiaoEn: "SÃO PAULO · BRAZIL",
     nomeEn: "São Paulo",
-    complementoEn: "",
+    complementoEn: "streets and discoveries",
     resumoEn: "A space to collect photographs from São Paulo.",
     detalheEn: "Choose city views, architecture, or a place you want to highlight.",
   }),
@@ -213,12 +164,12 @@ export const mapaPessoalDestinos = [
     id: "foz-do-iguacu",
     regiaoPt: "PARANÁ · BRASIL",
     nomePt: "Foz do Iguaçu",
-    complementoPt: "",
+    complementoPt: "paisagens em destaque",
     resumoPt: "Um espaço para registrar imagens de Foz do Iguaçu.",
     detalhePt: "Escolha uma vista ou atração e complete a legenda com suas próprias palavras.",
     regiaoEn: "PARANÁ · BRAZIL",
     nomeEn: "Foz do Iguaçu",
-    complementoEn: "",
+    complementoEn: "landscapes in focus",
     resumoEn: "A space to keep photographs from Foz do Iguaçu.",
     detalheEn: "Choose a view or attraction and complete the caption in your own words.",
   }),
@@ -243,7 +194,7 @@ function criarHobby(id, nomePt, nomeEn) {
 
 // Espaços neutros: escolha seus hobbies e renomeie-os quando quiser.
 export const mapaPessoalHobbies = [
-  criarHobby("hobby-01", "Um hobby meu", "One of my hobbies"),
-  criarHobby("hobby-02", "Outro interesse", "Another interest"),
-  criarHobby("hobby-03", "Mais uma descoberta", "One more discovery"),
+  criarHobby("hobby-01", "Meu hobby", "My hobby"),
+  criarHobby("hobby-02", "Outro hobby", "Another hobby"),
+  criarHobby("hobby-03", "Outro interesse", "Another interest"),
 ]

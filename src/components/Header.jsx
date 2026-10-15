@@ -35,8 +35,8 @@ function Header() {
   }
 
   return (
-    <header className="fixed left-0 top-0 z-50 w-full border-b border-[#759AAB]/30 bg-[#FFFEE8]/95 backdrop-blur">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+    <header className="site-header fixed left-0 top-0 z-50 w-full border-b border-[#759AAB]/30 bg-[#FFFEE8]/95 backdrop-blur">
+      <nav className="site-header-nav mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
 
         <a
           href="#home"
@@ -47,7 +47,7 @@ function Header() {
         </a>
 
         {/* Desktop */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="header-desktop-nav items-center gap-8">
 
           <a
             href="#sobre"
@@ -94,7 +94,7 @@ function Header() {
           <button
             type="button"
             onClick={toggleLanguage}
-            className="rounded-full border border-[#253D5B] px-4 py-2 text-xs font-semibold text-[#253D5B] transition hover:bg-[#253D5B] hover:text-[#FFFEE8]"
+            className="header-language-toggle rounded-full border border-[#253D5B] px-4 py-2 text-xs font-semibold text-[#253D5B] transition hover:bg-[#253D5B] hover:text-[#FFFEE8]"
           >
             {t.idioma}
           </button>
@@ -105,8 +105,10 @@ function Header() {
         <button
           type="button"
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-[#253D5B]"
+          className="header-menu-toggle text-[#253D5B]"
           aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={menuOpen}
+          aria-controls="portfolio-mobile-menu"
         >
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
@@ -115,9 +117,9 @@ function Header() {
 
       {/* Menu mobile */}
       {menuOpen && (
-        <div className="border-t border-[#759AAB]/30 bg-[#FFFEE8] px-6 py-6 md:hidden">
+        <div id="portfolio-mobile-menu" className="header-mobile-menu border-t border-[#759AAB]/30 bg-[#FFFEE8] px-6 py-6">
 
-          <div className="flex flex-col gap-5">
+          <div className="header-mobile-links flex flex-col gap-5">
 
             <a href="#sobre" onClick={closeMenu}>
               {t.sobre}
@@ -149,7 +151,7 @@ function Header() {
                 toggleLanguage()
                 closeMenu()
               }}
-              className="w-fit rounded-full border border-[#253D5B] px-4 py-2 text-xs font-semibold text-[#253D5B]"
+              className="header-language-toggle w-fit rounded-full border border-[#253D5B] px-4 py-2 text-xs font-semibold text-[#253D5B]"
             >
               {t.idioma}
             </button>

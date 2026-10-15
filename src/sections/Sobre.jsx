@@ -152,12 +152,8 @@ function Sobre({ onOpenPersonalMap }) {
             </p>
 
             <div className="about-actions">
-              <a
-                href="#projetos"
-                className="about-link"
-              >
-                <span>{t.botao}</span>
-                <span className="about-link-arrow">↗</span>
+              <a href="#projetos" className="about-link">
+                {t.botao}
               </a>
 
               <button
@@ -165,8 +161,7 @@ function Sobre({ onOpenPersonalMap }) {
                 className="about-map-button"
                 onClick={onOpenPersonalMap}
               >
-                <span>{t.botaoMapa}</span>
-                <span className="about-map-button-icon" aria-hidden="true">↗</span>
+                {t.botaoMapa}
               </button>
             </div>
 

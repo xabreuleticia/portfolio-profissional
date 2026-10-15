@@ -11,7 +11,7 @@ function Home() {
       destaque: "Tecnologia, código e experiências digitais.",
       descricao:
         "Um portfólio para apresentar minha trajetória, projetos, experiências e interesses em tecnologia.",
-      projetos: "Conheça meus projetos →",
+      projetos: "Conheça meus projetos",
       contato: "Entre em contato",
     },
 
@@ -22,7 +22,7 @@ function Home() {
       destaque: "Technology, code and digital experiences.",
       descricao:
         "A portfolio to showcase my journey, projects, experiences and interests in technology.",
-      projetos: "See my projects →",
+      projetos: "See my projects",
       contato: "Get in touch",
     },
   }

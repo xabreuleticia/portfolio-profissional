@@ -83,10 +83,11 @@ function pointOnSphere(index, total, radius) {
 function SkillMarker({ skill, position }) {
   return (
     <group position={position}>
-      <mesh>
-        <sphereGeometry args={[0.045, 14, 14]} />
-        <meshBasicMaterial color={skill.color} />
-      </mesh>
+      {/*
+        O ponto colorido é desenhado no próprio rótulo via CSS.
+        Evitamos um mesh 3D no mesmo ponto do <Html>, pois ele pode
+        ser detectado como obstáculo pelo occlude e esconder a própria ferramenta.
+      */}
       <Html center distanceFactor={7.3} occlude>
         <span
           className="skills-globe-tag"
