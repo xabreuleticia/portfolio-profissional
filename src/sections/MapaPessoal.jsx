@@ -271,26 +271,42 @@ function MemoryAlbum({ onBack }) {
 
     return (
       <div className={`memory-cover ${mapaPessoalCapa.src ? "memory-cover--with-photo" : "memory-cover--blank"}`}>
-        {mapaPessoalCapa.src ? (
-          <img
-            className="memory-cover-photo"
-            src={mapaPessoalCapa.src}
-            alt={mapaPessoalCapa.alt?.[language] || text.capaAlt}
-            fetchPriority="high"
-          />
-        ) : (
-          <div className="memory-cover-photo-placeholder" aria-hidden="true" />
-        )}
-        <span className="memory-cover-vignette" aria-hidden="true" />
-        <div className="memory-cover-title">
-          <h1>
-            {cover.titulo || "Memórias"}
-            {cover.destaque && <em>{cover.destaque}</em>}
-          </h1>
-          <button type="button" className="memory-cover-open" onClick={nextPage}>
-            <span>{cover.comecar || text.abrir}</span>
-          </button>
+        <span className="memory-cover-grain" aria-hidden="true" />
+        <span className="memory-cover-spine" aria-hidden="true" />
+        <span className="memory-cover-stitch" aria-hidden="true" />
+
+        <div className="memory-cover-content">
+          <div className="memory-cover-photo-frame">
+            {mapaPessoalCapa.src ? (
+              <img
+                className="memory-cover-photo"
+                src={mapaPessoalCapa.src}
+                alt={mapaPessoalCapa.alt?.[language] || text.capaAlt}
+                fetchPriority="high"
+              />
+            ) : (
+              <div className="memory-cover-photo-placeholder" aria-hidden="true">
+                <Camera size={24} strokeWidth={1.25} />
+                <span>{language === "en" ? "YOUR PHOTOGRAPH" : "SUA FOTOGRAFIA"}</span>
+              </div>
+            )}
+          </div>
+
+          <div className="memory-cover-title">
+            <span className="memory-cover-kicker">
+              {language === "en" ? "PERSONAL ALBUM" : "CADERNO PESSOAL"}
+            </span>
+            <h1>
+              {cover.titulo || "Memórias"}
+              {cover.destaque && <em>{cover.destaque}</em>}
+            </h1>
+            <span className="memory-cover-rule" aria-hidden="true" />
+            <button type="button" className="memory-cover-open" onClick={nextPage}>
+              <span>{cover.comecar || text.abrir}</span>
+            </button>
+          </div>
         </div>
+
         <span className="memory-cover-monogram" aria-hidden="true">LA</span>
       </div>
     )
@@ -339,7 +355,7 @@ function MemoryAlbum({ onBack }) {
   }
 
   function renderSpread(slide) {
-    const { fallbackLocal, leftPhotos, rightPhotos } = getSpreadParts(slide)
+    const { item, fallbackLocal, leftPhotos, rightPhotos } = getSpreadParts(slide)
 
     return (
       <div className={`memory-spread memory-spread--${slide.type}`} style={albumTheme(slide.theme)}>

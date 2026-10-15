@@ -168,7 +168,7 @@ function Contato() {
             )}
 
             <a
-              href="https://www.linkedin.com/"
+              href="https://linkedin.com/in/letícia-xavier-abreu-0b9096407"
               target="_blank"
               rel="noreferrer"
               className="flex items-center gap-4 transition hover:text-[#759AAB]"
@@ -178,7 +178,7 @@ function Contato() {
             </a>
 
             <a
-              href="https://github.com/"
+              href="https://github.com/xabreuleticia"
               target="_blank"
               rel="noreferrer"
               className="flex items-center gap-4 transition hover:text-[#759AAB]"

@@ -1,28 +1,46 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
 import { Html, OrbitControls } from "@react-three/drei"
+import { Database, Gamepad2, Network } from "lucide-react"
+import {
+  SiBootstrap,
+  SiCss,
+  SiFigma,
+  SiGit,
+  SiGithub,
+  SiHtml5,
+  SiJavascript,
+  SiJson,
+  SiNodedotjs,
+  SiOpenjdk,
+  SiPython,
+  SiReact,
+  SiSpringboot,
+  SiTailwindcss,
+  SiVite,
+} from "react-icons/si"
 import { useLanguage } from "../context/useLanguage"
 import "./Habilidades.css"
 
 const SKILLS = [
-  { name: "JavaScript", color: "#D6AD62" },
-  { name: "React", color: "#8CB7C5" },
-  { name: "HTML", color: "#C77A68" },
-  { name: "CSS", color: "#A99BCB" },
-  { name: "Tailwind", color: "#8CB7C5" },
-  { name: "Bootstrap", color: "#B39ACB" },
-  { name: "Python", color: "#D6AD62" },
-  { name: "Pygame", color: "#C77A68" },
-  { name: "Java", color: "#D6AD62" },
-  { name: "Spring Boot", color: "#9FB58B" },
-  { name: "Node.js", color: "#9FB58B" },
-  { name: "SQL", color: "#8CB7C5" },
-  { name: "REST API", color: "#C77A68" },
-  { name: "Git", color: "#D6AD62" },
-  { name: "GitHub", color: "#FFFEE8" },
-  { name: "Figma", color: "#C77A68" },
-  { name: "Vite", color: "#A99BCB" },
-  { name: "JSON Server", color: "#8CB7C5" },
+  { name: "JavaScript", Icon: SiJavascript, color: "#FFFEE8" },
+  { name: "React", Icon: SiReact, color: "#759AAB" },
+  { name: "HTML", Icon: SiHtml5, color: "#D19AA4" },
+  { name: "CSS", Icon: SiCss, color: "#FFFEE8" },
+  { name: "Tailwind CSS", Icon: SiTailwindcss, color: "#759AAB" },
+  { name: "Bootstrap", Icon: SiBootstrap, color: "#D19AA4" },
+  { name: "Python", Icon: SiPython, color: "#FFFEE8" },
+  { name: "Pygame", Icon: Gamepad2, color: "#759AAB" },
+  { name: "Java", Icon: SiOpenjdk, color: "#D19AA4" },
+  { name: "Spring Boot", Icon: SiSpringboot, color: "#FFFEE8" },
+  { name: "Node.js", Icon: SiNodedotjs, color: "#759AAB" },
+  { name: "SQL", Icon: Database, color: "#D19AA4" },
+  { name: "REST API", Icon: Network, color: "#FFFEE8" },
+  { name: "Git", Icon: SiGit, color: "#759AAB" },
+  { name: "GitHub", Icon: SiGithub, color: "#D19AA4" },
+  { name: "Figma", Icon: SiFigma, color: "#FFFEE8" },
+  { name: "Vite", Icon: SiVite, color: "#759AAB" },
+  { name: "JSON Server", Icon: SiJson, color: "#D19AA4" },
 ]
 
 const COPY = {
@@ -42,7 +60,7 @@ const COPY = {
     panelLabel: "CADERNO DE TECNOLOGIAS",
     panelSub: "INTERATIVO · 2026",
     panelBottom: "18 TECNOLOGIAS EM PRÁTICA",
-    instruction: "ARRASTE PARA EXPLORAR",
+    instruction: "PASSE O MOUSE SOBRE OS ÍCONES",
     fallback: "Mapa interativo de habilidades",
     accessible: "Tecnologias que estou estudando e usando em projetos",
   },
@@ -62,7 +80,7 @@ const COPY = {
     panelLabel: "TECHNOLOGY NOTEBOOK",
     panelSub: "INTERACTIVE · 2026",
     panelBottom: "18 TECHNOLOGIES IN PRACTICE",
-    instruction: "DRAG TO EXPLORE",
+    instruction: "HOVER OVER THE ICONS",
     fallback: "Interactive skills map",
     accessible: "Technologies I am studying and using in projects",
   },
@@ -80,21 +98,25 @@ function pointOnSphere(index, total, radius) {
   ]
 }
 
-function SkillMarker({ skill, position }) {
+function SkillMarker({ skill, position, interactionRef }) {
+  const Icon = skill.Icon
+
   return (
     <group position={position}>
-      {/*
-        O ponto colorido é desenhado no próprio rótulo via CSS.
-        Evitamos um mesh 3D no mesmo ponto do <Html>, pois ele pode
-        ser detectado como obstáculo pelo occlude e esconder a própria ferramenta.
-      */}
-      <Html center distanceFactor={7.3} occlude>
-        <span
-          className="skills-globe-tag"
+      <Html center occlude zIndexRange={[40, 0]}>
+        <button
+          type="button"
+          className="skills-globe-marker"
           style={{ "--skill-accent": skill.color }}
+          aria-label={skill.name}
+          data-skill-name={skill.name}
+          onMouseEnter={() => { interactionRef.current.hovering = true }}
+          onMouseLeave={() => { interactionRef.current.hovering = false }}
+          onFocus={() => { interactionRef.current.hovering = true }}
+          onBlur={() => { interactionRef.current.hovering = false }}
         >
-          {skill.name}
-        </span>
+          <Icon className="skills-globe-logo" aria-hidden="true" focusable="false" />
+        </button>
       </Html>
     </group>
   )
@@ -102,7 +124,7 @@ function SkillMarker({ skill, position }) {
 
 function SkillsGlobe() {
   const globeRef = useRef(null)
-  const interactionRef = useRef(false)
+  const interactionRef = useRef({ dragging: false, hovering: false })
   const markers = useMemo(
     () => SKILLS.map((skill, index) => ({
       skill,
@@ -112,7 +134,7 @@ function SkillsGlobe() {
   )
 
   useFrame((_, delta) => {
-    if (globeRef.current && !interactionRef.current) {
+    if (globeRef.current && !interactionRef.current.dragging && !interactionRef.current.hovering) {
       globeRef.current.rotation.y += delta * 0.085
       globeRef.current.rotation.x = Math.sin(Date.now() * 0.00018) * 0.055
     }
@@ -133,19 +155,11 @@ function SkillsGlobe() {
           />
         </mesh>
         <mesh rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[1.51, 0.006, 8, 100]} />
-          <meshBasicMaterial color="#759AAB" transparent opacity={0.75} />
-        </mesh>
-        <mesh rotation={[0, Math.PI / 2, 0]}>
-          <torusGeometry args={[1.51, 0.004, 8, 100]} />
-          <meshBasicMaterial color="#FFFEE8" transparent opacity={0.25} />
-        </mesh>
-        <mesh rotation={[0, 0, Math.PI / 2]}>
-          <torusGeometry args={[1.51, 0.004, 8, 100]} />
-          <meshBasicMaterial color="#600819" transparent opacity={0.5} />
+          <torusGeometry args={[1.5, 0.004, 6, 96]} />
+          <meshBasicMaterial color="#759AAB" transparent opacity={0.32} />
         </mesh>
         {markers.map(({ skill, position }) => (
-          <SkillMarker key={skill.name} skill={skill} position={position} />
+          <SkillMarker key={skill.name} skill={skill} position={position} interactionRef={interactionRef} />
         ))}
       </group>
       <OrbitControls
@@ -153,8 +167,8 @@ function SkillsGlobe() {
         enableZoom={false}
         minPolarAngle={Math.PI * 0.23}
         maxPolarAngle={Math.PI * 0.77}
-        onStart={() => { interactionRef.current = true }}
-        onEnd={() => { interactionRef.current = false }}
+        onStart={() => { interactionRef.current.dragging = true }}
+        onEnd={() => { interactionRef.current.dragging = false }}
       />
     </>
   )
@@ -232,7 +246,7 @@ function Habilidades() {
               <span>{text.panelLabel}</span>
               <span className="skills-panel-meta">{text.panelSub}</span>
             </div>
-            <div className="skills-canvas-wrap" role="img" aria-label={text.accessible}>
+            <div className="skills-canvas-wrap" role="group" aria-label={text.accessible}>
               {isNearViewport ? (
                 <Canvas
                   dpr={[1, 1.5]}
