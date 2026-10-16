@@ -8,7 +8,7 @@ async function requestJson(url) {
   if (!response.ok || body?.error) {
     const payload = body?.error ?? body
     const error = new Error(payload?.message || "Não foi possível carregar as estatísticas.")
-    error.code = payload?.code || (response.status === 401 || response.status === 403 ? "invalid_key" : "request_failed")
+    error.code = payload?.code || (response.status === 401 || response.status === 403 ? "invalid_token" : "request_failed")
     error.status = response.status
     throw error
   }

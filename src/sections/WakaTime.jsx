@@ -140,11 +140,11 @@ function CodingNowCard({ live, language }) {
 function ErrorNotice({ error, language }) {
   const messages = {
     missing_config: language === "en"
-      ? "Add WAKATIME_API_KEY to .env.local and restart the development server."
-      : "Adicione WAKATIME_API_KEY ao arquivo .env.local e reinicie o servidor.",
-    invalid_key: language === "en"
-      ? "The API key was rejected. Check your WakaTime API settings."
-      : "A chave da API foi recusada. Confira as configurações do WakaTime.",
+      ? "Set WAKATIME_ACCESS_TOKEN in the environment variables and redeploy the site."
+      : "Configure WAKATIME_ACCESS_TOKEN nas variáveis de ambiente e publique o site novamente.",
+    invalid_token: language === "en"
+      ? "The WakaTime access token was rejected. Check the token and its permissions."
+      : "O token de acesso do WakaTime foi recusado. Confira o token e as permissões concedidas.",
     pending: language === "en"
       ? "WakaTime is still calculating this period. Try again shortly."
       : "O WakaTime ainda está calculando esse período. Tente novamente em instantes.",
