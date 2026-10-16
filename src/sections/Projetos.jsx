@@ -120,7 +120,7 @@ function Projetos() {
                         href={projeto.github}
                         target="_blank"
                         rel="noreferrer"
-                        className="project-github-button mt-7 w-fit rounded-full border border-[#FFFEE8]/40 px-5 py-2 text-sm transition hover:bg-[#FFFEE8] hover:text-[#253D5B]"
+                        className="project-access-button mt-7 w-fit rounded-full border px-5 py-2 text-sm transition"
                       >
                         {t.github}
                       </a>

@@ -6,22 +6,22 @@ function Home() {
   const texts = {
     pt: {
       saudacao: "Olá, sou",
-      nome: "Letícia Abreu.",
+      nome: "Letícia Abreu",
       profissao: "Estudante de Engenharia de Software",
-      destaque: "Tecnologia, código e experiências digitais.",
+      destaque: "Desenvolvimento de software, aprendizado e soluções digitais.",
       descricao:
-        "Um portfólio para apresentar minha trajetória, projetos, experiências e interesses em tecnologia.",
+        "Um portfólio para apresentar minha trajetória, aprendizados, experiências e projetos.",
       projetos: "Conheça meus projetos",
       contato: "Entre em contato",
     },
 
     en: {
       saudacao: "Hello, I am",
-      nome: "Letícia Abreu.",
+      nome: "Letícia Abreu",
       profissao: "Software Engineering Student",
-      destaque: "Technology, code and digital experiences.",
+      destaque: "Software development, learning, and digital solutions.",
       descricao:
-        "A portfolio to showcase my journey, projects, experiences and interests in technology.",
+        "A portfolio to showcase my journey, learning, experiences, and projects.",
       projetos: "See my projects",
       contato: "Get in touch",
     },
@@ -91,7 +91,7 @@ function Home() {
           <div className="visual-photo">
             <img
               src="/images/foto-leticia.jpeg"
-              alt="Foto de Letícia Abreu"
+              alt={language === "en" ? "Photo of Letícia Abreu" : "Foto de Letícia Abreu"}
             />
           </div>
 

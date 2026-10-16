@@ -6,17 +6,17 @@ function Experiencias() {
 
   const text = {
     pt: {
-      numero: "04 / Experiências",
+      numero: "Experiências",
       titulo: "Minha trajetória.",
       descricao:
         "Experiências, aprendizados e momentos que contribuíram para minha formação.",
     },
 
     en: {
-      numero: "04 / Experience",
+      numero: "Experiences",
       titulo: "My journey.",
       descricao:
-        "Experiences, learning and moments that have contributed to my development.",
+        "Experiences, learning, and moments that have contributed to my education.",
     },
   }
 

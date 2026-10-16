@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { Mail } from "lucide-react";
-import { FaGithub, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { Download, ExternalLink, FileText, Mail, X } from "lucide-react";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import emailjs from "@emailjs/browser";
 
@@ -12,9 +12,30 @@ const EMAILJS_OPTIONS = {
   blockHeadless: true,
 };
 
+// Coloque o PDF real em public/documentos/curriculo-leticia.pdf.
+const CURRICULO_PDF_URL = "/documentos/curriculo-leticia.pdf";
+
 function Contato() {
   const { language } = useLanguage();
   const [feedback, setFeedback] = useState("");
+  const [curriculoAberto, setCurriculoAberto] = useState(false);
+
+  useEffect(() => {
+    if (!curriculoAberto) return undefined;
+
+    const overflowAnterior = document.body.style.overflow;
+    const fecharComEscape = (event) => {
+      if (event.key === "Escape") setCurriculoAberto(false);
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", fecharComEscape);
+
+    return () => {
+      document.body.style.overflow = overflowAnterior;
+      window.removeEventListener("keydown", fecharComEscape);
+    };
+  }, [curriculoAberto]);
 
   const {
     register,
@@ -43,6 +64,14 @@ function Contato() {
       nomeErro: "Digite seu nome.",
       emailErro: "Digite um e-mail válido.",
       mensagemErro: "Digite uma mensagem.",
+      curriculo: "Currículo",
+      curriculoTitulo: "Currículo | Letícia Abreu",
+      curriculoDescricao: "Visualize meu currículo nesta página ou baixe o PDF.",
+      curriculoTipo: "PDF · Currículo profissional",
+      baixarCurriculo: "Baixar PDF",
+      abrirNovaAba: "Abrir em nova aba",
+      fecharCurriculo: "Fechar currículo",
+      pdfAjuda: "Se a pré-visualização não carregar, use “Abrir em nova aba” ou “Baixar PDF”.",
     },
     en: {
       numero: "04 / Contact",
@@ -63,6 +92,14 @@ function Contato() {
       nomeErro: "Enter your name.",
       emailErro: "Enter a valid email.",
       mensagemErro: "Enter a message.",
+      curriculo: "Resume",
+      curriculoTitulo: "Resume | Letícia Abreu",
+      curriculoDescricao: "View my resume on this page or download the PDF.",
+      curriculoTipo: "PDF · Professional resume",
+      baixarCurriculo: "Download PDF",
+      abrirNovaAba: "Open in new tab",
+      fecharCurriculo: "Close resume",
+      pdfAjuda: 'If the preview does not load, use “Open in new tab” or “Download PDF”.',
     },
   };
 
@@ -138,7 +175,8 @@ function Contato() {
   }[feedback];
 
   return (
-    <section
+    <>
+      <section
       id="contato"
       className="bg-[#253D5B] px-6 py-24 text-[#FFFEE8]"
     >
@@ -168,7 +206,7 @@ function Contato() {
             )}
 
             <a
-              href="https://linkedin.com/in/letícia-xavier-abreu-0b9096407"
+              href="https://www.linkedin.com/"
               target="_blank"
               rel="noreferrer"
               className="flex items-center gap-4 transition hover:text-[#759AAB]"
@@ -178,7 +216,7 @@ function Contato() {
             </a>
 
             <a
-              href="https://github.com/xabreuleticia"
+              href="https://github.com/"
               target="_blank"
               rel="noreferrer"
               className="flex items-center gap-4 transition hover:text-[#759AAB]"
@@ -187,15 +225,16 @@ function Contato() {
               <span>GitHub</span>
             </a>
 
-            <a
-              href="https://wa.me/5500000000000"
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-4 transition hover:text-[#759AAB]"
+            <button
+              type="button"
+              onClick={() => setCurriculoAberto(true)}
+              className="flex items-center gap-4 text-left transition hover:text-[#759AAB] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#759AAB]"
+              aria-haspopup="dialog"
+              aria-label={t.curriculo}
             >
-              <FaWhatsapp size={22} aria-hidden="true" />
-              <span>WhatsApp</span>
-            </a>
+              <FileText size={22} aria-hidden="true" />
+              <span>{t.curriculo}</span>
+            </button>
           </div>
 
           <form
@@ -291,7 +330,82 @@ function Contato() {
           </form>
         </div>
       </div>
-    </section>
+      </section>
+
+      {curriculoAberto && (
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#1E252B]/85 p-3 backdrop-blur-sm sm:p-6"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setCurriculoAberto(false);
+          }}
+        >
+          <section
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="curriculo-dialog-title"
+            className="flex h-[92vh] max-h-[920px] min-h-[420px] w-full max-w-6xl flex-col overflow-hidden rounded-2xl border border-[#759AAB]/50 bg-[#FFFEE8] shadow-2xl"
+            onMouseDown={(event) => event.stopPropagation()}
+          >
+            <div className="flex items-center justify-between gap-4 bg-[#253D5B] px-4 py-4 text-[#FFFEE8] sm:px-6">
+              <div className="flex min-w-0 items-center gap-3">
+                <FileText size={22} aria-hidden="true" className="shrink-0 text-[#759AAB]" />
+                <div className="min-w-0">
+                  <h3 id="curriculo-dialog-title" className="truncate text-base font-semibold sm:text-lg">
+                    {t.curriculoTitulo}
+                  </h3>
+                  <p className="mt-1 text-xs text-[#FFFEE8]/75 sm:text-sm">
+                    {t.curriculoDescricao}
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setCurriculoAberto(false)}
+                className="shrink-0 rounded-full border border-[#759AAB]/50 p-2 text-[#FFFEE8] transition hover:bg-[#759AAB]/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FFFEE8]"
+                aria-label={t.fecharCurriculo}
+              >
+                <X size={20} aria-hidden="true" />
+              </button>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#759AAB]/30 bg-[#FFFEE8] px-4 py-3 sm:px-6">
+              <p className="text-xs leading-5 text-[#253D5B]/75 sm:text-sm">{t.curriculoTipo}</p>
+              <div className="flex flex-wrap gap-2">
+                <a
+                  href={CURRICULO_PDF_URL}
+                  download="Curriculo-Leticia-Abreu.pdf"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#600819] px-4 py-2 text-sm font-semibold text-[#FFFEE8] transition hover:bg-[#253D5B] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#759AAB]"
+                >
+                  <Download size={16} aria-hidden="true" />
+                  {t.baixarCurriculo}
+                </a>
+                <a
+                  href={CURRICULO_PDF_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#253D5B]/30 px-4 py-2 text-sm font-semibold text-[#253D5B] transition hover:bg-[#759AAB]/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#759AAB]"
+                >
+                  <ExternalLink size={16} aria-hidden="true" />
+                  {t.abrirNovaAba}
+                </a>
+              </div>
+            </div>
+
+            <div className="min-h-0 flex-1 bg-[#1E252B]">
+              <iframe
+                src={CURRICULO_PDF_URL}
+                title={t.curriculoTitulo}
+                className="h-full w-full border-0"
+              />
+            </div>
+            <p className="bg-[#FFFEE8] px-4 py-2 text-xs text-[#253D5B]/70 sm:px-6">
+              {t.pdfAjuda}
+            </p>
+          </section>
+        </div>
+      )}
+    </>
   );
 }
 

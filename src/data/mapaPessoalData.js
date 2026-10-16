@@ -79,7 +79,7 @@ const legendasFotos = {
   "balneario/praia1.jpeg": {
     alt: {
       pt: "praia em Balneário Camboriú",
-      en: "Beach photographed during the trip",
+      en: "Beach in Balneário Camboriú",
     },
     pt: {
       local: "Praia em Balneário Camboriú",
@@ -93,7 +93,7 @@ const legendasFotos = {
   "balneario/praia2.jpeg": {
     alt: {
       pt: "praia em Balneário Camboriú",
-      en: "Beach photographed during the trip",
+      en: "Beach in Balneário Camboriú",
     },
     pt: {
       local: "Praia em Balneário Camboriú",
@@ -107,7 +107,7 @@ const legendasFotos = {
   "balneario/praia3.jpeg": {
     alt: {
       pt: "praia em Balneário Camboriú",
-      en: "Beach photographed during the trip",
+      en: "Beach in Balneário Camboriú",
     },
     pt: {
       local: "Praia em Balneário Camboriú",
@@ -121,7 +121,7 @@ const legendasFotos = {
   "balneario/praia4.jpeg": {
     alt: {
       pt: "praia em Balneário Camboriú",
-      en: "Beach photographed during the trip",
+      en: "Beach in Balneário Camboriú",
     },
     pt: {
       local: "Praia em Balneário Camboriú",
@@ -135,7 +135,7 @@ const legendasFotos = {
   "balneario/praia5.jpeg": {
     alt: {
       pt: "praia em Balneário Camboriú",
-      en: "Beach photographed during the trip",
+      en: "Beach in Balneário Camboriú",
     },
     pt: {
       local: "Praia em Balneário Camboriú",
@@ -223,7 +223,7 @@ const legendasFotos = {
       en: "Municipal Park in Belo Horizonte",
     },
     pt: {
-      local: "Parque Municipal emBelo Horizonte",
+      local: "Parque Municipal em Belo Horizonte",
       data: "2025",
     },
     en: {
@@ -584,7 +584,7 @@ const legendasFotos = {
   "nova-york/igreja.jpeg": {
     alt: {
       pt: "Igreja de Nova Iorque",
-      en: "Church of New York",
+      en: "Church in New York",
     },
     pt: {
       local: "catedral de São Patrício em Nova Iorque",
@@ -889,10 +889,24 @@ const legendasFotos = {
       data: "2022",
     },
   },
+    "rio-de-janeiro/petropolis.jpeg": {
+    alt: {
+      pt: "Petrópolis",
+      en: "Petrópolis",
+    },
+    pt: {
+      local: "Petrópolis",
+      data: "2025",
+    },
+    en: {
+      local: "Petrópolis",
+      data: "2025",
+    },
+  },
   "sao-paulo/ibirapuera.jpeg": {
     alt: {
       pt: "Parque Ibirapuera",
-      en: "Ibirapuera",
+      en: "Ibirapuera Park",
     },
     pt: {
       local: "Parque Ibirapuera",
@@ -945,7 +959,7 @@ const legendasFotos = {
       data: "2026",
     },
   },
-  "sao-paulo/museu-do-ipiranga.jpeg3": {
+  "sao-paulo/museu-do-ipiranga3.jpeg": {
     alt: {
       pt: "Museu do Ipiranga",
       en: "Ipiranga Museum",
@@ -962,7 +976,7 @@ const legendasFotos = {
   "sao-paulo/museu-zoologia.jpeg": {
     alt: {
       pt: "Museu de Zoologia da USP",
-      en: "Zoology Museum",
+      en: "USP Museum of Zoology",
     },
     pt: {
       local: "Museu de Zoologia da USP",
@@ -973,7 +987,7 @@ const legendasFotos = {
       data: "2026",
     },
   },
-};
+}
 
 function criarDestino({
   id,
@@ -1004,7 +1018,11 @@ function criarDestino({
       resumo: resumoEn,
       detalhe: detalheEn,
     },
-    fotos: criarFotos(id, `${nomePt} ${complementoPt}`.trim(), `${nomeEn} ${complementoEn}`.trim()),
+        fotos: criarFotos(
+      id,
+      `${nomePt} ${complementoPt}`.trim(),
+      `${nomeEn} ${complementoEn}`.trim(),
+    ),
   }
 }
 

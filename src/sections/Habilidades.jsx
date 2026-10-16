@@ -45,18 +45,20 @@ const SKILLS = [
 
 const COPY = {
   pt: {
-    kicker: "HABILIDADES / MAPA EM MOVIMENTO",
+    kicker: "HABILIDADES ",
     title: "Tecnologia se aprende na prática,",
     accent: "e na curiosidade.",
     intro:
-      "Um mapa do que venho estudando e colocando em prática. Não é uma lista fechada de respostas, mas um repertório que cresce a cada projeto.",
+      "A cada projeto, um novo mundo de oportunidades de aprendizado.",
     overline: "EM CONSTRUÇÃO CONTÍNUA",
-    group1: "Interfaces",
-    desc1: "Da estrutura visual à experiência de quem navega.",
-    group2: "Lógica & back-end",
-    desc2: "Algoritmos, serviços e dados trabalhando juntos.",
-    group3: "Ferramentas & fluxo",
-    desc3: "Organização, prototipação e trabalho com código.",
+    group1: "Design",
+    desc1: "Layouts, protótipos, mockups, design no figma pensado na experiencia do usuário.",
+    group2: "Interfaces",
+    desc2: "HTML, CSS, JavaScript, React, Tailwind CSS, Bootstrap.",
+    group3: "Lógica & back-end",
+    desc3: "Python, Java, Node.js, Spring Boot, SQL, REST API, JSON Server.",
+    group4: "Ferramentas & fluxo",
+    desc4: "Git, GitHub, VS Code, Vite, npm, Maven, Figma, ESLint.",
     panelLabel: "CADERNO DE TECNOLOGIAS",
     panelSub: "INTERATIVO · 2026",
     panelBottom: "18 TECNOLOGIAS EM PRÁTICA",
@@ -65,18 +67,20 @@ const COPY = {
     accessible: "Tecnologias que estou estudando e usando em projetos",
   },
   en: {
-    kicker: "SKILLS / A MAP IN MOTION",
+    kicker: "SKILLS ",
     title: "Technology is learned by building,",
     accent: "and staying curious.",
     intro:
-      "A map of what I am studying and putting into practice. Not a finished checklist, but a growing toolkit shaped by each project.",
+      "With every project, a new world of learning opportunities.",
     overline: "ALWAYS IN PROGRESS",
-    group1: "Interfaces",
-    desc1: "From visual structure to the experience of navigating.",
-    group2: "Logic & back end",
-    desc2: "Algorithms, services, and data working together.",
-    group3: "Tools & workflow",
-    desc3: "Organization, prototyping, and working with code.",
+    group1: "Design",
+    desc1: "Layouts, prototypes, mockups, and Figma designs focused on the user experience.",
+    group2: "Interfaces",
+    desc2: "HTML, CSS, JavaScript, React, Tailwind CSS, and Bootstrap.",
+    group3: "Logic & back end",
+    desc3: "Python, Java, Node.js, Spring Boot, SQL, REST API, and JSON Server.",
+    group4: "Tools & workflow",
+    desc4: "Git, GitHub, VS Code, Vite, npm, Maven, Figma, and ESLint.",
     panelLabel: "TECHNOLOGY NOTEBOOK",
     panelSub: "INTERACTIVE · 2026",
     panelBottom: "18 TECHNOLOGIES IN PRACTICE",
@@ -232,6 +236,13 @@ function Habilidades() {
                 <div>
                   <h3>{text.group3}</h3>
                   <p>{text.desc3}</p>
+                </div>
+              </article>
+              <article className="skills-group">
+                <span className="skills-group-number">04</span>
+                <div>
+                  <h3>{text.group4}</h3>
+                  <p>{text.desc4}</p>
                 </div>
               </article>
             </div>

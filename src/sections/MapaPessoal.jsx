@@ -355,7 +355,7 @@ function MemoryAlbum({ onBack }) {
   }
 
   function renderSpread(slide) {
-    const { item, fallbackLocal, leftPhotos, rightPhotos } = getSpreadParts(slide)
+    const { fallbackLocal, leftPhotos, rightPhotos } = getSpreadParts(slide)
 
     return (
       <div className={`memory-spread memory-spread--${slide.type}`} style={albumTheme(slide.theme)}>

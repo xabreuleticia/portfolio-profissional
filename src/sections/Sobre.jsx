@@ -5,7 +5,7 @@ function Sobre({ onOpenPersonalMap }) {
 
   const texts = {
     pt: {
-      numero: "01 / SOBRE MIM",
+      numero: "SOBRE MIM",
 
       titulo: "Curiosidade que vira",
       destaque: "construção.",
@@ -16,21 +16,21 @@ function Sobre({ onOpenPersonalMap }) {
       subtitulo: "Um pouco sobre mim",
 
       paragrafo1:
-        "Sou estudante de Engenharia de Software na PUC Minas. Tenho interesse em desenvolvimento web, programação e criação de soluções digitais.",
+        "Sou estudante do 2° período de Engenharia de Software na PUC Minas. Tenho interesse em desenvolvimento web, programação e criação de soluções digitais.",
 
       paragrafo2:
         "Gosto de aprender na prática, explorar possibilidades e colaborar com outras pessoas. Para mim, cada projeto é uma oportunidade de desenvolver novas habilidades e transformar conhecimento em experiência.",
 
       botao: "Conheça meus projetos",
-      botaoMapa: "Explorar meu mapa pessoal",
+      botaoMapa: "Explore experiencias que vão além dos códigos",
 
-      cartaoRotulo: "MEU JEITO DE APRENDER",
-      cartaoLinha1: "Aprender.",
-      cartaoLinha2: "Experimentar.",
-      cartaoLinha3: "Construir.",
+      cartaoRotulo: "MEU JEITO DE TRABALHAR",
+      cartaoLinha1: "Observar",
+      cartaoLinha2: "Aprender",
+      cartaoLinha3: "Construir",
 
       cartaoDescricao:
-        "Transformar conhecimento em prática, uma ideia de cada vez.",
+        "Descobrindo novos caminhos com a curiosidade que me permite construir soluções inovadoras.",
 
       cartaoRodape: "ENGENHARIA DE SOFTWARE · PUC MINAS",
 
@@ -51,10 +51,10 @@ function Sobre({ onOpenPersonalMap }) {
     },
 
     en: {
-      numero: "01 / ABOUT ME",
+      numero: "ABOUT ME",
 
-      titulo: "Curiosity turned into",
-      destaque: "creation.",
+      titulo: "Curiosity that leads to",
+      destaque: "building.",
 
       introducao:
         "I believe learning technology becomes meaningful when we turn ideas into something real.",
@@ -62,28 +62,28 @@ function Sobre({ onOpenPersonalMap }) {
       subtitulo: "A little about me",
 
       paragrafo1:
-        "I am a Software Engineering student at PUC Minas, interested in web development, programming and creating digital solutions.",
+        "I am a second-semester Software Engineering student at PUC Minas. I am interested in web development, programming, and creating digital solutions.",
 
       paragrafo2:
         "I enjoy learning by doing, exploring possibilities and collaborating with others. To me, every project is an opportunity to develop new skills and turn knowledge into experience.",
 
       botao: "Explore my projects",
-      botaoMapa: "Explore my personal map",
+      botaoMapa: "Explore experiences that go beyond code",
 
-      cartaoRotulo: "HOW I LIKE TO LEARN",
-      cartaoLinha1: "Learn.",
-      cartaoLinha2: "Experiment.",
-      cartaoLinha3: "Build.",
+      cartaoRotulo: "MY WAY OF WORKING",
+      cartaoLinha1: "Observe",
+      cartaoLinha2: "Learn",
+      cartaoLinha3: "Build",
 
       cartaoDescricao:
-        "Turning knowledge into practice, one idea at a time.",
+        "Discovering new paths with the curiosity that allows me to build innovative solutions.",
 
       cartaoRodape: "SOFTWARE ENGINEERING · PUC MINAS",
 
       formacaoRotulo: "EDUCATION",
       formacaoTitulo: "Software Engineering",
       formacaoDescricao:
-        "Undergraduate degree in progress at PUC Minas.",
+        "Undergraduate program in progress at PUC Minas.",
 
       interessesRotulo: "INTERESTS",
       interessesTitulo: "Technology & Web",
@@ -93,7 +93,7 @@ function Sobre({ onOpenPersonalMap }) {
       objetivosRotulo: "GOALS",
       objetivosTitulo: "Grow by building",
       objetivosDescricao:
-        "Expand my knowledge, collaborate on projects and grow as a developer.",
+        "Deepen my knowledge, collaborate on projects, and grow as a developer.",
     },
   }
 
@@ -108,8 +108,8 @@ function Sobre({ onOpenPersonalMap }) {
         <div className="about-heading">
 
           <p className="about-kicker">
-            <span className="about-kicker-number">01</span>
-            <span>{t.numero.replace("01 / ", "")}</span>
+            <span className="about-kicker-number"></span>
+            <span>{t.numero.replace("/ ", "")}</span>
           </p>
 
           <div className="about-heading-grid">
@@ -140,7 +140,7 @@ function Sobre({ onOpenPersonalMap }) {
             <h3 className="about-copy-title">
               {language === "pt"
                 ? "Aprender é o começo. Construir é o caminho."
-                : "Learning is the beginning. Building is the journey."}
+                : "Learning is the beginning. Building is the way forward."}
             </h3>
 
             <p className="about-paragraph">
@@ -152,8 +152,11 @@ function Sobre({ onOpenPersonalMap }) {
             </p>
 
             <div className="about-actions">
-              <a href="#projetos" className="about-link">
-                {t.botao}
+              <a
+                href="#projetos"
+                className="about-link"
+              >
+                <span>{t.botao}</span>
               </a>
 
               <button
@@ -161,7 +164,8 @@ function Sobre({ onOpenPersonalMap }) {
                 className="about-map-button"
                 onClick={onOpenPersonalMap}
               >
-                {t.botaoMapa}
+                <span>{t.botaoMapa}</span>
+                <span className="about-map-button-icon" aria-hidden="true">✦</span>
               </button>
             </div>
 

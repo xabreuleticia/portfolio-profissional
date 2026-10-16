@@ -5,7 +5,7 @@ export const experiencias = [
     pt: {
       titulo: "Programação 101",
       instituicao: "Instituto de Ciências Exatas - UFMG",
-      periodo: "24/02/2025 - 28/02/2025",
+      periodo: "02/2025 - 02/2025",
       descricao:
         "Curso de extensão introdutório em programação e algoritmos.",
     },
@@ -13,9 +13,9 @@ export const experiencias = [
     en: {
       titulo: "Programming 101",
       instituicao: "Institute of Exact Sciences - UFMG",
-      periodo: "02/24/2025 - 02/28/2025",
+      periodo: "02/2025 - 02/2025",
       descricao:
-        "Introductory extension course in programming and algorithms.",
+        "Introductory continuing education course in programming and algorithms.",
     },
   },
 
@@ -35,7 +35,7 @@ export const experiencias = [
       instituicao: "PUC Minas",
       periodo: "2026 - present",
       descricao:
-        "Undergraduate degree focused on software development, programming and technology.",
+        "Undergraduate program focused on software development, programming, and technology.",
     },
   },
   {
@@ -54,7 +54,7 @@ export const experiencias = [
     instituicao: "WebTech Network — PUC Minas",
     periodo: "2026 - present",
     descricao:
-      "Participation in a technology community focused on sharing knowledge and experiences in web development and digital solution building.",
+      "Participation in a technology community focused on sharing knowledge and experiences in web development and creating digital solutions.",
   },
 },
 {
@@ -73,7 +73,7 @@ export const experiencias = [
     instituicao: "PUC Minas",
     periodo: "2026 - present",
     descricao:
-      "Supporting students in learning programming logic and algorithm fundamentals, helping them understand concepts and solve practical exercises.",
+      "Supporting students as they learn programming logic and the fundamentals of algorithms, helping them understand concepts and solve practical exercises.",
   },
 },
 ]

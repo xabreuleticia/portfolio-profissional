@@ -1861,6 +1861,10 @@ footer a:hover {
   color: var(--azul) !important;
 }
 
+#sobre .about-link-arrow {
+  font-size: 17px;
+}
+
 /* Painel azul */
 
 #sobre .about-panel {
@@ -2786,6 +2790,22 @@ header nav > div a:hover::after {
   transform: rotate(45deg);
 }
 
+/* Link para os projetos */
+.about-link {
+  transition:
+    gap 0.25s ease,
+    color 0.25s ease;
+}
+
+.about-link-arrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.about-link:hover .about-link-arrow {
+  transform: translate(3px, -3px);
+}
+
 /* ==========================================
    4. PROJETOS — IMAGENS E TECNOLOGIAS
    ========================================== */
@@ -3187,257 +3207,248 @@ footer::before {
   outline-offset: 4px;
 }
 
+#sobre .about-map-button-icon {
+  display: grid;
+  flex: 0 0 29px;
+  width: 29px;
+  height: 29px;
+  place-items: center;
+  border: 1px solid rgba(255, 254, 232, 0.45);
+  border-radius: 50%;
+  font-size: 16px;
+  line-height: 1;
+  transition: transform 0.22s ease, background-color 0.22s ease;
+}
+
+#sobre .about-actions .about-map-button:hover .about-map-button-icon {
+  background: rgba(255, 254, 232, 0.12);
+  transform: translate(2px, -2px);
+}
+
 .personal-map-page > .personal-map-main {
   padding-top: 0;
 }
 
-
 /* =========================================================
-   SISTEMA DE BOTÕES — acabamentos consistentes, sem setas decorativas
+   AJUSTE FINAL — CORES DAS SEÇÕES E BOTÕES SEM HOVER OBRIGATÓRIO
+   Cada seção recebe uma superfície própria, mantendo a paleta.
    ========================================================= */
-:root {
-  --button-height: 46px;
-  --button-radius: 999px;
-  --button-shadow: 0 6px 16px rgba(37, 61, 91, 0.10);
-  --button-shadow-hover: 0 10px 22px rgba(37, 61, 91, 0.15);
+
+/* Início — creme */
+#home {
+  background: #FFFEE8 !important;
+  color: #1E252B;
 }
 
-.home-button-primary,
-.home-button-secondary,
-#sobre .about-actions .about-link,
-#sobre .about-actions .about-map-button,
-#projetos .project-github-button,
-#contato button[type="submit"] {
-  appearance: none;
-  display: inline-flex;
+/* Sobre — azul acinzentado */
+#sobre.about-section {
+  background: #759AAB !important;
+  color: #1E252B;
+}
+
+/* Habilidades — creme original da paleta */
+#habilidades.skills-section {
+  background: #FFFEE8 !important;
+  color: #1E252B;
+  border-top: 1px solid rgba(117, 154, 171, 0.38);
+  border-bottom: 1px solid rgba(117, 154, 171, 0.38);
+}
+
+/* Projetos — azul-acinzentado original da paleta */
+#projetos {
+  background: #759AAB !important;
+  color: #253D5B;
+  border-top: 1px solid rgba(37, 61, 91, 0.18);
+  border-bottom: 1px solid rgba(37, 61, 91, 0.18);
+}
+
+/* WakaTime — creme original da paleta */
+#wakatime.waka-section {
+  background: #FFFEE8 !important;
+  color: #1E252B;
+  border-top: 1px solid rgba(117, 154, 171, 0.5);
+  border-bottom: 1px solid rgba(117, 154, 171, 0.5);
+}
+
+/* Experiências — vinho */
+#experiencias {
+  background: #600819 !important;
+  color: #FFFEE8 !important;
+}
+
+/* Contato — azul-marinho */
+#contato {
+  background: #253D5B !important;
+  color: #FFFEE8 !important;
+}
+
+/* CTA principal na Home: sempre visível */
+.home-buttons .home-button-primary {
+  display: inline-flex !important;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  min-height: var(--button-height);
-  padding: 0 23px !important;
-  border: 1px solid transparent !important;
-  border-radius: var(--button-radius) !important;
-  font-family: inherit !important;
-  font-size: 12px !important;
-  font-weight: 600 !important;
-  line-height: 1.2;
-  letter-spacing: 0.01em;
-  text-align: center;
-  text-decoration: none !important;
-  cursor: pointer;
-  box-shadow: none;
-  transition:
-    color 220ms ease,
-    background-color 220ms ease,
-    border-color 220ms ease,
-    box-shadow 220ms ease,
-    transform 220ms ease;
-}
-
-.home-button-primary,
-#sobre .about-actions .about-link {
-  background: var(--vinho) !important;
-  border-color: var(--vinho) !important;
-  color: var(--creme) !important;
-  box-shadow: var(--button-shadow);
-}
-
-.home-button-secondary,
-#sobre .about-actions .about-map-button {
-  background: transparent !important;
-  border-color: rgba(37, 61, 91, 0.42) !important;
-  color: var(--azul) !important;
-}
-
-.home-button-primary:hover,
-#sobre .about-actions .about-link:hover {
-  background: var(--azul) !important;
-  border-color: var(--azul) !important;
-  color: var(--creme) !important;
-  transform: translateY(-2px);
-  box-shadow: var(--button-shadow-hover);
-}
-
-.home-button-secondary:hover,
-#sobre .about-actions .about-map-button:hover {
-  background: var(--azul) !important;
-  border-color: var(--azul) !important;
-  color: var(--creme) !important;
-  transform: translateY(-2px);
-  box-shadow: var(--button-shadow-hover);
-}
-
-#sobre .about-actions .about-link {
-  margin: 0 !important;
-}
-
-#sobre .about-actions .about-map-button {
-  margin: 0 !important;
-  text-align: center !important;
-  box-shadow: none;
-}
-
-/* Evita que estilos antigos transformem ações em links sublinhados. */
-#sobre .about-actions .about-link::after {
-  content: none !important;
-}
-
-#projetos .project-github-button {
-  background: rgba(255, 254, 232, 0.045) !important;
-  border-color: rgba(255, 254, 232, 0.48) !important;
-  color: var(--creme) !important;
-  box-shadow: none;
-}
-
-#projetos .project-github-button:hover {
-  background: var(--creme) !important;
-  border-color: var(--creme) !important;
-  color: var(--azul) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
-}
-
-#contato button[type="submit"] {
-  width: 100%;
-  min-height: 48px;
-  margin-top: 24px !important;
-  background: var(--vinho) !important;
-  border-color: var(--vinho) !important;
-  color: var(--creme) !important;
-  box-shadow: var(--button-shadow);
-}
-
-#contato button[type="submit"]:hover:not(:disabled) {
-  background: var(--azul) !important;
-  border-color: var(--azul) !important;
-  transform: translateY(-2px);
-  box-shadow: var(--button-shadow-hover);
-}
-
-#contato button[type="submit"]:disabled {
-  opacity: 0.6;
-  cursor: wait;
-  transform: none;
-  box-shadow: none;
-}
-
-/* Controles utilitários do cabeçalho: pequenos e discretos. */
-header nav .header-language-toggle {
-  min-width: 44px !important;
-  min-height: 36px !important;
-  padding: 0 13px !important;
-  border: 1px solid rgba(96, 8, 25, 0.34) !important;
-  border-radius: 999px !important;
-  background: transparent !important;
-  color: var(--vinho) !important;
-  font-size: 10px !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.08em;
-}
-
-header nav .header-language-toggle:hover {
-  background: var(--vinho) !important;
-  border-color: var(--vinho) !important;
-  color: var(--creme) !important;
-}
-
-header nav .header-menu-toggle {
-  display: grid !important;
-  width: 42px !important;
-  height: 42px !important;
-  min-width: 42px !important;
-  min-height: 42px !important;
-  padding: 0 !important;
-  place-items: center;
-  border: 1px solid rgba(37, 61, 91, 0.24) !important;
-  border-radius: 50% !important;
-  background: rgba(255, 254, 232, 0.92) !important;
-  color: var(--azul) !important;
-}
-
-header nav .header-menu-toggle:hover {
-  border-color: var(--azul) !important;
-  background: var(--azul) !important;
-  color: var(--creme) !important;
-}
-
-/* Período do WakaTime: controles segmentados, com estados claros. */
-.waka-ranges button {
-  min-height: 34px;
-  padding: 0 13px;
-  border-radius: 999px;
-  font-size: 10px;
-  font-weight: 600;
-}
-
-.waka-ranges button:hover:not(.active) {
-  background: rgba(255, 254, 232, 0.78);
-  color: var(--vinho);
-}
-
-.waka-ranges button.active {
-  box-shadow: 0 3px 9px rgba(96, 8, 25, 0.18);
-}
-
-/* A capa do álbum também usa uma ação limpa, sem seta decorativa. */
-.personal-memory-book .memory-cover-open {
   min-height: 44px;
-  padding: 0 22px;
+  padding: 0 21px;
+  background: #600819 !important;
+  border: 1px solid #600819 !important;
   border-radius: 999px;
-  font-family: inherit;
+  color: #FFFEE8 !important;
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.01em;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.10);
-  transition:
-    color 220ms ease,
-    background-color 220ms ease,
-    border-color 220ms ease,
-    transform 220ms ease,
-    box-shadow 220ms ease;
+  text-decoration: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  box-shadow: 0 5px 14px rgba(96, 8, 25, 0.13);
 }
 
-.personal-memory-book .memory-cover-open:hover {
+.home-buttons .home-button-primary:hover {
+  background: #253D5B !important;
+  border-color: #253D5B !important;
+  color: #FFFEE8 !important;
   transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 8px 18px rgba(37, 61, 91, 0.17);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .home-button-primary,
-  .home-button-secondary,
-  #sobre .about-actions .about-link,
-  #sobre .about-actions .about-map-button,
-  #projetos .project-github-button,
-  #contato button[type="submit"],
-  header nav .header-language-toggle,
-  header nav .header-menu-toggle,
-  .waka-ranges button,
-  .personal-memory-book .memory-cover-open {
-    transition: none !important;
+.home-buttons .home-button-secondary {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 21px;
+  background: transparent !important;
+  border: 1px solid #253D5B !important;
+  border-radius: 999px;
+  color: #253D5B !important;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.home-buttons .home-button-secondary:hover {
+  background: #253D5B !important;
+  border-color: #253D5B !important;
+  color: #FFFEE8 !important;
+  transform: translateY(-2px);
+}
+
+/* Link de projetos em Sobre: botão preenchido visível sem hover */
+#sobre .about-actions .about-link {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  margin: 0;
+  padding: 11px 18px !important;
+  gap: 0 !important;
+  color: #FFFEE8 !important;
+  background: #600819 !important;
+  border: 1px solid #600819 !important;
+  border-bottom: 1px solid #600819 !important;
+  border-radius: 999px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  box-shadow: 0 5px 14px rgba(96, 8, 25, 0.12);
+  transition: background-color 0.22s ease, border-color 0.22s ease, color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+#sobre .about-actions .about-link:hover {
+  gap: 0 !important;
+  color: #FFFEE8 !important;
+  background: #253D5B !important;
+  border-color: #253D5B !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(37, 61, 91, 0.15);
+}
+
+/* Botões dos projetos — preenchidos e legíveis no estado padrão */
+#projetos article .project-access-button,
+#projetos article a.project-access-button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  width: fit-content;
+  min-width: 126px;
+  min-height: 42px;
+  margin-top: 22px !important;
+  padding: 10px 18px !important;
+  border: 1px solid #600819 !important;
+  border-radius: 999px !important;
+  background: #600819 !important;
+  color: #FFFEE8 !important;
+  font-family: inherit;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  box-shadow: 0 5px 14px rgba(96, 8, 25, 0.13);
+  transition: background-color 0.22s ease, border-color 0.22s ease, color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+#projetos article .project-access-button:hover,
+#projetos article a.project-access-button:hover {
+  background: #253D5B !important;
+  border-color: #253D5B !important;
+  color: #FFFEE8 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(37, 61, 91, 0.16);
+}
+
+#projetos article .project-access-button:focus-visible,
+#sobre .about-actions .about-link:focus-visible,
+.home-buttons a:focus-visible {
+  outline: 3px solid rgba(117, 154, 171, 0.85);
+  outline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  .home-buttons .home-button-primary,
+  .home-buttons .home-button-secondary {
+    width: 100%;
+  }
+
+  #projetos article .project-access-button {
+    align-self: stretch;
+    width: 100%;
   }
 }
 
-/* =========================================================
-   HEADER RESPONSIVO — REGRAS EXPLÍCITAS
-   Corrige conflitos entre as regras globais e utilitários Tailwind.
-   Desktop: navegação completa, sem botão de menu.
-   Mobile: marca + menu compacto, com painel recolhível.
-   ========================================================= */
 
+/* =========================================================
+   FIX DEFINITIVO — HEADER DESKTOP / MOBILE
+   Mantém a paleta original e impede o menu mobile no desktop.
+   ========================================================= */
 header.site-header {
+  position: fixed !important;
+  inset: 0 0 auto 0 !important;
+  z-index: 9999 !important;
+  width: 100% !important;
   height: var(--header-height) !important;
   overflow: visible !important;
+  background: rgba(255, 254, 232, 0.97) !important;
+  border-bottom: 1px solid rgba(117, 154, 171, 0.32) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 header.site-header > nav.site-header-nav {
-  width: min(calc(100% - 56px), var(--max-width)) !important;
-  height: var(--header-height) !important;
-  padding: 0 !important;
-  margin: 0 auto !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
   gap: 18px !important;
+  width: min(calc(100% - 56px), var(--max-width)) !important;
+  height: var(--header-height) !important;
+  min-height: var(--header-height) !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
 }
 
 header.site-header nav > .header-desktop-nav {
@@ -3445,11 +3456,12 @@ header.site-header nav > .header-desktop-nav {
   flex: 1 1 auto;
   align-items: center !important;
   justify-content: center !important;
-  gap: clamp(12px, 1.9vw, 28px) !important;
+  gap: clamp(10px, 1.5vw, 24px) !important;
   min-width: 0;
 }
 
 header.site-header nav > .header-desktop-nav a {
+  display: inline-flex;
   white-space: nowrap;
 }
 
@@ -3462,19 +3474,13 @@ header.site-header nav .header-menu-toggle {
   height: 42px !important;
   min-width: 42px !important;
   min-height: 42px !important;
-  padding: 0 !important;
   margin-left: auto;
+  padding: 0 !important;
   border: 1px solid rgba(37, 61, 91, 0.26) !important;
   border-radius: 50% !important;
   background: rgba(255, 254, 232, 0.92) !important;
-  color: var(--azul) !important;
+  color: #253D5B !important;
   cursor: pointer;
-}
-
-header.site-header nav .header-menu-toggle:hover {
-  border-color: var(--azul) !important;
-  background: var(--azul) !important;
-  color: var(--creme) !important;
 }
 
 header.site-header .header-mobile-menu {
@@ -3484,18 +3490,22 @@ header.site-header .header-mobile-menu {
 header.site-header .header-mobile-links a {
   display: block;
   width: 100%;
-  padding: 5px 0;
-  color: var(--grafite) !important;
+  padding: 10px 0;
+  color: #1E252B !important;
   font-size: 15px !important;
   font-weight: 500 !important;
-  border-bottom: 1px solid rgba(117, 154, 171, 0.16);
+  border-bottom: 1px solid rgba(117, 154, 171, 0.22);
 }
 
 header.site-header .header-mobile-links a:hover {
-  color: var(--vinho) !important;
+  color: #600819 !important;
 }
 
 @media (min-width: 769px) {
+  header.site-header > nav.site-header-nav {
+    width: min(calc(100% - 56px), var(--max-width)) !important;
+  }
+
   header.site-header nav > .header-desktop-nav {
     display: flex !important;
   }
@@ -3513,13 +3523,13 @@ header.site-header .header-mobile-links a:hover {
   header.site-header {
     --header-height: 66px;
     height: auto !important;
-    min-height: var(--header-height);
+    min-height: var(--header-height) !important;
   }
 
   header.site-header > nav.site-header-nav {
     width: min(calc(100% - 32px), var(--max-width)) !important;
-    min-height: var(--header-height) !important;
     height: var(--header-height) !important;
+    min-height: var(--header-height) !important;
     gap: 14px !important;
   }
 
@@ -3529,15 +3539,17 @@ header.site-header .header-mobile-links a:hover {
 
   header.site-header nav .header-menu-toggle {
     display: grid !important;
+    place-items: center;
   }
 
   header.site-header .header-mobile-menu {
     display: block !important;
-    width: 100%;
+    width: 100% !important;
+    max-height: calc(100vh - var(--header-height));
     max-height: calc(100dvh - var(--header-height));
     overflow-y: auto;
     padding: 10px 20px 22px !important;
-    border-top: 1px solid rgba(117, 154, 171, 0.25);
+    border-top: 1px solid rgba(117, 154, 171, 0.25) !important;
     background: rgba(255, 254, 232, 0.985) !important;
     box-shadow: 0 16px 28px rgba(37, 61, 91, 0.10);
     animation: header-mobile-menu-in 180ms ease-out both;
@@ -3546,7 +3558,7 @@ header.site-header .header-mobile-links a:hover {
   header.site-header .header-mobile-links {
     display: flex !important;
     flex-direction: column !important;
-    align-items: stretch;
+    align-items: stretch !important;
     gap: 4px !important;
     width: min(100%, 560px);
     margin: 0 auto;
@@ -3558,15 +3570,15 @@ header.site-header .header-mobile-links a:hover {
   }
 }
 
-@keyframes header-mobile-menu-in {
-  from { opacity: 0; transform: translateY(-6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 @media (max-width: 480px) {
   header.site-header > nav.site-header-nav {
     width: calc(100% - 24px) !important;
   }
+}
+
+@keyframes header-mobile-menu-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3574,3 +3586,63 @@ header.site-header .header-mobile-links a:hover {
     animation: none !important;
   }
 }
+
+/* Botão Currículo: igual aos links de e-mail, LinkedIn e GitHub */
+#contato > div > div > div:first-child > button[aria-haspopup="dialog"] {
+  display: flex !important;
+  align-items: center !important;
+  gap: 13px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 16px !important;
+
+  color: #FFFEE8 !important;
+  background: rgba(255, 254, 232, 0.045) !important;
+  border: 1px solid rgba(255, 254, 232, 0.12) !important;
+  border-radius: 15px !important;
+
+  font-family: inherit !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.5 !important;
+  text-align: left !important;
+  text-transform: none !important;
+  text-decoration: none !important;
+
+  cursor: pointer;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+#contato > div > div > div:first-child > button[aria-haspopup="dialog"] svg {
+  flex-shrink: 0;
+  color: #759AAB !important;
+  transition: color 0.25s ease;
+}
+
+#contato > div > div > div:first-child > button[aria-haspopup="dialog"]:hover {
+  color: #FFFEE8 !important;
+  background: rgba(255, 254, 232, 0.11) !important;
+  border-color: rgba(255, 254, 232, 0.28) !important;
+  transform: translateX(4px);
+}
+
+#contato > div > div > div:first-child > button[aria-haspopup="dialog"]:hover svg {
+  color: #FFFEE8 !important;
+}
+
+#contato > div > div > div:first-child > button[aria-haspopup="dialog"]:focus-visible {
+  outline: 2px solid #759AAB !important;
+  outline-offset: 4px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #contato > div > div > div:first-child > button[aria-haspopup="dialog"] {
+    transition: none !important;
+  }
+}
+  

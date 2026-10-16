@@ -15,6 +15,8 @@ function Header() {
       experiencias: "Experiências",
       contato: "Contato",
       idioma: "EN",
+      abrirMenu: "Abrir menu",
+      fecharMenu: "Fechar menu",
     },
 
     en: {
@@ -22,9 +24,11 @@ function Header() {
       habilidades: "Skills",
       projetos: "Projects",
       atividade: "Coding stats",
-      experiencias: "Experience",
+      experiencias: "Experiences",
       contato: "Contact",
       idioma: "PT",
+      abrirMenu: "Open menu",
+      fecharMenu: "Close menu",
     },
   }
 
@@ -106,7 +110,7 @@ function Header() {
           type="button"
           onClick={() => setMenuOpen(!menuOpen)}
           className="header-menu-toggle text-[#253D5B]"
-          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-label={menuOpen ? t.fecharMenu : t.abrirMenu}
           aria-expanded={menuOpen}
           aria-controls="portfolio-mobile-menu"
         >
